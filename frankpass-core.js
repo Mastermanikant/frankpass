@@ -8,7 +8,7 @@ const FRANKPASS_CORE = (function () {
     const APP_ID = "MasterManikant_PassGen";
     const VERSION = "v1";
     const UPPERCASE = "ABCDEFGHJKLMNPQRSTUVWXYZ"; // removed I, O
-    const LOWERCASE = "abcdefghijkmnopqrstuvwxyz"; // removed l
+    const LOWERCASE = "abcdefghijkmnpqrstuvwxyz"; // removed l, o
     const NUMBERS = "23456789"; // removed 0, 1
     const SYMBOLS = "!@#$%^&*()_+-=";
     const DEFAULT_PEPPER = "FrankbaseSuperSecretMango2026!";
