@@ -1,0 +1,168 @@
+const fs = require('fs');
+const path = require('path');
+
+const masterCountries = [
+    { code: "af", name: "Afghanistan", flag: "🇦🇫" }, { code: "al", name: "Albania", flag: "🇦🇱" },
+    { code: "dz", name: "Algeria", flag: "🇩🇿" }, { code: "ad", name: "Andorra", flag: "🇦🇩" },
+    { code: "ao", name: "Angola", flag: "🇦🇴" }, { code: "ag", name: "Antigua and Barbuda", flag: "🇦🇬" },
+    { code: "ar", name: "Argentina", flag: "🇦🇷" }, { code: "am", name: "Armenia", flag: "🇦🇲" },
+    { code: "au", name: "Australia", flag: "🇦🇺" }, { code: "at", name: "Austria", flag: "🇦🇹" },
+    { code: "az", name: "Azerbaijan", flag: "🇦🇿" }, { code: "bs", name: "Bahamas", flag: "🇧🇸" },
+    { code: "bh", name: "Bahrain", flag: "🇧🇭" }, { code: "bd", name: "Bangladesh", flag: "🇧🇩" },
+    { code: "bb", name: "Barbados", flag: "🇧🇧" }, { code: "by", name: "Belarus", flag: "🇧🇾" },
+    { code: "be", name: "Belgium", flag: "🇧🇪" }, { code: "bz", name: "Belize", flag: "🇧🇿" },
+    { code: "bj", name: "Benin", flag: "🇧🇯" }, { code: "bt", name: "Bhutan", flag: "🇧🇹" },
+    { code: "bo", name: "Bolivia", flag: "🇧🇴" }, { code: "ba", name: "Bosnia and Herzegovina", flag: "🇧🇦" },
+    { code: "bw", name: "Botswana", flag: "🇧🇼" }, { code: "br", name: "Brazil", flag: "🇧🇷" },
+    { code: "bn", name: "Brunei", flag: "🇧🇳" }, { code: "bg", name: "Bulgaria", flag: "🇧🇬" },
+    { code: "bf", name: "Burkina Faso", flag: "🇧🇫" }, { code: "bi", name: "Burundi", flag: "🇧🇮" },
+    { code: "cv", name: "Cabo Verde", flag: "🇨🇻" }, { code: "kh", name: "Cambodia", flag: "🇰🇭" },
+    { code: "cm", name: "Cameroon", flag: "🇨🇲" }, { code: "ca", name: "Canada", flag: "🇨🇦" },
+    { code: "cf", name: "Central African Republic", flag: "🇨🇫" }, { code: "td", name: "Chad", flag: "🇹🇩" },
+    { code: "cl", name: "Chile", flag: "🇨🇱" }, { code: "cn", name: "China", flag: "🇨🇳" },
+    { code: "co", name: "Colombia", flag: "🇨🇴" }, { code: "km", name: "Comoros", flag: "🇰🇲" },
+    { code: "cg", name: "Congo (Congo-Brazzaville)", flag: "🇨🇬" }, { code: "cd", name: "Congo (DRC)", flag: "🇨🇩" },
+    { code: "cr", name: "Costa Rica", flag: "🇨🇷" }, { code: "hr", name: "Croatia", flag: "🇭🇷" },
+    { code: "cu", name: "Cuba", flag: "🇨🇺" }, { code: "cy", name: "Cyprus", flag: "🇨🇾" },
+    { code: "cz", name: "Czechia (Czech Republic)", flag: "🇨🇿" }, { code: "dk", name: "Denmark", flag: "🇩🇰" },
+    { code: "dj", name: "Djibouti", flag: "🇩🇯" }, { code: "dm", name: "Dominica", flag: "🇩🇲" },
+    { code: "do", name: "Dominican Republic", flag: "🇩🇴" }, { code: "ec", name: "Ecuador", flag: "🇪🇨" },
+    { code: "eg", name: "Egypt", flag: "🇪🇬" }, { code: "sv", name: "El Salvador", flag: "🇸🇻" },
+    { code: "gq", name: "Equatorial Guinea", flag: "🇬🇶" }, { code: "er", name: "Eritrea", flag: "🇪🇷" },
+    { code: "ee", name: "Estonia", flag: "🇪🇪" }, { code: "sz", name: "Eswatini", flag: "🇸🇿" },
+    { code: "et", name: "Ethiopia", flag: "🇪🇹" }, { code: "fj", name: "Fiji", flag: "🇫🇯" },
+    { code: "fi", name: "Finland", flag: "🇫🇮" }, { code: "fr", name: "France", flag: "🇫🇷" },
+    { code: "ga", name: "Gabon", flag: "🇬🇦" }, { code: "gm", name: "Gambia", flag: "🇬🇲" },
+    { code: "ge", name: "Georgia", flag: "🇬🇪" }, { code: "de", name: "Germany", flag: "🇩🇪" },
+    { code: "gh", name: "Ghana", flag: "🇬🇭" }, { code: "gr", name: "Greece", flag: "🇬🇷" },
+    { code: "gd", name: "Grenada", flag: "🇬🇩" }, { code: "gt", name: "Guatemala", flag: "🇬🇹" },
+    { code: "gn", name: "Guinea", flag: "🇬🇳" }, { code: "gw", name: "Guinea-Bissau", flag: "🇬🇼" },
+    { code: "gy", name: "Guyana", flag: "🇬🇾" }, { code: "ht", name: "Haiti", flag: "🇭🇹" },
+    { code: "hn", name: "Honduras", flag: "🇭🇳" }, { code: "hk", name: "Hong Kong", flag: "🇭🇰" },
+    { code: "hu", name: "Hungary", flag: "🇭🇺" }, { code: "is", name: "Iceland", flag: "🇮🇸" },
+    { code: "in", name: "India", flag: "🇮🇳" }, { code: "id", name: "Indonesia", flag: "🇮🇩" },
+    { code: "ir", name: "Iran", flag: "🇮🇷" }, { code: "iq", name: "Iraq", flag: "🇮🇶" },
+    { code: "ie", name: "Ireland", flag: "🇮🇪" }, { code: "il", name: "Israel", flag: "🇮🇱" },
+    { code: "it", name: "Italy", flag: "🇮🇹" }, { code: "jm", name: "Jamaica", flag: "🇯🇲" },
+    { code: "jp", name: "Japan", flag: "🇯🇵" }, { code: "jo", name: "Jordan", flag: "🇯🇴" },
+    { code: "kz", name: "Kazakhstan", flag: "🇰🇿" }, { code: "ke", name: "Kenya", flag: "🇰🇪" },
+    { code: "ki", name: "Kiribati", flag: "🇰🇮" }, { code: "kp", name: "North Korea", flag: "🇰🇵" },
+    { code: "kr", name: "South Korea", flag: "🇰🇷" }, { code: "kw", name: "Kuwait", flag: "🇰🇼" },
+    { code: "kg", name: "Kyrgyzstan", flag: "🇰🇬" }, { code: "la", name: "Laos", flag: "🇱🇦" },
+    { code: "lv", name: "Latvia", flag: "🇱🇻" }, { code: "lb", name: "Lebanon", flag: "🇱🇧" },
+    { code: "ls", name: "Lesotho", flag: "🇱🇸" }, { code: "lr", name: "Liberia", flag: "🇱🇷" },
+    { code: "ly", name: "Libya", flag: "🇱🇾" }, { code: "li", name: "Liechtenstein", flag: "🇱🇮" },
+    { code: "lt", name: "Lithuania", flag: "🇱🇹" }, { code: "lu", name: "Luxembourg", flag: "🇱🇺" },
+    { code: "mg", name: "Madagascar", flag: "🇲🇬" }, { code: "mw", name: "Malawi", flag: "🇲🇼" },
+    { code: "my", name: "Malaysia", flag: "🇲🇾" }, { code: "mv", name: "Maldives", flag: "🇲🇻" },
+    { code: "ml", name: "Mali", flag: "🇲🇱" }, { code: "mt", name: "Malta", flag: "🇲🇹" },
+    { code: "mh", name: "Marshall Islands", flag: "🇲🇭" }, { code: "mr", name: "Mauritania", flag: "🇲🇷" },
+    { code: "mu", name: "Mauritius", flag: "🇲🇺" }, { code: "mx", name: "Mexico", flag: "🇲🇽" },
+    { code: "fm", name: "Micronesia", flag: "🇫🇲" }, { code: "md", name: "Moldova", flag: "🇲🇩" },
+    { code: "mc", name: "Monaco", flag: "🇲🇨" }, { code: "mn", name: "Mongolia", flag: "🇲🇳" },
+    { code: "me", name: "Montenegro", flag: "🇲🇪" }, { code: "ma", name: "Morocco", flag: "🇲🇦" },
+    { code: "mz", name: "Mozambique", flag: "🇲🇿" }, { code: "mm", name: "Myanmar (Burma)", flag: "🇲🇲" },
+    { code: "na", name: "Namibia", flag: "🇳🇦" }, { code: "nr", name: "Nauru", flag: "🇳🇷" },
+    { code: "np", name: "Nepal", flag: "🇳🇵" }, { code: "nl", name: "Netherlands", flag: "🇳🇱" },
+    { code: "nz", name: "New Zealand", flag: "🇳🇿" }, { code: "ni", name: "Nicaragua", flag: "🇳🇮" },
+    { code: "ne", name: "Niger", flag: "🇳🇪" }, { code: "ng", name: "Nigeria", flag: "🇳🇬" },
+    { code: "mk", name: "North Macedonia", flag: "🇲🇰" }, { code: "no", name: "Norway", flag: "🇳🇴" },
+    { code: "om", name: "Oman", flag: "🇴🇲" }, { code: "pk", name: "Pakistan", flag: "🇵🇰" },
+    { code: "pw", name: "Palau", flag: "🇵🇼" }, { code: "pa", name: "Panama", flag: "🇵🇦" },
+    { code: "pg", name: "Papua New Guinea", flag: "🇵🇬" }, { code: "py", name: "Paraguay", flag: "🇵🇾" },
+    { code: "pe", name: "Peru", flag: "🇵🇪" }, { code: "ph", name: "Philippines", flag: "🇵🇭" },
+    { code: "pl", name: "Poland", flag: "🇵🇱" }, { code: "pt", name: "Portugal", flag: "🇵🇹" },
+    { code: "qa", name: "Qatar", flag: "🇶🇦" }, { code: "ro", name: "Romania", flag: "🇷🇴" },
+    { code: "ru", name: "Russia", flag: "🇷🇺" }, { code: "rw", name: "Rwanda", flag: "🇷🇼" },
+    { code: "kn", name: "Saint Kitts and Nevis", flag: "🇰🇳" }, { code: "lc", name: "Saint Lucia", flag: "🇱🇨" },
+    { code: "vc", name: "Saint Vincent and the Grenadines", flag: "🇻🇨" }, { code: "ws", name: "Samoa", flag: "🇼🇸" },
+    { code: "sm", name: "San Marino", flag: "🇸🇲" }, { code: "st", name: "Sao Tome and Principe", flag: "🇸🇹" },
+    { code: "sa", name: "Saudi Arabia", flag: "🇸🇦" }, { code: "sn", name: "Senegal", flag: "🇸🇳" },
+    { code: "rs", name: "Serbia", flag: "🇷🇸" }, { code: "sc", name: "Seychelles", flag: "🇸🇨" },
+    { code: "sl", name: "Sierra Leone", flag: "🇸🇱" }, { code: "sg", name: "Singapore", flag: "🇸🇬" },
+    { code: "sk", name: "Slovakia", flag: "🇸🇰" }, { code: "si", name: "Slovenia", flag: "🇸🇮" },
+    { code: "sb", name: "Solomon Islands", flag: "🇸🇧" }, { code: "so", name: "Somalia", flag: "🇸🇴" },
+    { code: "za", name: "South Africa", flag: "🇿🇦" }, { code: "ss", name: "South Sudan", flag: "🇸🇸" },
+    { code: "es", name: "Spain", flag: "🇪🇸" }, { code: "lk", name: "Sri Lanka", flag: "🇱🇰" },
+    { code: "sd", name: "Sudan", flag: "🇸🇩" }, { code: "sr", name: "Suriname", flag: "🇸🇷" },
+    { code: "se", name: "Sweden", flag: "🇸🇪" }, { code: "ch", name: "Switzerland", flag: "🇨🇭" },
+    { code: "sy", name: "Syria", flag: "🇸🇾" }, { code: "tw", name: "Taiwan", flag: "🇹🇼" },
+    { code: "tj", name: "Tajikistan", flag: "🇹🇯" }, { code: "tz", name: "Tanzania", flag: "🇹🇿" },
+    { code: "th", name: "Thailand", flag: "🇹🇭" }, { code: "tl", name: "Timor-Leste", flag: "🇹🇱" },
+    { code: "tg", name: "Togo", flag: "🇹🇬" }, { code: "to", name: "Tonga", flag: "🇹🇴" },
+    { code: "tt", name: "Trinidad and Tobago", flag: "🇹🇹" }, { code: "tn", name: "Tunisia", flag: "🇹🇳" },
+    { code: "tr", name: "Turkey", flag: "🇹🇷" }, { code: "tm", name: "Turkmenistan", flag: "🇹🇲" },
+    { code: "tv", name: "Tuvalu", flag: "🇹🇻" }, { code: "ug", name: "Uganda", flag: "🇺🇬" },
+    { code: "ua", name: "Ukraine", flag: "🇺🇦" }, { code: "ae", name: "United Arab Emirates", flag: "🇦🇪" },
+    { code: "gb", name: "United Kingdom", flag: "🇬🇧" }, { code: "us", name: "United States", flag: "🇺🇸" },
+    { code: "uy", name: "Uruguay", flag: "🇺🇾" }, { code: "uz", name: "Uzbekistan", flag: "🇺🇿" },
+    { code: "vu", name: "Vanuatu", flag: "🇻🇺" }, { code: "va", name: "Vatican City", flag: "🇻🇦" },
+    { code: "ve", name: "Venezuela", flag: "🇻🇪" }, { code: "vn", name: "Vietnam", flag: "🇻🇳" },
+    { code: "ye", name: "Yemen", flag: "🇾🇪" }, { code: "zm", name: "Zambia", flag: "🇿🇲" },
+    { code: "zw", name: "Zimbabwe", flag: "🇿🇼" }
+];
+
+const standardPlatforms = [
+    "Facebook", "Google - Gmail", "Netflix", "Amazon", "Apple",
+    "Microsoft", "Instagram", "LinkedIn", "Twitter - X (Twitter)",
+    "PayPal", "Discord", "Github", "Pinterest", "Reddit",
+    "Snapchat", "Spotify", "Steam", "Telegram", "TikTok",
+    "Twitch", "WhatsApp", "YouTube"
+];
+
+const countryDataDir = path.join(__dirname, 'Country data');
+if (!fs.existsSync(countryDataDir)) {
+    fs.mkdirSync(countryDataDir);
+}
+
+// 1. Create .md files for all
+masterCountries.forEach(country => {
+    // using country name without spaces as filename to avoid URL issues
+    const filename = country.name.toLowerCase().replace(/[^a-z]/g, '') + '.md';
+    const filePath = path.join(countryDataDir, filename);
+
+    if (!fs.existsSync(filePath)) {
+        const regionalData = [
+            `Central Bank of ${country.name}`,
+            `National Bank of ${country.name}`,
+            `${country.name} Commercial Bank`,
+            ...standardPlatforms
+        ];
+
+        const content = `[\n${regionalData.map(item => `  "${item}"`).join(',\n')}\n]`;
+        fs.writeFileSync(filePath, content);
+    }
+});
+
+// 2. Rewrite build_data.js 'map' object
+const buildDataPath = path.join(__dirname, 'build_data.js');
+let buildDataContent = fs.readFileSync(buildDataPath, 'utf8');
+
+let mapObjString = "const map = {\n";
+masterCountries.forEach(c => {
+    const filename = c.name.toLowerCase().replace(/[^a-z]/g, '') + '.md';
+    mapObjString += `  "${filename}": "${c.code}",\n`;
+});
+mapObjString += "};\n";
+
+buildDataContent = buildDataContent.replace(/const map = \{[\s\S]*?\};/g, mapObjString);
+fs.writeFileSync(buildDataPath, buildDataContent);
+
+// 3. Rewrite index.html options
+const indexPath = path.join(__dirname, 'index.html');
+let indexContent = fs.readFileSync(indexPath, 'utf8');
+
+let optionsHTML = '';
+masterCountries.forEach(c => {
+    // Make India selected by default if found
+    const selected = c.code === 'in' ? ' selected' : '';
+    optionsHTML += `                            <option value="${c.code}"${selected}>${c.flag} ${c.name} (${c.code.toUpperCase()})</option>\n`;
+});
+optionsHTML += `                            <option value="global">🌍 Global (All)</option>\n`;
+
+const newSelectBlock = `<select id="region" aria-label="Select your region or country">\n${optionsHTML}                        </select>`;
+
+indexContent = indexContent.replace(/<select id="region"[^>]*>[\s\S]*?<\/select>/g, newSelectBlock);
+fs.writeFileSync(indexPath, indexContent);
+
+console.log("Generated ALL countries data, updated build_data.js map, and injected UI flags!");
