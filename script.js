@@ -314,6 +314,14 @@ function closeShoutoutModal() {
     if (modal) modal.classList.remove('show');
 }
 
+// Close modal when clicking outside of the content
+window.addEventListener('click', (event) => {
+    const modal = document.getElementById('shoutout-modal');
+    if (event.target === modal) {
+        closeShoutoutModal();
+    }
+});
+
 // Main Generator Form Submission
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
