@@ -144,8 +144,48 @@ window.addEventListener('DOMContentLoaded', () => {
         let code = val.split('-')[0].trim().toLowerCase();
         if (!code) code = 'global';
         populatePlatformDatalist(code);
+        updateRegionIcon(val); // Initialize flag
     }
 });
+
+// Helper to convert CC to Emoji
+function getFlagEmoji(cc) {
+    if (!cc || cc.length !== 2) return null;
+    const codePoints = cc.toUpperCase().split('').map(char => 127397 + char.charCodeAt(0));
+    return String.fromCodePoint(...codePoints);
+}
+
+// Update the icon next to region input
+function updateRegionIcon(val) {
+    const wrapper = document.getElementById('region-icon-wrapper');
+    if (!wrapper) return;
+
+    const code = val.split('-')[0].trim().toLowerCase();
+    const flag = getFlagEmoji(code);
+
+    if (flag && code !== 'global') {
+        wrapper.innerHTML = flag;
+    } else {
+        wrapper.innerHTML = '<ion-icon name="earth-outline"></ion-icon>';
+    }
+}
+
+// Listen for region changes
+if (regionEl) {
+    regionEl.addEventListener('input', (e) => {
+        let val = e.target.value || '';
+        let code = val.split('-')[0].trim().toLowerCase();
+        if (!code) code = 'global';
+        
+        populatePlatformDatalist(code);
+        updateRegionIcon(val);
+    });
+    
+    // Also handle 'change' for full selection from datalist
+    regionEl.addEventListener('change', (e) => {
+        updateRegionIcon(e.target.value);
+    });
+}
 
 // ==========================================
 // 4. MAIN GENERATOR LOGIC
