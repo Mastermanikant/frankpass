@@ -385,12 +385,10 @@
 
         <!-- ================= LANGUAGE BUTTONS ================= -->
         <div class="guide-actions" style="flex-wrap: wrap;" id="how-it-works">
-            <button class="btn-guide" id="btn-guide-en"><ion-icon name="book-outline"></ion-icon> How to use</button>
-            <button class="btn-guide" id="btn-guide-hi"><ion-icon name="book-outline"></ion-icon> कैसे उपयोग
-                करें</button>
-            <button class="btn-guide" id="btn-guide-es"><ion-icon name="book-outline"></ion-icon> Cómo usar</button>
-            <button class="btn-guide" id="btn-guide-fr"><ion-icon name="book-outline"></ion-icon> Comment
-                utiliser</button>
+            <button class="btn-guide" id="btn-guide-en"><ion-icon name="book-outline"></ion-icon> How to use FrankPass</button>
+            <button class="btn-guide" id="btn-guide-hi"><ion-icon name="book-outline"></ion-icon> FrankPass का उपयोग कैसे करें</button>
+            <button class="btn-guide" id="btn-guide-es"><ion-icon name="book-outline"></ion-icon> Cómo usar FrankPass</button>
+            <button class="btn-guide" id="btn-guide-fr"><ion-icon name="book-outline"></ion-icon> Comment utiliser FrankPass</button>
         </div>
 
         <!-- ================= GUIDE SECTIONS (MULTILINGUAL) ================= -->
@@ -436,6 +434,7 @@
                 <li>Never write down the final password or your Secret Key. Write down the recipe instead: <em>"Facebook
                         - Username X - Variant 2"</em>.</li>
             </ul>
+            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> Hide Guide</button>
         </section>
 
         <section class="guide-content glass-panel hidden" id="guide-hi">
@@ -476,6 +475,7 @@
                 <li>क्लिपबोर्ड साफ़ रखें: पासवर्ड पेस्ट करने के बाद कोई भी रैंडम टेक्स्ट कॉपी कर लें।</li>
                 <li>कभी भी अपना फाइनल पासवर्ड कहीं न लिखें। सिर्फ रेसिपी लिखें: <em>"Facebook - Variant 2"</em>.</li>
             </ul>
+            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> गाइड छिपाएं (Hide)</button>
         </section>
 
         <section class="guide-content glass-panel hidden" id="guide-es">
@@ -501,6 +501,22 @@
             <h3>🧠 La Estrategia "Cero Carga Mental"</h3>
             <p>Regla de Oro: Mantén tu Clave Secreta y Variante exactamente iguales para el 99% de los sitios web. ¡Solo
                 cambia el nombre de la <strong>Plataforma</strong>!</p>
+            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> Ocultar Guía</button>
+        </section>
+
+        <!-- French Guide -->
+        <section class="guide-content glass-panel hidden" id="guide-fr">
+            <h2>Comment utiliser FrankPass : Le Guide Ultime</h2>
+            <p>Bienvenue sur FrankPass. Cet outil est conçu pour générer des mots de passe inviolables tout en gardant votre charge mentale proche de zéro.</p>
+            <p><strong>Principe de base :</strong> Cet outil est 100% sans état et déterministe. Il ne sauvegarde vos données nulle part. Si vous entrez les <em>mêmes détails exacts</em>, vous obtiendrez toujours le <em>même mot de passe exact</em>.</p>
+
+            <h3>🔑 Comprendre les entrées</h3>
+            <ol>
+                <li><strong>Plateforme (Requis) :</strong> Utilisez toujours un nom cohérent (ex. <code>facebook</code>).</li>
+                <li><strong>Clé Personnelle Secrète (Requis) :</strong> Votre phrase maîtresse. Facile à retenir pour vous, impossible à deviner pour les autres.</li>
+                <li><strong>Compteur de Variante (Défaut 1) :</strong> Gardez votre clé secrète identique. Changez ce nombre pour générer un nouveau mot de passe pour le même site.</li>
+            </ol>
+            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> Masquer le guide</button>
         </section>
 
         <!-- ================= FAQ SECTION ================= -->
@@ -727,13 +743,13 @@
         </section>
 
         <!-- ================= NEWSLETTER CROSS-PROMOTION ================= -->
-        <section class="glass-panel"
+        <section class="glass-panel" id="breach-section"
             style="margin-top: 2rem; padding: 2rem; border-radius: 20px; text-align: center; border: 1px solid rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.05);">
-            <h2 style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.6rem;">
+            <h2 id="breach-title" style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.6rem;">
                 <ion-icon name="warning-outline" style="vertical-align: middle; margin-right: 0.5rem;"></ion-icon>
                 Beware of Data Breaches
             </h2>
-            <p style="color: var(--text-secondary); line-height: 1.6; max-width: 700px; margin: 0 auto 1.5rem auto;">
+            <p id="breach-body" style="color: var(--text-secondary); line-height: 1.6; max-width: 700px; margin: 0 auto 1.5rem auto;">
                 FrankPass is <strong>100% Stateless and Zero-Knowledge</strong>. We don't have a database, which means
                 we cannot collect your email or alert you when websites get hacked. <br><br>
                 However, if you want free, instant alerts about global data breaches, join the official security
@@ -746,35 +762,30 @@
         </section>
 
         <!-- ================= FOOTER SECTION ================= -->
-        <footer class="glass-panel" style="margin-top: 2rem; padding: 2rem; border-radius: 20px;">
-            <div class="footer-grid"
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <footer class="glass-panel">
+            <div class="footer-grid">
                 <!-- Column 1: Links -->
                 <div class="footer-col">
-                    <h4 style="margin-bottom: 1rem; color: #a5b4fc;">Quick Links</h4>
-                    <ul style="list-style: none; padding: 0; line-height: 1.8;">
-                        <li><a href="#how-it-works"
-                                style="color: #cbd5e1; text-decoration: none; transition: color 0.2s;"
-                                onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">How it
-                                Works</a></li>
-                        <li><a href="#security" style="color: #cbd5e1; text-decoration: none; transition: color 0.2s;"
-                                onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">Security
-                                Architecture</a></li>
-                        <li><a href="#faq" style="color: #cbd5e1; text-decoration: none; transition: color 0.2s;"
-                                onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">FAQ</a>
-                        </li>
-                        <li><a href="mailto:contact@frankpass.com"
-                                style="color: #cbd5e1; text-decoration: none; transition: color 0.2s;"
-                                onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#cbd5e1'">Contact
-                                Support</a></li>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How it Works</a></li>
+                        <li><a href="#security">Security Architecture</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="mailto:contact@frankpass.com">Contact Support</a></li>
                     </ul>
+                    <h4 class="small-title">Give me a shoutout!</h4>
+                    <div class="shoutout-links">
+                        <a href="https://x.com/mastermanikant" target="_blank" rel="noopener" title="X (Twitter)"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="https://instagram.com/mastermanikant" target="_blank" rel="noopener" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="https://facebook.com/mastermanikant" target="_blank" rel="noopener" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="https://youtube.com/@mastermanikant" target="_blank" rel="noopener" title="YouTube"><ion-icon name="logo-youtube"></ion-icon></a>
+                    </div>
                 </div>
 
                 <!-- Column 2: App Socials -->
                 <div class="footer-col">
-                    <h4 style="margin-bottom: 1rem; color: #a5b4fc;">Follow FrankPass For Security Tips</h4>
-                    <div class="social-links"
-                        style="display: flex; gap: 0.7rem; font-size: 1.5rem; flex-wrap: nowrap; justify-content: flex-start; align-items: center;">
+                    <h4>Follow FrankPass For Security Tips</h4>
+                    <div class="social-links">
                         <a href="https://x.com/frankbasedigital" target="_blank" aria-label="X (Twitter)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px"
                                 height="24px">
@@ -801,16 +812,21 @@
                         onclick="installPWA()">
                         <ion-icon name="download-outline" style="margin-right: 0.4rem;"></ion-icon> Install Web App
                     </button>
+                    <!-- Open in Browser — only shows if in standalone mode (PWA window) -->
+                    <button id="open-browser-btn" class="btn-primary"
+                        style="margin-top: 0.7rem; padding: 0.6rem 1.2rem; font-size: 0.95rem; width: 100%; border-radius: 10px; display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);"
+                        onclick="openInBrowser()">
+                        <ion-icon name="globe-outline" style="margin-right: 0.4rem;"></ion-icon> Open in Browser
+                    </button>
                 </div>
 
                 <!-- Column 3: Developer -->
                 <div class="footer-col">
-                    <h4 style="margin-bottom: 1rem; color: #a5b4fc;">The Developer</h4>
-                    <p style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 1rem;">Created by
-                        <a href="https://www.google.com/search?q=mastermanikant" target="_blank" rel="noopener" style="color: #a5b4fc; text-decoration: none; font-weight: 700;"><strong>@mastermanikant</strong></a>
+                    <h4>The Developer</h4>
+                    <p>Created by
+                        <a href="https://www.google.com/search?q=mastermanikant" target="_blank" rel="noopener"><strong>@mastermanikant</strong></a>
                     </p>
-                    <div class="social-links"
-                        style="display: flex; gap: 0.5rem; font-size: 1.25rem; flex-wrap: nowrap; justify-content: flex-start; align-items: center;">
+                    <div class="social-links developer-socials">
                         <a href="https://x.com/mastermanikant" target="_blank" aria-label="X (Twitter)">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20px"
                                 height="20px">
@@ -843,6 +859,41 @@
 
     <!-- Notification Toast -->
     <div id="toast" class="toast">Copied to clipboard!</div>
+
+    <!-- Social Share Modal -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <div class="modal-header">
+                <h3>Share FrankPass</h3>
+                <button class="close-modal" onclick="closeShareModal()">
+                    <ion-icon name="close-outline"></ion-icon>
+                </button>
+            </div>
+            <p>Tell your friends about 100% Stateless security!</p>
+            <div class="share-grid">
+                <a href="#" id="share-twitter" class="share-option">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                    <span>Twitter (X)</span>
+                </a>
+                <a href="#" id="share-whatsapp" class="share-option">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="#" id="share-facebook" class="share-option">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" id="share-linkedin" class="share-option">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+            <div class="copy-link-container">
+                <input type="text" id="share-url" readonly value="https://frankpass.com">
+                <button onclick="copyShareUrl()" class="btn-primary">Copy</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Data sources generated by build_data.js -->
     <script src="platforms.js"></script>

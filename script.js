@@ -94,8 +94,15 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Reset secret timer on input
-secretEl.addEventListener('input', startSecretClearTimer);
+//Reset secret timer on input
+if (secretEl) secretEl.addEventListener('input', startSecretClearTimer);
+
+// Clear platform on click (like country selector)
+if (platformEl) {
+    platformEl.addEventListener('click', () => {
+        platformEl.value = '';
+    });
+}
 
 // Field Auto-Cleanup & Restore UX
 function setupSmartField(el) {
@@ -149,6 +156,9 @@ if (regionEl) {
         if (!code) code = 'global';
         populatePlatformDatalist(code);
         updateRegionIcon(val);
+
+        // Clear platform on region change
+        if (platformEl) platformEl.value = '';
 
         // Update URL path without refresh (SEO & UX)
         if (code !== 'global') {
@@ -467,6 +477,28 @@ function toggleGuide(lang) {
     if (!isShowing) {
         guides[lang].classList.remove('hidden');
         btns[lang].classList.add('active');
+        
+        // Dynamic Breach Translation
+        const breachTranslation = window.regionalTranslations && window.regionalTranslations[lang === 'hi' ? 'in' : lang === 'en' ? 'ng' : lang];
+        if (breachTranslation) {
+            const bTitle = document.getElementById('breach-title');
+            const bBody = document.getElementById('breach-body');
+            if (bTitle) bTitle.innerHTML = `<ion-icon name="warning-outline" style="vertical-align: middle; margin-right: 0.5rem;"></ion-icon> ${breachTranslation.breach_title}`;
+            if (bBody) bBody.innerHTML = breachTranslation.breach_body;
+        }
+    }
+}
+
+function closeGuide() {
+    langs.forEach(l => {
+        if (guides[l]) guides[l].classList.add('hidden');
+        if (btns[l]) btns[l].classList.remove('active');
+    });
+    
+    // Scroll back to guide buttons
+    const target = document.getElementById('how-it-works');
+    if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
@@ -487,17 +519,47 @@ function shareApp() {
     };
 
     const text = shareTexts[activeLang] || shareTexts['en'];
+    const url = window.location.href;
 
     if (navigator.share) {
         navigator.share({
             title: 'FrankPass',
             text: text,
-            url: window.location.href
-        }).catch(err => console.log('Error sharing:', err));
+            url: url
+        }).catch(err => {
+            console.log('Error sharing:', err);
+            openShareModal(url, text);
+        });
     } else {
-        copyToClipboard(window.location.href);
-        alert("Link copied to clipboard to share!");
+        openShareModal(url, text);
     }
+}
+
+function openShareModal(url, text) {
+    const modal = document.getElementById('share-modal');
+    modal.classList.add('show');
+    
+    document.getElementById('share-url').value = url;
+    
+    // Set direct links
+    const encodedUrl = encodeURIComponent(url);
+    const encodedText = encodeURIComponent(text);
+    
+    document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
+    document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
+    document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+    document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+}
+
+function closeShareModal() {
+    const modal = document.getElementById('share-modal');
+    modal.classList.remove('show');
+}
+
+function copyShareUrl() {
+    const urlInput = document.getElementById('share-url');
+    copyToClipboard(urlInput.value);
+    closeShareModal();
 }
 
 // =============== PWA Smart Install / Open-in-App Logic ===============
@@ -530,6 +592,20 @@ function showInstallBtn() {
     btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
     btn.innerHTML = '<ion-icon name="download-outline" style="margin-right:0.4rem;"></ion-icon> Install Web App';
     btn.onclick = installPWA;
+}
+
+// Detect Standalone Mode and show "Open in Browser" button
+window.addEventListener('load', () => {
+    const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+    const openBrowserBtn = document.getElementById('open-browser-btn');
+    if (isStandalone && openBrowserBtn) {
+        openBrowserBtn.style.display = 'block';
+    }
+});
+
+function openInBrowser() {
+    // This will open the URL in a new browser tab/window
+    window.open(window.location.href, '_blank');
 }
 
 // On page load: check if app is already installed
