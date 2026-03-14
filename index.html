@@ -376,9 +376,14 @@
                 <div class="output-display">
                     <input type="password" class="password-text" id="password-output" value="****************" readonly
                         style="background: transparent; border: none; outline: none; padding: 0; width: 100%; box-shadow: none;">
-                    <button class="icon-btn copy-btn" id="copy-btn" disabled title="Copy to clipboard">
-                        <ion-icon name="copy-outline"></ion-icon>
-                    </button>
+                    <div class="output-actions" style="display: flex; gap: 0.5rem;">
+                        <button class="icon-btn shoutout-trigger-btn" id="shoutout-btn" title="Give me a shoutout!" onclick="showShoutoutModal()">
+                            <ion-icon name="share-social-outline"></ion-icon>
+                        </button>
+                        <button class="icon-btn copy-btn" id="copy-btn" disabled title="Copy to clipboard">
+                            <ion-icon name="copy-outline"></ion-icon>
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -849,6 +854,40 @@
                 <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
             </div>
         </footer>
+    </div>
+
+    <!-- Shoutout Modal -->
+    <div id="shoutout-modal" class="modal">
+        <div class="modal-content glass-panel">
+            <button class="close-modal" onclick="closeShoutoutModal()">&times;</button>
+            <div class="logo-container" style="margin-bottom: 1rem;">
+                <h2 style="font-size: 1.8rem;">Give us a <span class="FrankPass-text">Shoutout</span>!</h2>
+            </div>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">
+                You've generated multiple secure passwords. Help others find mental peace by sharing FrankPass with your friends and family!
+            </p>
+            <div class="share-grid">
+                <a href="javascript:void(0)" onclick="runShoutout('whatsapp'); closeShoutoutModal();" class="share-option" id="share-whatsapp">
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="javascript:void(0)" onclick="runShoutout('x'); closeShoutoutModal();" class="share-option" id="share-twitter">
+                    <ion-icon name="logo-twitter"></ion-icon>
+                    <span>X / Twitter</span>
+                </a>
+                <a href="javascript:void(0)" onclick="runShoutout('facebook'); closeShoutoutModal();" class="share-option" id="share-facebook">
+                    <ion-icon name="logo-facebook"></ion-icon>
+                    <span>Facebook</span>
+                </a>
+                <a href="javascript:void(0)" onclick="runShoutout('instagram'); closeShoutoutModal();" class="share-option" id="share-instagram">
+                    <ion-icon name="logo-instagram"></ion-icon>
+                    <span>Instagram</span>
+                </a>
+            </div>
+            <button class="btn-primary" onclick="closeShoutoutModal()" style="background: rgba(255,255,255,0.05); box-shadow: none; border: 1px solid rgba(255,255,255,0.1);">
+                Maybe Later
+            </button>
+        </div>
     </div>
 
     <!-- Notification Toast -->

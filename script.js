@@ -297,6 +297,24 @@ if (regionEl) {
 // 4. MAIN GENERATOR LOGIC
 // ==========================================
 // Main Generator Form Submission
+// ==========================================
+// 5. GUIDE LOCALIZATION & SHARING
+// ==========================================
+
+// Generation tracking for Shoutout feature
+let genCount = parseInt(localStorage.getItem('frankpass_gen_count') || '0');
+
+function showShoutoutModal() {
+    const modal = document.getElementById('shoutout-modal');
+    if (modal) modal.classList.add('show');
+}
+
+function closeShoutoutModal() {
+    const modal = document.getElementById('shoutout-modal');
+    if (modal) modal.classList.remove('show');
+}
+
+// Main Generator Form Submission
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     if (!form.checkValidity()) return;
@@ -306,94 +324,76 @@ form.addEventListener('submit', async (e) => {
     try {
         await new Promise(resolve => setTimeout(resolve, 10));
 
+        // ... existing platform/username/secret logic ...
         let rawPlatform = platformEl.value.trim().toLowerCase();
-        
-        // Advanced Domain Canonicalization (Basic PSL-like approach without heavy libraries)
         let platform = rawPlatform;
-        
-        // 1. Remove protocol and paths
         platform = platform.replace(/^(https?:\/\/)?/, '').split('/')[0].split('?')[0].split('#')[0];
-        
-        // 2. Remove common subdomains
         platform = platform.replace(/^(www\.|m\.|app\.|login\.|secure\.|auth\.|account\.)/, '');
-        
-        // 3. Extract the main domain block (strip TLDs)
         let domainParts = platform.split('.');
         if (domainParts.length > 2 && (domainParts[domainParts.length - 2].length <= 3)) {
-            // Handle cases like .co.uk, .com.au
             platform = domainParts[domainParts.length - 3];
         } else if (domainParts.length >= 2) {
-            // Handle cases like facebook.com, facebook.in
             platform = domainParts[domainParts.length - 2];
         } else {
-            // No dots, use as is (e.g. user typed "facebook")
             platform = domainParts[0];
         }
-        
-        // 4. Final sanitization (remove any remaining non-alphanumeric chars)
         platform = platform.replace(/[^a-z0-9]/g, '');
 
-        // Map rebranded or shortened names to their original base (e.g. x -> twitter)
         const globalAliases = {
-            'x': 'twitter', 'tw': 'twitter',
-            'ig': 'instagram', 'insta': 'instagram',
-            'fb': 'facebook', 'yt': 'youtube',
-            'wa': 'whatsapp', 'amzn': 'amazon',
-            'snap': 'snapchat', 'pin': 'pinterest',
-            'gpay': 'googlepay', 'appleid': 'apple'
+            'x': 'twitter', 'tw': 'twitter', 'ig': 'instagram', 'insta': 'instagram',
+            'fb': 'facebook', 'yt': 'youtube', 'wa': 'whatsapp', 'amzn': 'amazon',
+            'snap': 'snapchat', 'pin': 'pinterest', 'gpay': 'googlepay', 'appleid': 'apple'
         };
-        if (globalAliases[platform]) {
-            platform = globalAliases[platform];
-        }
+        if (globalAliases[platform]) platform = globalAliases[platform];
 
         const usernameRaw = usernameEl.value.trim().toLowerCase();
-        // Smart Normalization: Strip email domain, but preserve . - _
         const username = usernameRaw.split('@')[0].replace(/[^a-z0-9._-]/g, '');
         const secret = secretEl.value.toLowerCase().replace(/\s+/g, '');
-
         let variant = parseInt(variantEl.value, 10);
-        if (isNaN(variant)) variant = 1; // Bug fix: fallback if NaN
-
+        if (isNaN(variant)) variant = 1;
         const profile = profileEl.value;
-
         let length = parseInt(lengthEl.value, 10);
-        if (isNaN(length)) length = 16;  // Bug fix: fallback if NaN
+        if (isNaN(length)) length = 16;
 
-        // Generate using isolated Core Logic (Fully Offline)
         const password = await FRANKPASS_CORE.generate(platform, username, secret, variant, profile, length, null);
 
-        // Calculate and Show Strength
+        // Strength Logic
         const strengthIndicator = document.getElementById('strength-indicator');
         if (strengthIndicator) {
             strengthIndicator.style.display = 'flex';
             if (length >= 16 && profile === 'standard') {
                 strengthIndicator.innerHTML = '<ion-icon name="shield-checkmark"></ion-icon> Unbreakable';
-                strengthIndicator.style.color = '#10b981'; // Green
+                strengthIndicator.style.color = '#10b981';
                 strengthIndicator.style.background = 'rgba(16, 185, 129, 0.15)';
             } else if (length >= 12 && (profile === 'standard' || profile === 'alphanumeric')) {
                 strengthIndicator.innerHTML = '<ion-icon name="shield-outline"></ion-icon> Strong';
-                strengthIndicator.style.color = '#3b82f6'; // Blue
+                strengthIndicator.style.color = '#3b82f6';
                 strengthIndicator.style.background = 'rgba(59, 130, 246, 0.15)';
             } else if (length >= 8) {
                 strengthIndicator.innerHTML = '<ion-icon name="alert-circle-outline"></ion-icon> Medium';
-                strengthIndicator.style.color = '#f59e0b'; // Amber
+                strengthIndicator.style.color = '#f59e0b';
                 strengthIndicator.style.background = 'rgba(245, 158, 11, 0.15)';
             } else {
                 strengthIndicator.innerHTML = '<ion-icon name="warning-outline"></ion-icon> Weak';
-                strengthIndicator.style.color = '#ef4444'; // Red
+                strengthIndicator.style.color = '#ef4444';
                 strengthIndicator.style.background = 'rgba(239, 68, 68, 0.15)';
             }
         }
 
-        // 3. UI Result
         passwordOutput.value = password;
         outputSection.classList.add('active');
         copyBtn.disabled = false;
         copyToClipboard(password);
 
-        // Start Auto-Clear Timers
         startPasswordClearTimer();
         startSecretClearTimer();
+
+        // Increment and Check Generation Count for Shoutout
+        genCount++;
+        localStorage.setItem('frankpass_gen_count', genCount);
+        if (genCount === 2 || genCount === 3) {
+            setTimeout(showShoutoutModal, 1500); // Small delay after generation
+        }
 
     } catch (err) {
         console.error("Generation Error:", err);
@@ -402,7 +402,6 @@ form.addEventListener('submit', async (e) => {
         setLoadingState(false);
     }
 });
-
 
 function setLoadingState(isLoading) {
     if (isLoading) {
@@ -421,8 +420,6 @@ function setLoadingState(isLoading) {
 copyBtn.addEventListener('click', () => {
     copyToClipboard(passwordOutput.value);
 });
-
-// Legacy toggle logic removed in favor of switch
 
 async function copyToClipboard(text) {
     if (!text || text === '****************') return;
@@ -445,9 +442,6 @@ function showToast() {
     setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
-// ==========================================
-// 5. GUIDE LOCALIZATION & SHARING
-// ==========================================
 // Guide Localization and Toggling
 const langs = ['en', 'hi', 'es', 'fr'];
 const guides = {};
@@ -459,28 +453,25 @@ langs.forEach(lang => {
     if (guideEl && btnEl) {
         guides[lang] = guideEl;
         btns[lang] = btnEl;
-        btnEl.addEventListener('click', () => toggleGuide(lang));
+        btnEl.addEventListener('click', () => {
+            toggleGuide(lang);
+        });
     }
 });
 
 function toggleGuide(lang) {
     if (!guides[lang] || !btns[lang]) return;
-
     const isShowing = !guides[lang].classList.contains('hidden');
-
-    // Hide all
     langs.forEach(l => {
         if (guides[l]) guides[l].classList.add('hidden');
         if (btns[l]) btns[l].classList.remove('active');
     });
-
-    // Toggle selected
     if (!isShowing) {
         guides[lang].classList.remove('hidden');
         btns[lang].classList.add('active');
-        
-        // Dynamic Breach Translation
-        const breachTranslation = window.regionalTranslations && window.regionalTranslations[lang === 'hi' ? 'in' : lang === 'en' ? 'ng' : lang];
+        const activeRegion = regionEl.value.split('-')[0].trim().toLowerCase() || 'global';
+        const transLang = (activeRegion === 'in' || activeRegion === 'np') ? 'in' : (activeRegion === 'ng' ? 'ng' : activeRegion);
+        const breachTranslation = window.regionalTranslations[transLang] || window.regionalTranslations['ng'];
         if (breachTranslation) {
             const bTitle = document.getElementById('breach-title');
             const bBody = document.getElementById('breach-body');
