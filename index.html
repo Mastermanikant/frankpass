@@ -48,7 +48,7 @@
                     <div class="input-wrapper select-wrapper">
                         <ion-icon name="earth-outline"></ion-icon>
                         <input type="text" id="region" list="region-list"
-                            placeholder="Search Country (e.g. in - India)..." autocomplete="off">
+                            placeholder="Type your country name e.g- in or india " autocomplete="off">
                         <datalist id="region-list">
 
                             <option value="af - Afghanistan (AF)"></option>
@@ -685,6 +685,10 @@
                     </div>
                 </details>
 
+                <!-- Bottom Collapse Button -->
+                <button onclick="toggleFAQ()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;padding:0.75rem 1.2rem;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25);border-radius:12px;color:#a5b4fc;font-size:1rem;font-weight:600;transition:background 0.3s ease;margin-top:0.5rem;">
+                    <ion-icon name="chevron-up-outline" style="font-size:1.2rem;"></ion-icon> Collapse FAQ
+                </button>
             </div>
         </section>
 
