@@ -107,10 +107,23 @@ function autoDetectRegion() {
 
         const detectedRegion = tzMap[tz];
         if (detectedRegion) {
-            // Find the matching option in the datalist
+            // 1. Personalize Platform List
             const option = document.querySelector(`#region-list option[value^="${detectedRegion} -"]`);
             if (option) {
                 regionEl.value = option.value;
+            }
+
+            // 2. Personalize Language Guide (if not already manually set)
+            // Map detected regions to available guide languages
+            const regionToLang = {
+                'in': 'hi', 'np': 'hi', // Hindi for India/Nepal
+                'es': 'es', 'us': 'es', // Spanish for Spain/US-Latino
+                'fr': 'fr', 'ca': 'fr', // French for France/Canada
+                'bd': 'en', 'pk': 'en', 'ae': 'en' // Defaulting others to English (or specific if added)
+            };
+            const targetLang = regionToLang[detectedRegion];
+            if (targetLang && typeof toggleGuide === 'function') {
+                toggleGuide(targetLang);
             }
         }
     } catch (e) {
