@@ -148,7 +148,14 @@ if (regionEl) {
         let code = val.split('-')[0].trim().toLowerCase();
         if (!code) code = 'global';
         populatePlatformDatalist(code);
-        updateRegionIcon(val); // Added this to update the logo flag
+        updateRegionIcon(val);
+
+        // Update URL path without refresh (SEO & UX)
+        if (code !== 'global') {
+            window.history.pushState({ code }, '', `/${code}`);
+        } else {
+            window.history.pushState({ code }, '', '/');
+        }
     });
 }
 
@@ -196,17 +203,41 @@ function autoDetectRegion() {
 // Initial populate on page load
 window.addEventListener('DOMContentLoaded', () => {
     if (regionEl) {
-        // Set default to India if empty
+        // 1. Check URL path for region (e.g. /in)
+        const path = window.location.pathname.replace(/\//g, '').toLowerCase();
+        if (path.length === 2) {
+            const pathOpt = document.querySelector(`#region-list option[value^="${path} -"]`);
+            if (pathOpt) {
+                regionEl.value = pathOpt.value;
+            }
+        }
+
+        // 2. Fallback to default if still empty
         if (!regionEl.value) {
             const defaultOpt = document.querySelector(`#region-list option[value^="in -"]`);
             if (defaultOpt) regionEl.value = defaultOpt.value;
         }
-        autoDetectRegion();
+
+        // 3. Auto-detect if NO path was specified (only for home page)
+        if (!path || path === '' || path === 'index.html') {
+            autoDetectRegion();
+        }
+
+        // 4. Update UI
         let val = regionEl.value || '';
         let code = val.split('-')[0].trim().toLowerCase();
         if (!code) code = 'global';
         populatePlatformDatalist(code);
         updateRegionIcon(val); // Initialize flag
+
+        // Trigger Guide language change based on final region
+        const regionToLang = {
+            'in': 'hi', 'np': 'hi', 'es': 'es', 'us': 'es', 'fr': 'fr', 'ca': 'fr'
+        };
+        const finalLang = regionToLang[code];
+        if (finalLang && typeof toggleGuide === 'function') {
+            toggleGuide(finalLang);
+        }
     }
 });
 

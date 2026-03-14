@@ -1,11 +1,7 @@
 {
     "rewrites": [
         {
-            "source": "/in",
-            "destination": "/index.html"
-        },
-        {
-            "source": "/us",
+            "source": "/:country([a-zA-Z]{2})",
             "destination": "/index.html"
         }
     ]
