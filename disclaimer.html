@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer | FrankPass</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="legal-page">
+    <canvas id="particle-canvas"></canvas>
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <h1><span class="FrankPass-text">Frank</span>Pass</h1>
+                </a>
+            </div>
+            <p>Security & Usage Disclaimer</p>
+        </header>
+
+        <main class="glass-panel content-page">
+            <section>
+                <h2>1. No Guarantee of Absolute Security</h2>
+                <p>Security is a process, not a product. While FrankPass utilizes robust cryptographic algorithms (HMAC-SHA512 + PBKDF2), no system is 100% infallible. Your security is also dependent on the security of your operating system, browser, and hardware.</p>
+            </section>
+
+            <section style="margin-top: 2rem;">
+                <h2>2. Zero Recovery Disclaimer</h2>
+                <p>FrankPass is <strong>strictly stateless</strong>. We do not store any part of your password recipe. If you forget your "Secret Personal Key" or your "Variant Number", there is <strong>mathematically zero possibility</strong> for us to recover your password. Use the "Recipe System" documented in our guide to manage your data safely.</p>
+            </section>
+
+            <section style="margin-top: 2rem;">
+                <h2>3. Ethical Use</h2>
+                <p>FrankPass is intended for personal and professional account security. We do not condone its use for any illegal activities. Users are responsible for complying with local laws regarding the use of encryption and security tools.</p>
+            </section>
+
+            <section style="margin-top: 2rem;">
+                <h2>4. Third-Party Risks</h2>
+                <p>FrankPass protects the generation of your password. It does not protect you against keyloggers, screen recording malware, or phishing attacks on external websites. Always ensure you are on the legitimate website (https://frankpass.com) before entering keys.</p>
+            </section>
+
+            <div style="margin-top: 3rem; text-align: center;">
+                <p style="color: var(--text-secondary); font-size: 0.8rem; margin-bottom: 1.5rem;">Last Updated: March 2026</p>
+                <a href="/" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.8rem 2rem;">
+                    <ion-icon name="arrow-back-outline"></ion-icon> Back to Generator
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="particles.js"></script>
+</body>
+</html>

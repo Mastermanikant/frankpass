@@ -1,8 +1,16 @@
 {
     "rewrites": [
-        {
-            "source": "/:country([a-zA-Z]{2})",
-            "destination": "/index.html"
-        }
+        { "source": "/in", "destination": "/index.html" },
+        { "source": "/us", "destination": "/index.html" },
+        { "source": "/privacy", "destination": "/privacy.html" },
+        { "source": "/about", "destination": "/about.html" },
+        { "source": "/contact", "destination": "/contact.html" },
+        { "source": "/founder", "destination": "/founder-mastermanikant.html" },
+        { "source": "/founder-mastermanikant", "destination": "/founder-mastermanikant.html" },
+        { "source": "/why-stateless", "destination": "/why-stateless.html" },
+        { "source": "/guide", "destination": "/guide.html" },
+        { "source": "/terms", "destination": "/terms.html" },
+        { "source": "/disclaimer", "destination": "/disclaimer.html" },
+        { "source": "/:country([a-zA-Z]{2})", "destination": "/index.html" }
     ]
 }

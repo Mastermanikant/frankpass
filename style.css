@@ -30,6 +30,9 @@ body {
     align-items: center;
     overflow-x: hidden;
     position: relative;
+    line-height: 1.6; /* Improved base line height */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Dynamic Animated Background */
@@ -42,6 +45,78 @@ body {
     z-index: -1;
     overflow: hidden;
 }
+
+/* Particle Canvas Background */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Global Page Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(108, 92, 231, 0.1); }
+    50% { box-shadow: 0 0 30px rgba(108, 92, 231, 0.3); }
+}
+
+/* Animate all glass panels on page load */
+.glass-panel {
+    animation: fadeInScale 0.8s ease-out both;
+}
+
+.legal-page header {
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.legal-page section {
+    animation: slideInLeft 0.6s ease-out both;
+}
+
+.legal-page section:nth-child(1) { animation-delay: 0.1s; }
+.legal-page section:nth-child(2) { animation-delay: 0.2s; }
+.legal-page section:nth-child(3) { animation-delay: 0.3s; }
+.legal-page section:nth-child(4) { animation-delay: 0.4s; }
+.legal-page section:nth-child(5) { animation-delay: 0.5s; }
+
+/* Social links hover animation */
+.social-links a {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-4px) scale(1.15);
+    opacity: 1;
+}
+
+/* Button hover glow */
+.btn-primary {
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 25px rgba(108, 92, 231, 0.5);
+    transform: translateY(-2px);
+}
+
 
 .circle {
     position: absolute;
@@ -115,10 +190,10 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 3.2rem; /* Adjusted for perfect incenter over Frank and Pass */
-    margin-bottom: 4px;
+    gap: 3.5rem; /* Slightly wider to frame the text better */
+    margin-bottom: 2px;
     pointer-events: none;
-    transform: translateX(-4px); /* Minor adjustment for visual optical center */
+    transform: translateX(-2px); /* Centered more accurately */
 }
 
 .floating-badge {
@@ -145,10 +220,25 @@ body {
     50% { transform: translateY(-3px); }
 }
 
+header {
+    text-align: center;
+    margin-bottom: 2.5rem; /* Improved bottom spacing */
+}
+
+h1 {
+    margin: 0.3rem 0; /* Slightly tighter */
+    font-size: 3rem; /* Slightly larger for premium feel */
+    font-weight: 700; /* Less heavy than 800 */
+    letter-spacing: -0.03em;
+}
+
 header p {
     color: var(--text-secondary);
-    font-size: 1.1rem;
-    margin-top: 5px;
+    font-size: 1.15rem;
+    margin: 0.2rem 0 0; /* Tighten top spacing */
+    font-weight: 300;
+    letter-spacing: 0.02rem;
+    line-height: 1.5;
 }
 
 /* Glassmorphism Panel */
@@ -198,10 +288,11 @@ header p {
 
 label {
     display: block;
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 0.6rem;
+    font-size: 1rem; /* Better visibility */
+    font-weight: 500; /* Less bold for better flow */
+    margin-bottom: 0.75rem;
     color: var(--text-primary);
+    letter-spacing: 0.01rem;
 }
 
 label .optional {
@@ -235,12 +326,13 @@ select {
     background: rgba(0, 0, 0, 0.2);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 1rem 1rem 1rem 3.2rem;
+    padding: 1.1rem 1.1rem 1.1rem 3.4rem; /* More generous padding */
     color: var(--text-primary);
     font-family: var(--font-main);
     font-size: 1.1rem;
     outline: none;
     transition: all 0.3s;
+    letter-spacing: 0.02rem;
 }
 
 input:focus,
@@ -421,11 +513,11 @@ input[type=range]::-webkit-slider-thumb:hover {
 }
 
 .output-header {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
+    letter-spacing: 1.5px;
+    font-weight: 500;
 }
 
 .output-display {
@@ -695,7 +787,7 @@ input[type=range]::-webkit-slider-thumb:hover {
     border-color: var(--accent-primary);
 }
 
-.share-option#share-twitter:hover { color: #1DA1F2; border-color: #1DA1F2; }
+.share-option#share-twitter:hover { color: #fff; border-color: rgba(255, 255, 255, 0.4); }
 .share-option#share-whatsapp:hover { color: #25D366; border-color: #25D366; }
 .share-option#share-facebook:hover { color: #1877F2; border-color: #1877F2; }
 .share-option#share-linkedin:hover { color: #0A66C2; border-color: #0A66C2; }
@@ -998,12 +1090,78 @@ footer .creator-credits a:hover {
         font-size: 1.6rem;
     }
 
-    .input-group label {
-        font-size: 0.85rem;
+    .content-page p {
+        font-size: 1.05rem;
+    }
+}
+
+/* Legal and Content Page Specialized Typography */
+.legal-page {
+    line-height: 1.75;
+    background-attachment: fixed;
+}
+
+.content-page {
+    max-width: 800px !important;
+    margin: 3rem auto !important;
+    padding: 3.5rem !important;
+    text-align: left;
+}
+
+.content-page h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 2.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--accent-primary);
+    letter-spacing: -0.01rem;
+}
+
+.content-page h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-focus);
+}
+
+.content-page p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.01rem;
+    word-spacing: 0.05rem;
+}
+
+.content-page ul, .content-page ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.content-page li {
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+}
+
+.content-page strong {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* Mobile Adjustments for Content Pages */
+@media (max-width: 768px) {
+    .content-page {
+        padding: 2rem !important;
+        margin: 1.5rem auto !important;
     }
     
-    .btn-primary {
-        padding: 0.8rem 1rem;
+    .content-page h2 {
+        font-size: 1.5rem;
+    }
+    
+    .content-page p {
+        font-size: 1.05rem;
     }
 }
 

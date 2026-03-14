@@ -69,44 +69,60 @@ if (togglePassCb) {
 function startSecretClearTimer() {
     clearTimeout(secretClearTimer);
     secretClearTimer = setTimeout(() => {
-        secretEl.value = '';
-        console.log("Secret Key auto-cleared for security.");
-    }, 120000); // 2 minutes
+        if (secretEl) {
+            secretEl.value = '';
+            // Trigger input event to update any dependent UI if necessary
+            secretEl.dispatchEvent(new Event('input'));
+        }
+        console.log("Secret Key auto-cleared for security (1 min inactivity).");
+    }, 60000); // 1 minute
 }
 
 function startPasswordClearTimer() {
     clearTimeout(passwordClearTimer);
     passwordClearTimer = setTimeout(() => {
-        passwordOutput.value = '****************';
-        outputSection.classList.remove('active');
-        copyBtn.disabled = true;
-        console.log("Generated Password auto-cleared for security.");
-    }, 30000); // 30 seconds
+        if (passwordOutput) {
+            passwordOutput.value = '****************';
+            passwordOutput.type = 'password'; // Force mask
+            if (togglePassCb) togglePassCb.checked = false;
+        }
+        if (outputSection) outputSection.classList.remove('active');
+        if (copyBtn) copyBtn.disabled = true;
+        console.log("Generated Password auto-cleared for security (15s).");
+    }, 15000); // 15 seconds
 }
 
-// Clear sensitive data on tab leave
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        secretEl.value = '';
+// Clear sensitive data on tab close or leave
+const clearSensitiveData = () => {
+    if (secretEl) secretEl.value = '';
+    if (passwordOutput) {
         passwordOutput.value = '****************';
-        outputSection.classList.remove('active');
-        copyBtn.disabled = true;
-        console.log("Sensitive data cleared on tab leave.");
+        passwordOutput.type = 'password';
     }
+    if (outputSection) outputSection.classList.remove('active');
+    if (copyBtn) copyBtn.disabled = true;
+    console.log("Sensitive data wiped.");
+};
+
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) clearSensitiveData();
 });
 
-//Reset secret timer on input
-if (secretEl) secretEl.addEventListener('input', startSecretClearTimer);
+window.addEventListener('beforeunload', clearSensitiveData);
+window.addEventListener('pagehide', clearSensitiveData);
 
-// Clear platform on click (like country selector)
-if (platformEl) {
-    platformEl.addEventListener('click', () => {
-        platformEl.value = '';
-    });
-}
+// Reset secret timer on any user activity (inactivity detection)
+['mousedown', 'mousemove', 'keypress', 'scroll', 'touchstart', 'input'].forEach(evt => {
+    document.addEventListener(evt, () => {
+        if (secretEl && secretEl.value !== '') {
+            startSecretClearTimer();
+        }
+    }, { passive: true });
+});
 
 // Field Auto-Cleanup & Restore UX
 function setupSmartField(el) {
+    if (!el) return;
     let originalValue = "";
     el.addEventListener('focus', () => {
         originalValue = el.value;
@@ -120,6 +136,7 @@ function setupSmartField(el) {
 }
 
 setupSmartField(regionEl);
+setupSmartField(platformEl);
 setupSmartField(usernameEl);
 
 // Populate Datalist dynamically based on region
@@ -156,14 +173,16 @@ function autoDetectRegion() {
     try {
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const tzMap = {
-            'Asia/Kolkata': 'in', 'America/New_York': 'us', 'America/Los_Angeles': 'us',
-            'Europe/London': 'gb', 'America/Toronto': 'ca', 'Australia/Sydney': 'au',
+            'Asia/Kolkata': 'in', 'Asia/Calcutta': 'in',
+            'America/New_York': 'us', 'America/Los_Angeles': 'us', 'America/Chicago': 'us', 'America/Denver': 'us',
+            'Europe/London': 'gb', 'Europe/Paris': 'fr', 'Europe/Berlin': 'de',
+            'America/Toronto': 'ca', 'Australia/Sydney': 'au', 'Australia/Melbourne': 'au',
             'Asia/Dhaka': 'bd', 'Asia/Karachi': 'pk', 'Africa/Lagos': 'ng',
             'Asia/Manila': 'ph', 'Asia/Jakarta': 'id', 'Africa/Nairobi': 'ke',
-            'Asia/Dubai': 'ae', 'Europe/Paris': 'fr', 'Europe/Berlin': 'de',
+            'Asia/Dubai': 'ae', 'Asia/Riyadh': 'sa',
             'Asia/Tokyo': 'jp', 'America/Sao_Paulo': 'br', 'Africa/Johannesburg': 'za',
             'Europe/Madrid': 'es', 'Europe/Rome': 'it', 'Europe/Amsterdam': 'nl'
-            // Add more common timezones if necessary. Fallback is what is selected in HTML.
+            // Add more common timezones if necessary.
         };
 
         const detectedRegion = tzMap[tz];
@@ -210,19 +229,20 @@ window.addEventListener('DOMContentLoaded', () => {
             if (defaultOpt) regionEl.value = defaultOpt.value;
         }
 
-        // 3. Auto-detect if NO path was specified (only for home page)
+        // 3. Auto-detect timezone BEFORE reading regionEl.value for UI update
+        //    This ensures flag badge reflects the detected region correctly
         if (!path || path === '' || path === 'index.html') {
             autoDetectRegion();
         }
 
-        // 4. Update UI
+        // 4. Update UI — read value AFTER autoDetectRegion() has potentially changed it
         let val = regionEl.value || '';
         let code = val.split('-')[0].trim().toLowerCase();
         if (!code) code = 'global';
         populatePlatformDatalist(code);
-        updateRegionIcon(val); // Initialize flag
+        updateRegionIcon(val); // Initialize flag badge with final region
 
-        // Trigger Guide language change based on final region
+        // 5. Trigger Guide language change based on final region
         const regionToLang = {
             'in': 'hi', 'np': 'hi', 'es': 'es', 'us': 'es', 'fr': 'fr', 'ca': 'fr'
         };
@@ -245,14 +265,21 @@ function updateRegionIcon(fullVal) {
     const flagBadge = document.getElementById('flag-badge');
     if (!flagBadge) return;
 
-    const countryCode = (fullVal || '').split('-')[0].trim().toLowerCase();
-
-    if (countryCode && countryCode !== 'global') {
-        const flag = getFlagEmoji(countryCode);
-        if (flag) {
-            flagBadge.textContent = flag;
-            return;
+    let countryCode = (fullVal || '').split('-')[0].trim().toLowerCase();
+    
+    // If user typed something but it's not a full code (e.g. typing "in"), try to find it
+    if (countryCode.length < 2 && fullVal) {
+        const match = document.querySelector(`#region-list option[value*="${fullVal}"]`);
+        if (match) {
+            countryCode = match.value.split('-')[0].trim().toLowerCase();
         }
+    }
+
+    if (countryCode && countryCode !== 'global' && countryCode.length === 2) {
+        // Use FlagCDN for guaranteed rendering on Windows
+        const flagUrl = `https://flagcdn.com/w80/${countryCode}.png`;
+        flagBadge.innerHTML = `<img src="${flagUrl}" alt="${countryCode}" style="width: 22px; height: auto; border-radius: 2px; vertical-align: middle;">`;
+        return;
     }
     flagBadge.textContent = "🌍";
 }
@@ -505,32 +532,32 @@ function runShoutout(platform) {
     const regionVal = regionEl ? regionEl.value : '';
     const regionCode = (regionVal || '').split('-')[0].trim().toLowerCase() || 'ng';
     const msgData = window.regionalTranslations[regionCode] || window.regionalTranslations['ng'] || {};
-    const message = msgData.shoutout_message || "Hello Everyone! I am using Https://frankpass.com - this is a very advanced and futuristic password generator that reduces your mental load and gives you mental peace. You only have to remember simple words or phrases, that's it! And this generator gives you proof-hard passwords that are next to impossible to guess by any person, AI, or even supercomputer.";
+    
+    // Updated more descriptive message that encourages supporting others
+    const message = msgData.shoutout_message || "I'm using FrankPass - a futuristic, stateless password generator that ensures privacy and mental peace. No more forgotten passwords! Check it out: https://frankpass.com/guide";
     const encodedMsg = encodeURIComponent(message);
-    const url = "https://frankpass.com";
+    const guideUrl = "https://frankpass.com/guide";
+    const encodedGuideUrl = encodeURIComponent(guideUrl);
 
     let shareUrl = "";
 
     switch (platform) {
         case 'x':
-            shareUrl = `https://twitter.com/intent/tweet?text=${encodedMsg}`;
+            shareUrl = `https://x.com/intent/tweet?text=${encodedMsg}`;
             break;
         case 'whatsapp':
             shareUrl = `https://wa.me/?text=${encodedMsg}`;
             break;
         case 'facebook':
-            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodedMsg}`;
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedGuideUrl}&quote=${encodedMsg}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedGuideUrl}`;
             break;
         case 'instagram':
             navigator.clipboard.writeText(message).then(() => {
                 alert("Message copied to clipboard! Now opening Instagram — paste it in your story or post.");
                 window.open("https://instagram.com/mastermanikant", '_blank', 'noopener,noreferrer');
-            });
-            return;
-        case 'youtube':
-            navigator.clipboard.writeText(message).then(() => {
-                alert("Message copied to clipboard! Now opening YouTube — paste it in a comment.");
-                window.open("https://youtube.com/@mastermanikant", '_blank', 'noopener,noreferrer');
             });
             return;
         default:

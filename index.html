@@ -13,6 +13,16 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#6366f1">
+    
+    <!-- SEO & Metas -->
+    <meta name="description" content="FrankPass: The ultimate deterministic, stateless, and unbreakable password generator. No database, pure math, zero mental load.">
+    <meta name="keywords" content="password generator, stateless password, deterministic password, cybersecurity, mastermanikant, frankpass">
+    <meta property="og:title" content="FrankPass | Ultimate Deterministic Security">
+    <meta property="og:description" content="Generate unbreakable passwords without a database. Pure math, total privacy.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://frankpass.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
     <!-- Ionicons for icons -->
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
         integrity="sha384-xyQ/Vpt1cq1pdPYlRaT/QkcSj2vrYyWI3WOhxGBzqnP1vgvsS2yrhWXe3/wIoCr5"
@@ -23,6 +33,7 @@
 </head>
 
 <body>
+    <canvas id="particle-canvas"></canvas>
     <div class="background-elements">
         <div class="circle circle-1"></div>
         <div class="circle circle-2"></div>
@@ -261,7 +272,7 @@
                     <label for="platform">Platform / Website <span class="required">*</span></label>
                     <div class="input-wrapper">
                         <ion-icon name="globe-outline"></ion-icon>
-                        <input type="text" id="platform" list="platform-list" placeholder="Type your platform name or domin "
+                        <input type="text" id="platform" list="platform-list" placeholder="Type your platform name or domain"
                             required autocomplete="off">
                         <!-- 
                         WARNING FOR ALL DEVELOPERS & AI AGENTS: 
@@ -339,7 +350,7 @@
                         <div class="input-wrapper select-wrapper">
                             <ion-icon name="options-outline"></ion-icon>
                             <select id="profile">
-                                <option value="standard">Standard (Complex-Recommended latter, number and special characters)</option>
+                                <option value="standard">Standard (Letters, Numbers & Symbols - Recommended)</option>
                                 <option value="alphanumeric">Alphanumeric (Letters & Numbers)</option>
                                 <option value="numeric">Numeric (PIN Code)</option>
                             </select>
@@ -398,149 +409,54 @@
 
         <!-- ================= GUIDE SECTIONS (MULTILINGUAL) ================= -->
         <section class="guide-content glass-panel hidden" id="guide-en">
-            <h2>How to Use FrankPass: The Ultimate Guide</h2>
-            <p>Welcome to FrankPass. This tool is designed to generate unbreakable passwords while keeping your
-                mental
-                load near zero.</p>
-            <p><strong>Core Principle:</strong> This tool is 100% Stateless and Deterministic. It doesn't save your data
-                anywhere. No databases. It's pure math running between your browser and a secure stateless API. If you
-                enter the <em>exact same details</em>, you will always get the <em>exact same password</em>.</p>
-            <p>Even if a hacker reads this guide, they cannot steal your passwords because the security relies on what's
-                in your head, not what's stored in a system.</p>
-
-            <h3>🔑 Understanding the Inputs</h3>
-            <ol>
-                <li><strong>Platform / Website (Required):</strong> This changes your password. Always use a consistent
-                    name (e.g., <code>facebook</code>).</li>
-                <li><strong>Username / Email (Optional):</strong> This changes your password. Use exact spelling (e.g.
-                    <code>master_manikant</code> is different from <code>mastermanikant</code>). If you don't use it,
-                    leave it blank.
-                </li>
-                <li><strong>Secret Personal Key (Required):</strong> This is your master phrase — anything you will never forget. To make it easy, you can combine names of 2-3 friends or family members, or use your name + favorite fruit + a year.
-                    <br><em>Examples:</em> <code>john paul 2026</code>, <code>mary apple 2024</code>, <code>i am good boy rahul 2020</code>
-                    <br><em>Note: Capital letters and spaces do not matter in the Secret Key.</em></li>
-                <li><strong>Variant Counter (Default 1):</strong> Keep your Secret Key the same. Change this number to
-                    generate a new password for the same site (e.g., if you need to change your Facebook password, just
-                    increase Variant from 1 to 2).</li>
-                <li><strong>Profile / Length:</strong> These only change the format of the password, but changing them
-                    will give a different password sequence.</li>
-            </ol>
-
-            <h3>🧠 The "Zero Mental Load" Strategy</h3>
-            <p>The Golden Rule: Keep your Secret Key, Variant, and Length exactly the same for 99% of websites. Only
-                change the <strong>Platform</strong> name! This way, you only need to remember your Secret Key.</p>
-
-
-            <h3>⚠️ Important Do's and Don'ts</h3>
-            <ul>
-                <li>If a site requires fewer characters: Lower the length slider and regenerate.</li>
-                <li>If a site doesn't allow symbols (!@#): Change the Profile to "Alphanumeric".</li>
-                <li>Keep your Clipboard clean by copying random text after logging in.</li>
-                <li>Never write down the final password or your Secret Key. Write down the recipe instead: <em>"Facebook
-                        - Username X - Variant 2"</em>.</li>
-            </ul>
-            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> Hide Guide</button>
+            <h2>Quick Guide: How to use FrankPass</h2>
+            <p><strong>Benefit: Remember just 1 or 2 things and generate unbreakable passwords for life!</strong></p>
+            <p>This tool is 100% stateless. It saves nothing anywhere. Enter the same details — get the exact same password every time.</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
+                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> Read Full Masterclass Guide
+                </a>
+            </div>
+            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Hide Quick Guide</button>
         </section>
 
         <section class="guide-content glass-panel hidden" id="guide-hi">
-            <h2>FrankPass का उपयोग कैसे करें: संपूर्ण गाइड</h2>
-            <p>FrankPass में आपका स्वागत है। यह टूल आपको बिना किसी दिमागी बोझ के, हैक न हो सकने वाले (Unbreakable)
-                पासवर्ड बनाने में मदद करता है।</p>
-            <p><strong>मूल सिद्धांत:</strong> यह टूल 100% "हर बार एक जैसा काम करता है" और आपका डेटा "कहीं सेव नहीं करता"
-                है।
-                यह ब्राउज़र और सुरक्षित API के बीच विशुद्ध गणित है। यदि आप बिलकुल वही जानकारी दोबारा डालेंगे, तो आपको
-                हमेशा बिलकुल वही पासवर्ड मिलेगा।</p>
-            <p>सुरक्षा सिस्टम में नहीं, बल्कि आपके दिमाग में है।</p>
-
-            <h3>🔑 इनपुट्स को समझना</h3>
-            <ol>
-                <li><strong>Platform (ज़रूरी):</strong> हमेशा एक ही आसान नाम का उपयोग करें (जैसे,
-                    <code>facebook</code>)।
-                </li>
-                <li><strong>Secret Personal Key (ज़रूरी):</strong> कोई ऐसा वाक्य (शब्द और अंक) इस्तेमाल करें जो आपको
-                    आसानी से याद रहे पर कोई और अंदाज़ा न लगा सके (जैसे:
-                    <code>Rajakoranisepyartha2000</code>).<br><em>ध्यान दें: Secret Key में स्पेस या छोटे/बड़े
-                        (capital/small) अक्षरों से कोई फर्क नहीं पडेगा (जैसे, <code>I am Good</code> =
-                        <code>iamgood</code> = <code>IAMGOOD</code>).</em>
-                </li>
-                <li><strong>Variant Counter (डिफ़ॉल्ट 1):</strong> जब भी किसी साइट का पासवर्ड बदलना हो, तो अपना Secret
-                    Key न बदलें, बस Variant को 1 से बढ़ाकर 2 कर दें। इससे याद रखने में बहुत आसानी होगी।</li>
-            </ol>
-
-            <h3>🧠 "ज़ीरो मेंटल लोड" स्ट्रेटेजी</h3>
-            <p>गोल्डन रूल: Secret Key हमेशा एक ही। Variant 1। Length 16। आपको केवल एक ही चीज़ बदलनी है, वह है
-                <strong>Platform</strong> का नाम!
-            </p>
-
-
-            <h3>⚠️ क्या करें और क्या न करें</h3>
-            <ul>
-                <li>साइट कम अक्षरों वाला पासवर्ड मांगे: Length स्लाइडर कम करें।</li>
-                <li>साइट सिंबल एक्सेप्ट न करे: Profile को "Alphanumeric" कर दें।</li>
-                <li>क्लिपबोर्ड साफ़ रखें: पासवर्ड पेस्ट करने के बाद कोई भी रैंडम टेक्स्ट कॉपी कर लें।</li>
-                <li>कभी भी अपना फाइनल पासवर्ड कहीं न लिखें। सिर्फ रेसिपी लिखें: <em>"Facebook - Variant 2"</em>.</li>
-            </ul>
-            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> गाइड छिपाएं (Hide)</button>
+            <h2>शॉर्ट गाइड: FrankPass का उपयोग कैसे करें</h2>
+            <p><strong>फायदा: सिर्फ 1 या 2 आसान बातें याद रखकर, जीवन भर के लिए कभी हैक न होने वाले पासवर्ड बनाएं!</strong></p>
+            <p>यह टूल 100% स्टेटलेस (Stateless) है। यह आपका डेटा कहीं सेव नहीं करता। यदि आप बिलकुल वही जानकारी दोबारा डालेंगे, तो आपको हमेशा बिलकुल वही पासवर्ड मिलेगा।</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
+                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> पूरी मास्टरक्लास गाइड पढ़ें
+                </a>
+            </div>
+            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> गाइड छिपाएं (Hide)</button>
         </section>
 
         <section class="guide-content glass-panel hidden" id="guide-es">
-            <h2>Cómo usar FrankPass: La Guía Definitiva</h2>
-            <p>Bienvenido a FrankPass. Esta herramienta está diseñada para generar contraseñas irrompibles
-                manteniendo tu carga mental casi en cero.</p>
-            <p><strong>Principio Central:</strong> Esta herramienta es 100% Sin Estado y Determinista. No guarda tus
-                datos en ninguna parte. No hay bases de datos. Si introduces los <em>mismos detalles exactos</em>,
-                siempre obtendrás la <em>misma contraseña exacta</em>.</p>
-
-            <h3>🔑 Entendiendo las Entradas</h3>
-            <ol>
-                <li><strong>Plataforma (Requerido):</strong> Usa siempre un nombre consistente (ej.,
-                    <code>facebook</code>).
-                </li>
-                <li><strong>Clave Personal Secreta (Requerido):</strong> Tu frase maestra. Usa palabras o números
-                    fáciles de recordar pero difíciles de adivinar.<br><em>Nota: Las mayúsculas y espacios no
-                        importan.</em></li>
-                <li><strong>Contador de Variante (Por defecto 1):</strong> Mantén tu clave secreta igual. Cambia este
-                    número para generar una nueva contraseña para el mismo sitio.</li>
-            </ol>
-
-            <h3>🧠 La Estrategia "Cero Carga Mental"</h3>
-            <p>Regla de Oro: Mantén tu Clave Secreta y Variante exactamente iguales para el 99% de los sitios web. ¡Solo
-                cambia el nombre de la <strong>Plataforma</strong>!</p>
-            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> Ocultar Guía</button>
+            <h2>Guía rápida: Cómo usar FrankPass</h2>
+            <p><strong>Beneficio: ¡Recordando solo 1 o 2 cosas, puedes crear contraseñas irrompibles para toda la vida!</strong></p>
+            <p>Esta herramienta es 100% sin estado. No guarda tus datos.</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
+                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> Leer guía completa
+                </a>
+            </div>
+            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Ocultar guía</button>
         </section>
 
-        <!-- French Guide -->
         <section class="guide-content glass-panel hidden" id="guide-fr">
-            <h2>Comment utiliser FrankPass : Le Guide Ultime</h2>
-            <p>Bienvenue sur FrankPass. Cet outil est conçu pour générer des mots de passe inviolables tout en gardant votre charge mentale proche de zéro.</p>
-            <p><strong>Principe de base :</strong> Cet outil est 100% sans état et déterministe. Il ne sauvegarde vos données nulle part. Si vous entrez les <em>mêmes détails exacts</em>, vous obtiendrez toujours le <em>même mot de passe exact</em>.</p>
-
-            <h3>🔑 Comprendre les entrées</h3>
-            <ol>
-                <li><strong>Plateforme (Requis) :</strong> Utilisez toujours un nom cohérent (ex. <code>facebook</code>).</li>
-                <li><strong>Clé Personnelle Secrète (Requis) :</strong> Votre phrase maîtresse. Facile à retenir pour vous, impossible à deviner pour les autres.</li>
-                <li><strong>Compteur de Variante (Défaut 1) :</strong> Gardez votre clé secrète identique. Changez ce nombre pour générer un nouveau mot de passe pour le même site.</li>
-            </ol>
-            <button class="btn-hide-guide" onclick="closeGuide()"><ion-icon name="chevron-up-outline"></ion-icon> Masquer le guide</button>
+            <h2>Guide rapide : Comment utiliser FrankPass</h2>
+            <p><strong>Avantage : En vous rappelant seulement 1 ou 2 choses simples, vous pouvez créer des mots de passe inviolables à vie!</strong></p>
+            <p>Cet outil est 100% sans état.</p>
+            <div style="text-align: center; margin-top: 1.5rem;">
+                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
+                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> Lire le guide complet
+                </a>
+            </div>
+            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Masquer le guide</button>
         </section>
 
         <!-- ================= FAQ SECTION ================= -->
-        <style>
-            .faq-item summary::-webkit-details-marker {
-                display: none;
-            }
-
-            .faq-item[open] summary ion-icon {
-                transform: rotate(180deg);
-                color: var(--accent-primary);
-            }
-
-            .faq-item[open] {
-                background: rgba(255, 255, 255, 0.06) !important;
-                border-color: rgba(99, 102, 241, 0.3) !important;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            }
-        </style>
         <section id="faq" class="glass-panel" style="margin-top: 2rem; padding: 2rem; border-radius: 20px;">
             <h2 id="faq-header" style="color: var(--accent-primary); margin-bottom: 1rem; text-align: center; font-size: 1.8rem;">Frequently Asked Questions</h2>
             <button id="faq-toggle-btn" onclick="toggleFAQ()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;padding:0.9rem 1.2rem;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:var(--accent-primary);font-size:1.1rem;font-weight:600;transition:background 0.3s ease;margin-bottom:0;">
@@ -719,33 +635,7 @@
             </div>
         </section>
 
-        <section class="guide-content glass-panel hidden" id="guide-fr">
-            <h2>Comment utiliser FrankPass: Le Guide Ultime</h2>
-            <p>Bienvenue sur FrankPass. Cet outil est conçu pour générer des mots de passe inviolables tout en
-                gardant votre charge mentale proche de zéro.</p>
-            <p><strong>Principe de base:</strong> Cet outil est 100% Sans État et Déterministe. Il n'enregistre vos
-                données nulle part. Pas de base de données. Si vous entrez <em>exactement les mêmes détails</em>,
-                vous
-                obtiendrez toujours le <em>même mot de passe</em>.</p>
-
-            <h3>🔑 Comprendre les Entrées</h3>
-            <ol>
-                <li><strong>Plateforme / Site Web (Requis):</strong> Utilisez toujours un nom constant (ex.,
-                    <code>facebook</code>).
-                </li>
-                <li><strong>Clé Personnelle Secreta (Requis):</strong> Votre phrase maîtresse. Usez des mots faciles
-                    à retenir mais difficiles à deviner.<br><em>Note: Les majuscules et les espaces n'ont pas
-                        d'importance.</em></li>
-                <li><strong>Compteur de Variante (Défaut 1):</strong> Gardez votre clé secrète identique. Changez ce
-                    nombre pour générer un nouveau mot de passe pour le même site.</li>
-            </ol>
-
-            <h3>🧠 Stratégie "Zéro Charge Mentale"</h3>
-            <p>Règle d'or: Gardez votre Clé Secrète et Variante exactement identiques pour 99% des sites. Ne changez
-                que
-                le nom de la <strong>Plateforme</strong> !</p>
-
-        </section>
+        <!-- Duplicate guide-fr section removed -->
 
         <!-- ================= NEWSLETTER CROSS-PROMOTION ================= -->
         <section class="breach-alert-section" id="breach-section">
@@ -768,87 +658,67 @@
         <footer class="glass-panel">
             <div class="footer-grid">
                 <!-- Column 1: Links -->
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
+                <div class="footer-col" style="flex: 2;">
+                    <h4>Legal & About</h4>
                     <ul>
-                        <li><a href="#how-it-works">How it Works</a></li>
-                        <li><a href="#security">Security Architecture</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="mailto:contact@frankpass.com">Contact Support</a></li>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li><a href="/why-stateless.html">Why Stateless?</a></li>
+                        <li><a href="/guide.html">Masterclass Guide</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/disclaimer.html">Disclaimer</a></li>
+                        <li><a href="/contact.html">Contact Us</a></li>
+                        <li><a href="/founder-mastermanikant.html">Founder & Developer</a></li>
                     </ul>
-                    <h4 class="small-title">Give me a shoutout!</h4>
-                    <div class="shoutout-links">
-                        <a href="javascript:void(0)" onclick="runShoutout('x')" title="X (Twitter)"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="javascript:void(0)" onclick="runShoutout('instagram')" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="javascript:void(0)" onclick="runShoutout('facebook')" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="javascript:void(0)" onclick="runShoutout('youtube')" title="YouTube"><ion-icon name="logo-youtube"></ion-icon></a>
-                        <a href="javascript:void(0)" onclick="runShoutout('whatsapp')" title="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
-                    </div>
                 </div>
 
                 <!-- Column 2: App Socials -->
-                <div class="footer-col">
-                    <h4>Follow FrankPass For Security Tips</h4>
-                    <div class="social-links">
-                        <a href="https://x.com/frankbasedigital" target="_blank" aria-label="X (Twitter)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px"
-                                height="24px">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
+                <div class="footer-col" style="flex: 2;">
+                    <h4>Support & Security</h4>
+                    <ul>
+                        <li><a href="#faq">FAQ & Security</a></li>
+                        <li><a href="mailto:contact@frankpass.com">Email Support</a></li>
+                    </ul>
+                    <h4 class="small-title" style="margin-top: 1.5rem;">Share FrankPass — Sharing is Caring</h4>
+                    <div class="shoutout-links">
+                        <a href="javascript:void(0)" onclick="runShoutout('x')" title="X (Formerly Twitter)">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px" style="vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                         </a>
-                        <a href="https://facebook.com/frankbasedigital" target="_blank" aria-label="Facebook"><ion-icon
-                                name="logo-facebook" style="color: #1877F2;"></ion-icon></a>
-                        <a href="https://instagram.com/frankbasedigital" target="_blank"
-                            aria-label="Instagram"><ion-icon name="logo-instagram"
-                                style="color: #E4405F;"></ion-icon></a>
-                        <a href="https://youtube.com/@frankbase" target="_blank" aria-label="YouTube"><ion-icon
-                                name="logo-youtube" style="color: #FF0000;"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('instagram')" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('facebook')" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('linkedin')" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('whatsapp')" title="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
                     </div>
-                    <!-- PWA Install Button — only shows if browser supports it -->
-                    <button id="pwa-install-btn" class="btn-primary"
-                        style="margin-top: 0.7rem; padding: 0.6rem 1.2rem; font-size: 0.95rem; width: 100%; border-radius: 10px; display: none; background: linear-gradient(135deg, #10b981, #059669);"
-                        onclick="installPWA()">
+                </div>
+                <!-- Column 3: Socials & Developer -->
+                <div class="footer-col" style="flex: 3;">
+                    <h4>Follow FrankPass</h4>
+                    <div class="social-links" style="margin-bottom: 1.5rem;">
+                        <a href="https://x.com/frankbasedigital" target="_blank" aria-label="X">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20px" height="20px"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                        </a>
+                        <a href="https://facebook.com/frankbasedigital" target="_blank" aria-label="Facebook"><ion-icon name="logo-facebook" style="color: #1877F2;"></ion-icon></a>
+                        <a href="https://instagram.com/frankbasedigital" target="_blank" aria-label="Instagram"><ion-icon name="logo-instagram" style="color: #E4405F;"></ion-icon></a>
+                        <a href="https://linkedin.com/company/frankbase" target="_blank" aria-label="LinkedIn"><ion-icon name="logo-linkedin" style="color: #0A66C2;"></ion-icon></a>
+                    </div>
+
+                    <h4>The Developer</h4>
+                    <p style="margin-bottom: 0.8rem;">Created by <a href="https://www.google.com/search?q=mastermanikant" target="_blank" rel="noopener"><strong>@mastermanikant</strong></a></p>
+                    <div class="social-links developer-socials">
+                        <a href="https://x.com/mastermanikant" target="_blank" aria-label="X">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px" style="vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                        </a>
+                        <a href="https://github.com/mastermanikant" target="_blank" aria-label="GitHub"><ion-icon name="logo-github" style="color: #ffffff;"></ion-icon></a>
+                        <a href="https://linkedin.com/in/mastermanikant" target="_blank" aria-label="LinkedIn"><ion-icon name="logo-linkedin" style="color: #0A66C2;"></ion-icon></a>
+                    </div>
+
+                    <button id="pwa-install-btn" class="btn-primary" style="margin-top: 1.5rem; padding: 0.6rem 1.2rem; font-size: 0.9rem; width: 100%; border-radius: 10px; display: none; background: linear-gradient(135deg, #10b981, #059669);" onclick="installPWA()">
                         <ion-icon name="download-outline" style="margin-right: 0.4rem;"></ion-icon> Install Web App
                     </button>
-                    <!-- Open in Browser — only shows if in standalone mode (PWA window) -->
-                    <button id="open-browser-btn" class="btn-primary"
-                        style="margin-top: 0.7rem; padding: 0.6rem 1.2rem; font-size: 0.95rem; width: 100%; border-radius: 10px; display: none; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);"
-                        onclick="openInBrowser()">
-                        <ion-icon name="globe-outline" style="margin-right: 0.4rem;"></ion-icon> Open in Browser
-                    </button>
-                </div>
-
-                <!-- Column 3: Developer -->
-                <div class="footer-col">
-                    <h4>The Developer</h4>
-                    <p>Created by
-                        <a href="https://www.google.com/search?q=mastermanikant" target="_blank" rel="noopener"><strong>@mastermanikant</strong></a>
-                    </p>
-                    <div class="social-links developer-socials">
-                        <a href="https://x.com/mastermanikant" target="_blank" aria-label="X (Twitter)">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20px"
-                                height="20px">
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                            </svg>
-                        </a>
-                        <a href="https://github.com/mastermanikant" target="_blank" aria-label="GitHub"><ion-icon
-                                name="logo-github" style="color: #ffffff;"></ion-icon></a>
-                        <a href="https://facebook.com/mastermanikant" target="_blank" aria-label="Facebook"><ion-icon
-                                name="logo-facebook" style="color: #1877F2;"></ion-icon></a>
-                        <a href="https://instagram.com/mastermanikant" target="_blank" aria-label="Instagram"><ion-icon
-                                name="logo-instagram" style="color: #E4405F;"></ion-icon></a>
-                        <a href="https://linkedin.com/in/mastermanikant" target="_blank" aria-label="LinkedIn"><ion-icon
-                                name="logo-linkedin" style="color: #0A66C2;"></ion-icon></a>
-                        <a href="https://youtube.com/@mastermanikant" target="_blank" aria-label="YouTube"><ion-icon
-                                name="logo-youtube" style="color: #FF0000;"></ion-icon></a>
-                    </div>
                 </div>
             </div>
 
-            <div
-                style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: #94a3b8; font-size: 0.85rem;">
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: #94a3b8; font-size: 0.85rem;">
                 <p>Serverless Cryptography. Zero Database. Pure Math.</p>
                 <p style="margin-top: 0.5rem;">&copy; <span id="copyright-year"></span> FrankPass. All rights reserved.</p>
                 <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
@@ -861,10 +731,10 @@
         <div class="modal-content glass-panel">
             <button class="close-modal" onclick="closeShoutoutModal()">&times;</button>
             <div class="logo-container" style="margin-bottom: 1rem;">
-                <h2 style="font-size: 1.8rem;">Give us a <span class="FrankPass-text">Shoutout</span>!</h2>
+                <h2 style="font-size: 1.8rem;">Sharing <span class="FrankPass-text">is Caring</span>!</h2>
             </div>
             <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1rem;">
-                You've generated multiple secure passwords. Help others find mental peace by sharing FrankPass with your friends and family!
+                Help others find mental peace. Share FrankPass and help your friends create unbreakable passwords!
             </p>
             <div class="share-grid">
                 <a href="javascript:void(0)" onclick="runShoutout('whatsapp'); closeShoutoutModal();" class="share-option" id="share-whatsapp">
@@ -872,8 +742,8 @@
                     <span>WhatsApp</span>
                 </a>
                 <a href="javascript:void(0)" onclick="runShoutout('x'); closeShoutoutModal();" class="share-option" id="share-twitter">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                    <span>X / Twitter</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px" style="margin-bottom: 5px;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                    <span>Post on X</span>
                 </a>
                 <a href="javascript:void(0)" onclick="runShoutout('facebook'); closeShoutoutModal();" class="share-option" id="share-facebook">
                     <ion-icon name="logo-facebook"></ion-icon>
@@ -882,6 +752,10 @@
                 <a href="javascript:void(0)" onclick="runShoutout('instagram'); closeShoutoutModal();" class="share-option" id="share-instagram">
                     <ion-icon name="logo-instagram"></ion-icon>
                     <span>Instagram</span>
+                </a>
+                <a href="javascript:void(0)" onclick="runShoutout('linkedin'); closeShoutoutModal();" class="share-option" id="share-linkedin">
+                    <ion-icon name="logo-linkedin"></ion-icon>
+                    <span>LinkedIn</span>
                 </a>
             </div>
             <button class="btn-primary" onclick="closeShoutoutModal()" style="background: rgba(255,255,255,0.05); box-shadow: none; border: 1px solid rgba(255,255,255,0.1);">
@@ -899,6 +773,7 @@
     <script src="translations.js"></script>
     <script src="frankpass-core.js"></script>
     <script src="script.js"></script>
+    <script src="particles.js"></script>
 </body>
 
 </html>
