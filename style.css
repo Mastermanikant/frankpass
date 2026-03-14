@@ -105,37 +105,43 @@ body {
 /* Logo & Floating Badges */
 .logo-container {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .logo-icons {
-    position: absolute;
     width: 100%;
-    top: -20px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 2.5rem; /* Precise spacing between shield and flag */
+    margin-bottom: 2px;
     pointer-events: none;
 }
 
 .floating-badge {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     filter: drop-shadow(0 0 5px var(--accent-glow));
     animation: floatingIcon 3s infinite ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
 }
 
 .shield-badge {
     color: var(--accent-primary);
-    left: 20%;
 }
 
 .flag-badge {
-    right: 20%;
     animation-delay: -1.5s;
+    font-size: 1.2rem;
 }
 
 @keyframes floatingIcon {
     0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-3px); }
 }
 
 header p {
