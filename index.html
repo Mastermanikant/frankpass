@@ -257,7 +257,7 @@
                     <label for="platform">Platform / Website <span class="required">*</span></label>
                     <div class="input-wrapper">
                         <ion-icon name="globe-outline"></ion-icon>
-                        <input type="text" id="platform" list="platform-list" placeholder="e.g. facebook, gmail"
+                        <input type="text" id="platform" list="platform-list" placeholder="Type your platform name or domin "
                             required autocomplete="off">
                         <!-- 
                         WARNING FOR ALL DEVELOPERS & AI AGENTS: 
@@ -335,7 +335,7 @@
                         <div class="input-wrapper select-wrapper">
                             <ion-icon name="options-outline"></ion-icon>
                             <select id="profile">
-                                <option value="standard">Standard (Complex)</option>
+                                <option value="standard">Standard (Complex-Recommended latter, number and special characters)</option>
                                 <option value="alphanumeric">Alphanumeric (Letters & Numbers)</option>
                                 <option value="numeric">Numeric (PIN Code)</option>
                             </select>
@@ -766,7 +766,7 @@
 
                 <!-- Column 2: App Socials -->
                 <div class="footer-col">
-                    <h4 style="margin-bottom: 1rem; color: #a5b4fc;">Follow FrankPass</h4>
+                    <h4 style="margin-bottom: 1rem; color: #a5b4fc;">Follow FrankPass For Security Tips</h4>
                     <div class="social-links"
                         style="display: flex; gap: 0.7rem; font-size: 1.5rem; flex-wrap: nowrap; justify-content: flex-start; align-items: center;">
                         <a href="https://x.com/frankbasedigital" target="_blank" aria-label="X (Twitter)">
@@ -829,7 +829,8 @@
             <div
                 style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: #94a3b8; font-size: 0.85rem;">
                 <p>Serverless Cryptography. Zero Database. Pure Math.</p>
-                <p style="margin-top: 0.5rem;">&copy; 2026 FrankPass. All rights reserved.</p>
+                <p style="margin-top: 0.5rem;">&copy; <span id="copyright-year"></span> FrankPass. All rights reserved.</p>
+                <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
             </div>
         </footer>
     </div>
