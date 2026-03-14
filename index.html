@@ -316,7 +316,7 @@
                     </div>
                     <div class="input-wrapper">
                         <ion-icon name="key-outline"></ion-icon>
-                        <input type="password" id="secret" placeholder="Your master secret phrase" required
+                        <input type="password" id="secret" placeholder="e.g. 2friends+fruit+2026" required
                             autocomplete="off">
                     </div>
                 </div>
@@ -368,8 +368,8 @@
                 <div class="output-display">
                     <input type="password" class="password-text" id="password-output" value="****************" readonly
                         style="background: transparent; border: none; outline: none; padding: 0; width: 100%; box-shadow: none;">
-                    <button class="icon-btn copy-btn" id="toggle-vis-btn" title="Show/Hide" style="right: 3rem;">
-                        <ion-icon name="eye-outline" id="vis-icon"></ion-icon>
+                    <button class="icon-btn copy-btn" id="toggle-vis-btn" title="Show/Hide" style="right: 3.2rem;">
+                        <ion-icon name="eye-off-outline" id="vis-icon"></ion-icon>
                     </button>
                     <button class="icon-btn copy-btn" id="copy-btn" disabled title="Copy to clipboard">
                         <ion-icon name="copy-outline"></ion-icon>
@@ -408,10 +408,9 @@
                     <code>master_manikant</code> is different from <code>mastermanikant</code>). If you don't use it,
                     leave it blank.
                 </li>
-                <li><strong>Secret Personal Key (Required):</strong> This is your master phrase. Use words and numbers
-                    that are easy for you to remember but hard for others to guess (e.g., <code>ihavenoidea1988</code>
-                    or <code>iamking20</code>). <br><em>Note: Capital letters and spaces do not matter in the Secret
-                        Key. (e.g., <code>I am Good</code> = <code>iamgood</code> = <code>IAMGOOD</code>).</em></li>
+                <li><strong>Secret Personal Key (Required):</strong> This is your master phrase — anything you will never forget. To make it easy, you can combine names of 2-3 friends or family members, or use your name + favorite fruit + a year.
+                    <br><em>Examples:</em> <code>john paul 2026</code>, <code>mary apple 2024</code>, <code>i am good boy rahul 2020</code>
+                    <br><em>Note: Capital letters and spaces do not matter in the Secret Key.</em></li>
                 <li><strong>Variant Counter (Default 1):</strong> Keep your Secret Key the same. Change this number to
                     generate a new password for the same site (e.g., if you need to change your Facebook password, just
                     increase Variant from 1 to 2).</li>

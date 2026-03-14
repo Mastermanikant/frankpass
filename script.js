@@ -37,6 +37,10 @@ const toggleSecretCb = document.getElementById('toggle-secret-cb');
 const toggleVisBtn = document.getElementById('toggle-vis-btn');
 const visIcon = document.getElementById('vis-icon');
 
+// Security Timers
+let secretClearTimer = null;
+let passwordClearTimer = null;
+
 // Guide Elements handled dynamically below
 
 // ==========================================
@@ -52,6 +56,46 @@ lengthEl.addEventListener('input', (e) => {
 toggleSecretCb.addEventListener('change', (e) => {
     secretEl.type = e.target.checked ? 'text' : 'password';
 });
+
+// Toggle Generated Password Visibility
+toggleVisBtn.addEventListener('click', () => {
+    const isPassword = passwordOutput.type === 'password';
+    passwordOutput.type = isPassword ? 'text' : 'password';
+    visIcon.name = isPassword ? 'eye-outline' : 'eye-off-outline';
+});
+
+// Auto-Clear Logic
+function startSecretClearTimer() {
+    clearTimeout(secretClearTimer);
+    secretClearTimer = setTimeout(() => {
+        secretEl.value = '';
+        console.log("Secret Key auto-cleared for security.");
+    }, 120000); // 2 minutes
+}
+
+function startPasswordClearTimer() {
+    clearTimeout(passwordClearTimer);
+    passwordClearTimer = setTimeout(() => {
+        passwordOutput.value = '****************';
+        outputSection.classList.remove('active');
+        copyBtn.disabled = true;
+        console.log("Generated Password auto-cleared for security.");
+    }, 30000); // 30 seconds
+}
+
+// Clear sensitive data on tab leave
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        secretEl.value = '';
+        passwordOutput.value = '****************';
+        outputSection.classList.remove('active');
+        copyBtn.disabled = true;
+        console.log("Sensitive data cleared on tab leave.");
+    }
+});
+
+// Reset secret timer on input
+secretEl.addEventListener('input', startSecretClearTimer);
 
 // Populate Datalist dynamically based on region
 function populatePlatformDatalist(region) {
@@ -282,6 +326,10 @@ form.addEventListener('submit', async (e) => {
         outputSection.classList.add('active');
         copyBtn.disabled = false;
         copyToClipboard(password);
+
+        // Start Auto-Clear Timers
+        startPasswordClearTimer();
+        startSecretClearTimer();
 
     } catch (err) {
         console.error("Generation Error:", err);
