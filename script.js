@@ -149,26 +149,7 @@ function populatePlatformDatalist(region) {
     });
 }
 
-// Listen for region changes
-if (regionEl) {
-    regionEl.addEventListener('change', (e) => {
-        let val = e.target.value || '';
-        let code = val.split('-')[0].trim().toLowerCase();
-        if (!code) code = 'global';
-        populatePlatformDatalist(code);
-        updateRegionIcon(val);
-
-        // Clear platform on region change
-        if (platformEl) platformEl.value = '';
-
-        // Update URL path without refresh (SEO & UX)
-        if (code !== 'global') {
-            window.history.pushState({ code }, '', `/${code}`);
-        } else {
-            window.history.pushState({ code }, '', '/');
-        }
-    });
-}
+// Region change is handled below in the unified listener
 
 // Auto-detect Region by Timezone
 function autoDetectRegion() {
@@ -276,20 +257,32 @@ function updateRegionIcon(fullVal) {
     flagBadge.textContent = "🌍";
 }
 
-// Listen for region changes
+// Unified region change listener (input + change)
 if (regionEl) {
     regionEl.addEventListener('input', (e) => {
         let val = e.target.value || '';
         let code = val.split('-')[0].trim().toLowerCase();
         if (!code) code = 'global';
-        
         populatePlatformDatalist(code);
         updateRegionIcon(val);
     });
-    
-    // Also handle 'change' for full selection from datalist
+
     regionEl.addEventListener('change', (e) => {
-        updateRegionIcon(e.target.value);
+        let val = e.target.value || '';
+        let code = val.split('-')[0].trim().toLowerCase();
+        if (!code) code = 'global';
+        populatePlatformDatalist(code);
+        updateRegionIcon(val);
+
+        // Clear platform on region change
+        if (platformEl) platformEl.value = '';
+
+        // Update URL path without refresh (SEO & UX)
+        if (code !== 'global') {
+            window.history.pushState({ code }, '', `/${code}`);
+        } else {
+            window.history.pushState({ code }, '', '/');
+        }
     });
 }
 
@@ -502,23 +495,17 @@ function closeGuide() {
     }
 }
 
-// Localized App Sharing
-function shareApp() {
-    let activeLang = 'en'; // default
-    langs.forEach(l => {
-        if (guides[l] && !guides[l].classList.contains('hidden')) {
-            activeLang = l;
-        }
-    });
-
 /**
  * Shoutout functionality: Pre-fills a localized message and opens social sharing.
+ * Detects the active region from the region selector to pick the right language.
  * @param {string} platform - The social platform ('x', 'instagram', 'facebook', 'youtube', 'whatsapp')
  */
 function runShoutout(platform) {
-    const activeLang = document.documentElement.lang || 'en';
-    const msgData = window.regionalTranslations[activeLang] || window.regionalTranslations['en'] || {};
-    const message = msgData.shoutout_message || "Hello Everyone! I am using https://frankpass.com - this is a very advanced and futuristic password generator that reduces your mental load and give you mental peace.";
+    // Detect active region from the region selector
+    const regionVal = regionEl ? regionEl.value : '';
+    const regionCode = (regionVal || '').split('-')[0].trim().toLowerCase() || 'ng';
+    const msgData = window.regionalTranslations[regionCode] || window.regionalTranslations['ng'] || {};
+    const message = msgData.shoutout_message || "Hello Everyone! I am using Https://frankpass.com - this is a very advanced and futuristic password generator that reduces your mental load and gives you mental peace. You only have to remember simple words or phrases, that's it! And this generator gives you proof-hard passwords that are next to impossible to guess by any person, AI, or even supercomputer.";
     const encodedMsg = encodeURIComponent(message);
     const url = "https://frankpass.com";
 
@@ -535,14 +522,20 @@ function runShoutout(platform) {
             shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodedMsg}`;
             break;
         case 'instagram':
-            shareUrl = "https://instagram.com/mastermanikant";
-            break;
+            navigator.clipboard.writeText(message).then(() => {
+                alert("Message copied to clipboard! Now opening Instagram — paste it in your story or post.");
+                window.open("https://instagram.com/mastermanikant", '_blank', 'noopener,noreferrer');
+            });
+            return;
         case 'youtube':
-            shareUrl = "https://youtube.com/@mastermanikant";
-            break;
+            navigator.clipboard.writeText(message).then(() => {
+                alert("Message copied to clipboard! Now opening YouTube — paste it in a comment.");
+                window.open("https://youtube.com/@mastermanikant", '_blank', 'noopener,noreferrer');
+            });
+            return;
         default:
             navigator.clipboard.writeText(message).then(() => {
-                alert("Message copied! You can now paste it.");
+                alert("Message copied! You can now paste it anywhere.");
             });
             return;
     }
@@ -681,19 +674,7 @@ function collapseFAQ() {
     document.getElementById('faq-header').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Helper to close guide with scroll-to-top logic
-function closeGuide() {
-    // Hide all guides
-    langs.forEach(l => {
-        if (guides[l]) guides[l].classList.add('hidden');
-        if (btns[l]) btns[l].classList.remove('active');
-    });
-    // Scroll to the How it Works section
-    const guideSection = document.getElementById('how-it-works');
-    if (guideSection) {
-        guideSection.scrollIntoView({ behavior: 'smooth' });
-    }
-}
+// Duplicate closeGuide() removed — already defined at line 492
 
 // Exclusive accordion: only one <details> open at a time
 document.addEventListener('DOMContentLoaded', () => {
