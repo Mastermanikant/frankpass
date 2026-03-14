@@ -33,9 +33,7 @@ const passwordOutput = document.getElementById('password-output');
 const outputSection = document.getElementById('output-section');
 const copyBtn = document.getElementById('copy-btn');
 const toast = document.getElementById('toast');
-const toggleSecretCb = document.getElementById('toggle-secret-cb');
-const toggleVisBtn = document.getElementById('toggle-vis-btn');
-const visIcon = document.getElementById('vis-icon');
+const togglePassCb = document.getElementById('toggle-pass-cb');
 
 // Security Timers
 let secretClearTimer = null;
@@ -53,16 +51,18 @@ lengthEl.addEventListener('input', (e) => {
 });
 
 // Toggle Secret Visibility via Checkbox
-toggleSecretCb.addEventListener('change', (e) => {
-    secretEl.type = e.target.checked ? 'text' : 'password';
-});
+if (toggleSecretCb) {
+    toggleSecretCb.addEventListener('change', (e) => {
+        secretEl.type = e.target.checked ? 'text' : 'password';
+    });
+}
 
-// Toggle Generated Password Visibility
-toggleVisBtn.addEventListener('click', () => {
-    const isPassword = passwordOutput.type === 'password';
-    passwordOutput.type = isPassword ? 'text' : 'password';
-    visIcon.name = isPassword ? 'eye-outline' : 'eye-off-outline';
-});
+// Toggle Generated Password Visibility via Switch
+if (togglePassCb) {
+    togglePassCb.addEventListener('change', (e) => {
+        passwordOutput.type = e.target.checked ? 'text' : 'password';
+    });
+}
 
 // Auto-Clear Logic
 function startSecretClearTimer() {
@@ -411,17 +411,7 @@ copyBtn.addEventListener('click', () => {
     copyToClipboard(passwordOutput.value);
 });
 
-if (toggleVisBtn) {
-    toggleVisBtn.addEventListener('click', () => {
-        if (passwordOutput.type === 'password') {
-            passwordOutput.type = 'text';
-            visIcon.name = 'eye-off-outline';
-        } else {
-            passwordOutput.type = 'password';
-            visIcon.name = 'eye-outline';
-        }
-    });
-}
+// Legacy toggle logic removed in favor of switch
 
 async function copyToClipboard(text) {
     if (!text || text === '****************') return;

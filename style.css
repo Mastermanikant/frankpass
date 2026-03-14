@@ -115,9 +115,10 @@ body {
     width: 100%;
     display: flex;
     justify-content: center;
-    gap: 2.5rem; /* Precise spacing between shield and flag */
-    margin-bottom: 2px;
+    gap: 3.2rem; /* Adjusted for perfect incenter over Frank and Pass */
+    margin-bottom: 4px;
     pointer-events: none;
+    transform: translateX(-4px); /* Minor adjustment for visual optical center */
 }
 
 .floating-badge {

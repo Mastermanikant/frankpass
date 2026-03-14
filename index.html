@@ -34,7 +34,7 @@
         <header>
             <div class="logo-container">
                 <div class="logo-icons">
-                    <span id="shield-icon" class="floating-badge shield-badge"><ion-icon name="key-sharp"></ion-icon></span>
+                    <span id="shield-icon" class="floating-badge shield-badge"><ion-icon name="shield-checkmark"></ion-icon></span>
                     <span id="flag-badge" class="floating-badge flag-badge">🌍</span>
                 </div>
                 <h1><span class="FrankPass-text">Frank</span>Pass</h1>
@@ -366,13 +366,16 @@
 
             <!-- ================= OUTPUT SECTION ================= -->
             <div class="output-section" id="output-section">
-                <div class="output-header">Generated Password</div>
+                <div class="output-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    Generated Password
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggle-pass-cb">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
                 <div class="output-display">
                     <input type="password" class="password-text" id="password-output" value="****************" readonly
                         style="background: transparent; border: none; outline: none; padding: 0; width: 100%; box-shadow: none;">
-                    <button class="icon-btn copy-btn" id="toggle-vis-btn" title="Show/Hide" style="right: 3.2rem;">
-                        <ion-icon name="eye-off-outline" id="vis-icon"></ion-icon>
-                    </button>
                     <button class="icon-btn copy-btn" id="copy-btn" disabled title="Copy to clipboard">
                         <ion-icon name="copy-outline"></ion-icon>
                     </button>
