@@ -34,6 +34,7 @@ const outputSection = document.getElementById('output-section');
 const copyBtn = document.getElementById('copy-btn');
 const toast = document.getElementById('toast');
 const togglePassCb = document.getElementById('toggle-pass-cb');
+const toggleSecretCb = document.getElementById('toggle-secret-cb');
 
 // Security Timers
 let secretClearTimer = null;
@@ -511,56 +512,47 @@ function shareApp() {
         }
     });
 
-    const shareTexts = {
-        'en': 'Generate unbreakable passwords mentally without storing them anywhere!',
-        'hi': 'बिना कहीं सेव किए दिमाग से अनब्रेकेबल पासवर्ड बनाएं!',
-        'es': '¡Genera contraseñas irrompibles mentalmente sin guardarlas en ninguna parte!',
-        'fr': 'Générez des mots de passe inviolables mentalement sans les stocker nulle part !'
-    };
+/**
+ * Shoutout functionality: Pre-fills a localized message and opens social sharing.
+ * @param {string} platform - The social platform ('x', 'instagram', 'facebook', 'youtube', 'whatsapp')
+ */
+function runShoutout(platform) {
+    const activeLang = document.documentElement.lang || 'en';
+    const msgData = window.regionalTranslations[activeLang] || window.regionalTranslations['en'] || {};
+    const message = msgData.shoutout_message || "Hello Everyone! I am using https://frankpass.com - this is a very advanced and futuristic password generator that reduces your mental load and give you mental peace.";
+    const encodedMsg = encodeURIComponent(message);
+    const url = "https://frankpass.com";
 
-    const text = shareTexts[activeLang] || shareTexts['en'];
-    const url = window.location.href;
+    let shareUrl = "";
 
-    if (navigator.share) {
-        navigator.share({
-            title: 'FrankPass',
-            text: text,
-            url: url
-        }).catch(err => {
-            console.log('Error sharing:', err);
-            openShareModal(url, text);
-        });
-    } else {
-        openShareModal(url, text);
+    switch (platform) {
+        case 'x':
+            shareUrl = `https://twitter.com/intent/tweet?text=${encodedMsg}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=${encodedMsg}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodedMsg}`;
+            break;
+        case 'instagram':
+            shareUrl = "https://instagram.com/mastermanikant";
+            break;
+        case 'youtube':
+            shareUrl = "https://youtube.com/@mastermanikant";
+            break;
+        default:
+            navigator.clipboard.writeText(message).then(() => {
+                alert("Message copied! You can now paste it.");
+            });
+            return;
+    }
+
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'noopener,noreferrer');
     }
 }
 
-function openShareModal(url, text) {
-    const modal = document.getElementById('share-modal');
-    modal.classList.add('show');
-    
-    document.getElementById('share-url').value = url;
-    
-    // Set direct links
-    const encodedUrl = encodeURIComponent(url);
-    const encodedText = encodeURIComponent(text);
-    
-    document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodedText}&url=${encodedUrl}`;
-    document.getElementById('share-whatsapp').href = `https://wa.me/?text=${encodedText}%20${encodedUrl}`;
-    document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-    document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
-}
-
-function closeShareModal() {
-    const modal = document.getElementById('share-modal');
-    modal.classList.remove('show');
-}
-
-function copyShareUrl() {
-    const urlInput = document.getElementById('share-url');
-    copyToClipboard(urlInput.value);
-    closeShareModal();
-}
 
 // =============== PWA Smart Install / Open-in-App Logic ===============
 let deferredInstallPrompt = null;
@@ -674,13 +666,33 @@ function toggleFAQ() {
     if (isOpen) {
         body.style.display = 'none';
         if (icon) icon.style.transform = 'rotate(0deg)';
-        btn.innerHTML = btn.innerHTML.replace('Hide FAQ', 'Show FAQ');
+        btn.innerHTML = '<ion-icon name="chevron-down-outline" id="faq-toggle-icon"></ion-icon> Show FAQ';
     } else {
         body.style.display = 'flex';
         body.style.flexDirection = 'column';
         body.style.gap = '1rem';
         if (icon) icon.style.transform = 'rotate(180deg)';
-        btn.innerHTML = btn.innerHTML.replace('Show FAQ', 'Hide FAQ');
+        btn.innerHTML = '<ion-icon name="chevron-up-outline" id="faq-toggle-icon"></ion-icon> Hide FAQ';
+    }
+}
+
+// Collapse FAQ and scroll to header
+function collapseFAQ() {
+    toggleFAQ();
+    document.getElementById('faq-header').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Helper to close guide with scroll-to-top logic
+function closeGuide() {
+    // Hide all guides
+    langs.forEach(l => {
+        if (guides[l]) guides[l].classList.add('hidden');
+        if (btns[l]) btns[l].classList.remove('active');
+    });
+    // Scroll to the How it Works section
+    const guideSection = document.getElementById('how-it-works');
+    if (guideSection) {
+        guideSection.scrollIntoView({ behavior: 'smooth' });
     }
 }
 

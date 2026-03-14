@@ -317,7 +317,7 @@
                         </label>
                     </div>
                     <div class="input-wrapper">
-                        <ion-icon name="key-outline"></ion-icon>
+                        <ion-icon name="shield-checkmark-outline"></ion-icon>
                         <input type="password" id="secret" placeholder="e.g. 2friends+fruit+2026" required
                             autocomplete="off">
                     </div>
@@ -537,7 +537,7 @@
             }
         </style>
         <section id="faq" class="glass-panel" style="margin-top: 2rem; padding: 2rem; border-radius: 20px;">
-            <h2 style="color: var(--accent-primary); margin-bottom: 1rem; text-align: center; font-size: 1.8rem;">Frequently Asked Questions</h2>
+            <h2 id="faq-header" style="color: var(--accent-primary); margin-bottom: 1rem; text-align: center; font-size: 1.8rem;">Frequently Asked Questions</h2>
             <button id="faq-toggle-btn" onclick="toggleFAQ()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;padding:0.9rem 1.2rem;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);border-radius:12px;color:var(--accent-primary);font-size:1.1rem;font-weight:600;transition:background 0.3s ease;margin-bottom:0;">
                 <ion-icon name="chevron-down-outline" id="faq-toggle-icon" style="font-size:1.3rem;transition:transform 0.3s ease;"></ion-icon> Show FAQ
             </button>
@@ -708,7 +708,7 @@
                 </details>
 
                 <!-- Bottom Collapse Button -->
-                <button onclick="toggleFAQ()" style="cursor:pointer;display:flex;align-items:center;justify-content:center;gap:0.6rem;width:100%;padding:0.75rem 1.2rem;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.25);border-radius:12px;color:#a5b4fc;font-size:1rem;font-weight:600;transition:background 0.3s ease;margin-top:0.5rem;">
+                <button onclick="collapseFAQ()" class="btn-collapse-faq">
                     <ion-icon name="chevron-up-outline" style="font-size:1.2rem;"></ion-icon> Collapse FAQ
                 </button>
             </div>
@@ -743,20 +743,18 @@
         </section>
 
         <!-- ================= NEWSLETTER CROSS-PROMOTION ================= -->
-        <section class="glass-panel" id="breach-section"
-            style="margin-top: 2rem; padding: 2rem; border-radius: 20px; text-align: center; border: 1px solid rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.05);">
-            <h2 id="breach-title" style="color: var(--accent-primary); margin-bottom: 1rem; font-size: 1.6rem;">
+        <section class="breach-alert-section" id="breach-section">
+            <h2 id="breach-title">
                 <ion-icon name="warning-outline" style="vertical-align: middle; margin-right: 0.5rem;"></ion-icon>
                 Beware of Data Breaches
             </h2>
-            <p id="breach-body" style="color: var(--text-secondary); line-height: 1.6; max-width: 700px; margin: 0 auto 1.5rem auto;">
+            <p id="breach-body">
                 FrankPass is <strong>100% Stateless and Zero-Knowledge</strong>. We don't have a database, which means
                 we cannot collect your email or alert you when websites get hacked. <br><br>
                 However, if you want free, instant alerts about global data breaches, join the official security
                 newsletter by our upcoming parent agency, <strong>FrankBase Digital</strong>.
             </p>
-            <a href="https://frankbase.com/newsletter" target="_blank" rel="noopener" class="btn-primary"
-                style="display: inline-flex; align-items: center; justify-content: center; text-decoration: none; padding: 0.8rem 1.5rem;">
+            <a href="https://frankbase.com/newsletter" target="_blank" rel="noopener" class="btn-primary">
                 Subscribe via FrankBase <ion-icon name="arrow-forward-outline" style="margin-left: 0.5rem;"></ion-icon>
             </a>
         </section>
@@ -775,10 +773,11 @@
                     </ul>
                     <h4 class="small-title">Give me a shoutout!</h4>
                     <div class="shoutout-links">
-                        <a href="https://x.com/mastermanikant" target="_blank" rel="noopener" title="X (Twitter)"><ion-icon name="logo-twitter"></ion-icon></a>
-                        <a href="https://instagram.com/mastermanikant" target="_blank" rel="noopener" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
-                        <a href="https://facebook.com/mastermanikant" target="_blank" rel="noopener" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
-                        <a href="https://youtube.com/@mastermanikant" target="_blank" rel="noopener" title="YouTube"><ion-icon name="logo-youtube"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('x')" title="X (Twitter)"><ion-icon name="logo-twitter"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('instagram')" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('facebook')" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('youtube')" title="YouTube"><ion-icon name="logo-youtube"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('whatsapp')" title="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
                     </div>
                 </div>
 
@@ -801,11 +800,6 @@
                         <a href="https://youtube.com/@frankbase" target="_blank" aria-label="YouTube"><ion-icon
                                 name="logo-youtube" style="color: #FF0000;"></ion-icon></a>
                     </div>
-                    <button class="btn-primary"
-                        style="margin-top: 1.5rem; padding: 0.6rem 1.2rem; font-size: 0.95rem; width: 100%; border-radius: 10px;"
-                        onclick="shareApp()">
-                        <ion-icon name="share-social-outline"></ion-icon> Share FrankPass
-                    </button>
                     <!-- PWA Install Button — only shows if browser supports it -->
                     <button id="pwa-install-btn" class="btn-primary"
                         style="margin-top: 0.7rem; padding: 0.6rem 1.2rem; font-size: 0.95rem; width: 100%; border-radius: 10px; display: none; background: linear-gradient(135deg, #10b981, #059669);"
@@ -860,53 +854,12 @@
     <!-- Notification Toast -->
     <div id="toast" class="toast">Copied to clipboard!</div>
 
-    <!-- Social Share Modal -->
-    <div id="share-modal" class="modal">
-        <div class="modal-content glass-panel">
-            <div class="modal-header">
-                <h3>Share FrankPass</h3>
-                <button class="close-modal" onclick="closeShareModal()">
-                    <ion-icon name="close-outline"></ion-icon>
-                </button>
-            </div>
-            <p>Tell your friends about 100% Stateless security!</p>
-            <div class="share-grid">
-                <a href="#" id="share-twitter" class="share-option">
-                    <ion-icon name="logo-twitter"></ion-icon>
-                    <span>Twitter (X)</span>
-                </a>
-                <a href="#" id="share-whatsapp" class="share-option">
-                    <ion-icon name="logo-whatsapp"></ion-icon>
-                    <span>WhatsApp</span>
-                </a>
-                <a href="#" id="share-facebook" class="share-option">
-                    <ion-icon name="logo-facebook"></ion-icon>
-                    <span>Facebook</span>
-                </a>
-                <a href="#" id="share-linkedin" class="share-option">
-                    <ion-icon name="logo-linkedin"></ion-icon>
-                    <span>LinkedIn</span>
-                </a>
-            </div>
-            <div class="copy-link-container">
-                <input type="text" id="share-url" readonly value="https://frankpass.com">
-                <button onclick="copyShareUrl()" class="btn-primary">Copy</button>
-            </div>
-        </div>
-    </div>
 
     <!-- Data sources generated by build_data.js -->
     <script src="platforms.js"></script>
     <script src="translations.js"></script>
     <script src="frankpass-core.js"></script>
     <script src="script.js"></script>
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js').catch(err => console.error('SW init error:', err));
-            });
-        }
-    </script>
 </body>
 
 </html>
