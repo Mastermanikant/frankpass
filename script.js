@@ -97,6 +97,23 @@ document.addEventListener('visibilitychange', () => {
 // Reset secret timer on input
 secretEl.addEventListener('input', startSecretClearTimer);
 
+// Field Auto-Cleanup & Restore UX
+function setupSmartField(el) {
+    let originalValue = "";
+    el.addEventListener('focus', () => {
+        originalValue = el.value;
+        el.value = "";
+    });
+    el.addEventListener('blur', () => {
+        if (el.value.trim() === "") {
+            el.value = originalValue;
+        }
+    });
+}
+
+setupSmartField(regionEl);
+setupSmartField(usernameEl);
+
 // Populate Datalist dynamically based on region
 function populatePlatformDatalist(region) {
     if (!window.regionalPlatforms || !platformList) return;
@@ -131,6 +148,7 @@ if (regionEl) {
         let code = val.split('-')[0].trim().toLowerCase();
         if (!code) code = 'global';
         populatePlatformDatalist(code);
+        updateRegionIcon(val); // Added this to update the logo flag
     });
 }
 
@@ -199,19 +217,21 @@ function getFlagEmoji(cc) {
     return String.fromCodePoint(...codePoints);
 }
 
-// Update the icon next to region input
-function updateRegionIcon(val) {
-    const wrapper = document.getElementById('region-icon-wrapper');
-    if (!wrapper) return;
+// Update the logo flag badge based on region selection
+function updateRegionIcon(fullVal) {
+    const flagBadge = document.getElementById('flag-badge');
+    if (!flagBadge) return;
 
-    const code = val.split('-')[0].trim().toLowerCase();
-    const flag = getFlagEmoji(code);
+    const countryCode = (fullVal || '').split('-')[0].trim().toLowerCase();
 
-    if (flag && code !== 'global') {
-        wrapper.innerHTML = flag;
-    } else {
-        wrapper.innerHTML = '<ion-icon name="earth-outline"></ion-icon>';
+    if (countryCode && countryCode !== 'global') {
+        const flag = getFlagEmoji(countryCode);
+        if (flag) {
+            flagBadge.textContent = flag;
+            return;
+        }
     }
+    flagBadge.textContent = "🌍";
 }
 
 // Listen for region changes
@@ -284,7 +304,9 @@ form.addEventListener('submit', async (e) => {
             platform = globalAliases[platform];
         }
 
-        const username = usernameEl.value.trim().toLowerCase().replace(/\s+/g, '');
+        const usernameRaw = usernameEl.value.trim().toLowerCase();
+        // Smart Normalization: Strip email domain, but preserve . - _
+        const username = usernameRaw.split('@')[0].replace(/[^a-z0-9._-]/g, '');
         const secret = secretEl.value.toLowerCase().replace(/\s+/g, '');
 
         let variant = parseInt(variantEl.value, 10);

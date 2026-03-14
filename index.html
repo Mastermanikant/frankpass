@@ -32,10 +32,13 @@
     <div class="container">
         <!-- ================= HEADER SECTION ================= -->
         <header>
-            <div class="logo">
-                <ion-icon name="shield-checkmark"></ion-icon>
+            <div class="logo-container">
+                <div class="logo-icons">
+                    <span id="shield-icon" class="floating-badge shield-badge"><ion-icon name="shield-checkmark"></ion-icon></span>
+                    <span id="flag-badge" class="floating-badge flag-badge">🌍</span>
+                </div>
+                <h1><span class="FrankPass-text">Frank</span>Pass</h1>
             </div>
-            <h1><span class="FrankPass-text">Frank</span>Pass</h1>
             <p><span class="FrankPass-text">Frankly</span> Secure Password.<br>Deterministic, stateless, unbreakable.
             </p>
         </header>
@@ -43,14 +46,13 @@
         <!-- ================= MAIN GENERATOR FORM ================= -->
         <main class="glass-panel">
             <form id="generator-form">
-                <!-- Country / Region Auto-Detect -->
-                <div class="country-selector">
-                    <div class="input-wrapper select-wrapper">
-                        <span id="region-icon-wrapper" style="display: flex; align-items: center; justify-content: center; font-size: 1.4rem; color: #a5b4fc; width: 24px;">
-                            <ion-icon name="earth-outline"></ion-icon>
-                        </span>
-                        <input type="text" id="region" list="region-list"
-                            placeholder="Type your country name e.g- in or india " autocomplete="off">
+                <!-- Country / Region Selector -->
+                <div class="input-group">
+                    <label for="region">Choose your country</label>
+                    <div class="input-wrapper">
+                        <ion-icon name="earth-outline"></ion-icon>
+                        <input type="text" id="region" list="region-list" placeholder="Detecting your region..."
+                            autocomplete="off">
                         <datalist id="region-list">
 
                             <option value="af - 🇦🇫 Afghanistan (AF)"></option>
