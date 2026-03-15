@@ -602,6 +602,78 @@ input[type=range]::-webkit-slider-thumb:hover {
     bottom: 30px;
 }
 
+/* Success Shoutout Card */
+.shoutout-card {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInScale 0.4s ease-out;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.shoutout-card.hidden {
+    display: none;
+}
+
+.close-card {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.8rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+}
+
+.close-card:hover {
+    color: var(--text-primary);
+}
+
+.shoutout-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.shoutout-text h4 {
+    color: var(--accent-focus);
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+}
+
+.shoutout-text p {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin: 0;
+}
+
+.shoutout-icons {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.shoutout-icons a {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.shoutout-icons a:hover {
+    color: var(--accent-primary);
+    transform: translateY(-2px);
+}
+
 /* User Guide Section */
 .guide-actions {
     display: flex;

@@ -388,12 +388,31 @@
                     <input type="password" class="password-text" id="password-output" value="****************" readonly
                         style="background: transparent; border: none; outline: none; padding: 0; width: 100%; box-shadow: none;">
                     <div class="output-actions" style="display: flex; gap: 0.5rem;">
-                        <button class="icon-btn shoutout-trigger-btn" id="shoutout-btn" title="Give me a shoutout!" onclick="showShoutoutModal()">
-                            <ion-icon name="share-social-outline"></ion-icon>
-                        </button>
                         <button class="icon-btn copy-btn" id="copy-btn" disabled title="Copy to clipboard">
                             <ion-icon name="copy-outline"></ion-icon>
                         </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================= SPECIAL SHOUTOUT CARD ================= -->
+            <div id="special-shoutout-card" class="shoutout-card hidden">
+                <button class="close-card" onclick="hideSpecialShoutout()">&times;</button>
+                <div class="shoutout-content">
+                    <div class="shoutout-text">
+                        <h4>Sharing is Caring! 💙</h4>
+                        <p>Help others stay safe. Share FrankPass with your circle!</p>
+                    </div>
+                    <div class="shoutout-icons">
+                        <a href="javascript:void(0)" onclick="runShoutout('x')" title="Share on X">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                        </a>
+                        <a href="javascript:void(0)" onclick="runShoutout('whatsapp')" title="Share on WhatsApp">
+                            <ion-icon name="logo-whatsapp"></ion-icon>
+                        </a>
+                        <a href="javascript:void(0)" onclick="runShoutout('linkedin')" title="Share on LinkedIn">
+                            <ion-icon name="logo-linkedin"></ion-icon>
+                        </a>
                     </div>
                 </div>
             </div>

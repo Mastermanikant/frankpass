@@ -35,6 +35,7 @@ const copyBtn = document.getElementById('copy-btn');
 const toast = document.getElementById('toast');
 const togglePassCb = document.getElementById('toggle-pass-cb');
 const toggleSecretCb = document.getElementById('toggle-secret-cb');
+const specialShoutoutCard = document.getElementById('special-shoutout-card');
 
 // Security Timers
 let secretClearTimer = null;
@@ -416,12 +417,9 @@ form.addEventListener('submit', async (e) => {
         startPasswordClearTimer();
         startSecretClearTimer();
 
-        // Increment and Check Generation Count for Shoutout
+        // Increment generation count
         genCount++;
         localStorage.setItem('frankpass_gen_count', genCount);
-        if (genCount === 2 || genCount === 3) {
-            setTimeout(showShoutoutModal, 1500); // Small delay after generation
-        }
 
     } catch (err) {
         console.error("Generation Error:", err);
@@ -454,6 +452,7 @@ async function copyToClipboard(text) {
     try {
         await navigator.clipboard.writeText(text);
         showToast();
+        showSpecialShoutout();
     } catch (err) {
         const textarea = document.createElement("textarea");
         textarea.value = text;
@@ -462,12 +461,25 @@ async function copyToClipboard(text) {
         document.execCommand("copy");
         textarea.remove();
         showToast();
+        showSpecialShoutout();
     }
 }
 
 function showToast() {
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function showSpecialShoutout() {
+    if (specialShoutoutCard) {
+        specialShoutoutCard.classList.remove('hidden');
+    }
+}
+
+function hideSpecialShoutout() {
+    if (specialShoutoutCard) {
+        specialShoutoutCard.classList.add('hidden');
+    }
 }
 
 // Guide Localization and Toggling
