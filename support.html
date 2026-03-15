@@ -86,26 +86,48 @@
                 <p>FrankPass is 100% free and always will be. Your support helps us keep the lights on, build new features, and protect more people around the world.</p>
             </div>
 
-            <!-- SECTION 1: Support & Donations -->
-            <div class="support-section" style="border-top: none; padding-top: 0;">
-                <h3>💙 Support FrankPass</h3>
-                <p class="subtitle">Choose your preferred way to support our mission. Every contribution helps.</p>
+            <!-- REGIONAL SEPARATION TABS (Visual only for now) -->
+            <div style="display: flex; gap: 0.5rem; margin-bottom: 2rem; justify-content: center;">
+                <div style="background: rgba(255,255,255,0.05); padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #10b981;">🇮🇳 India Support</div>
+                <div style="background: rgba(255,255,255,0.05); padding: 0.5rem 1rem; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #6366f1;">🌍 Global Support</div>
+            </div>
+
+            <!-- INDIA SECTION -->
+            <div class="support-section" style="border-top: none; padding-top: 0; background: rgba(16, 185, 129, 0.03); border: 1px solid rgba(16, 185, 129, 0.1); border-radius: 20px; padding: 2rem; margin-bottom: 3rem;">
+                <h3 style="color: #10b981;">🇮🇳 India — Support via UPI</h3>
+                <p class="subtitle">Fast, frictionless, and zero fees. Optimized for Indian creators and users.</p>
+
+                <div class="payment-grid" style="grid-template-columns: 1fr;">
+                    <!-- India Support (Sellio IQ) -->
+                    <a href="https://sellioiq.com/mastermanikant" target="_blank" rel="noopener" class="payment-card" style="max-width: 500px; margin: 0 auto; border-color: rgba(16, 185, 129, 0.3);">
+                        <div class="card-icon">🪪</div>
+                        <h4>Direct UPI & Local Cards</h4>
+                        <p>Instant support via Google Pay, PhonePe, Paytm, and Net Banking. Safe and direct.</p>
+                        <span class="badge" style="background: #10b981;">UPI • GPAY • PHONEPE</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- GLOBAL SECTION -->
+            <div class="support-section" style="background: rgba(99, 102, 241, 0.03); border: 1px solid rgba(99, 102, 241, 0.1); border-radius: 20px; padding: 2rem; margin-bottom: 3rem;">
+                <h3 style="color: #6366f1;">🌍 Global — Rest of the World</h3>
+                <p class="subtitle">Secure international payments in your local currency. Multiple friction-less options.</p>
 
                 <div class="payment-grid">
                     <!-- Buy Me A Coffee (Global) -->
                     <a href="https://buymeacoffee.com/mastermanikant" target="_blank" rel="noopener" class="payment-card">
                         <div class="card-icon">☕</div>
-                        <h4>Global Support</h4>
-                        <p>One-time or monthly gifts via Buy Me A Coffee. Works in 190+ countries.</p>
-                        <span class="badge">Cards • Apple/Google Pay</span>
+                        <h4>Buy Me A Coffee</h4>
+                        <p>One-time or monthly gifts. Supports Credit/Debit Cards, Apple Pay, and Google Pay.</p>
+                        <span class="badge">Global Cards • Wallets</span>
                     </a>
 
-                    <!-- India Support (Sellio IQ / Cosmofeed) -->
-                    <a href="https://sellioiq.com/mastermanikant" target="_blank" rel="noopener" class="payment-card">
-                        <div class="card-icon">🇮🇳</div>
-                        <h4>India Support (UPI)</h4>
-                        <p>Instant UPI payments via Sellio IQ. Safe, secure, and frictionless.</p>
-                        <span class="badge">UPI • Net Banking • Cards</span>
+                    <!-- Gumroad (Global / PPP) -->
+                    <a href="https://gumroad.com/mastermanikant" target="_blank" rel="noopener" class="payment-card">
+                        <div class="card-icon">🛍️</div>
+                        <h4>Gumroad Shop</h4>
+                        <p>Best for Ebooks and Extensions. Automatically handles local taxes (VAT/GST).</p>
+                        <span class="badge">Global Store • MoR</span>
                     </a>
                 </div>
             </div>
@@ -113,13 +135,13 @@
             <!-- SECTION 2: Resell & Earn (Affiliate) -->
             <div class="support-section" id="resell">
                 <h3>🤝 Resell & Earn — 50% Commission</h3>
-                <p class="subtitle">Join our affiliate program and earn by promoting security. Perfect for influencers, bloggers, and users.</p>
+                <p class="subtitle">Join our affiliate program and earn by promoting security. Perfect for influencers and resellers.</p>
                 
                 <div class="payment-grid" style="grid-template-columns: 1fr;">
                     <div class="waitlist-box" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
                         <span class="offer-tag" style="background: linear-gradient(135deg, #10b981, #059669);">🔥 EARN 50% COMMISSION</span>
                         <h4 style="color: #10b981;">Become a FrankPass Partner</h4>
-                        <p>Share your unique link to our Ebooks or upcoming Extensions. When someone buys through you, you get <strong>half the profit</strong> instantly. No promotion effort needed from us — you grow with us!</p>
+                        <p>Share your unique link for India (Sellio) or Global (Gumroad). You get <strong>half the profit</strong> instantly on every sale. Grow together with the project!</p>
                         
                         <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem;">
                             <a href="https://sellioiq.com/affiliate/signup" target="_blank" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.7rem 1.5rem; background: #10b981;">
@@ -148,7 +170,7 @@
                     <a href="/guide.html" class="payment-card">
                         <div class="card-icon">🔥</div>
                         <h4>The Ultimate Masterclass</h4>
-                        <p>10-chapter deep dive into cryptography, hacking, and defense. Includes **PPP Pricing** on Gumroad.</p>
+                        <p>10-chapter deep dive into cryptography and defense. Includes **PPP Pricing** and regional links.</p>
                         <span class="badge badge-coming">Paid • Premium</span>
                     </a>
                 </div>
@@ -162,8 +184,7 @@
                 <div class="waitlist-box">
                     <span class="offer-tag">🎉 50% OFF — First Year Subscription</span>
                     <h4>Coming Soon!</h4>
-                    <p>Premium browser extensions for Chrome, Firefox, and Edge are in development. Join the waitlist to be the first to know and get an exclusive <strong>50% discount</strong> on your first year.</p>
-                    <p style="font-size: 0.85rem; color: var(--accent-focus); margin-bottom: 1rem;">🌍 <strong>PPP Pricing & Affiliate:</strong> We use Purchasing Power Parity and offer 50% commission for resellers on all extension sales!</p>
+                    <p>Premium browser extensions for Chrome, Firefox, and Edge are in development. Includes <strong>50% reseller commission</strong> and PPP pricing.</p>
                     <a href="https://frankbase.com/extensions-waitlist" target="_blank" rel="noopener" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.8rem 2rem; background: linear-gradient(135deg, #f59e0b, #ef4444); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
                         <ion-icon name="notifications-outline" style="margin-right: 0.4rem;"></ion-icon> Join the Waitlist
                     </a>
