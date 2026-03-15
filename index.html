@@ -426,52 +426,230 @@
             <button class="btn-guide" id="btn-guide-fr"><ion-icon name="book-outline"></ion-icon> Comment utiliser FrankPass</button>
         </div>
 
-        <!-- ================= GUIDE SECTIONS (MULTILINGUAL) ================= -->
+        <!-- ================= ENGLISH GUIDE ================= -->
         <section class="guide-content glass-panel hidden" id="guide-en">
-            <h2>Quick Guide: How to use FrankPass</h2>
-            <p><strong>Benefit: Remember just 1 or 2 things and generate unbreakable passwords for life!</strong></p>
-            <p>This tool is 100% stateless. It saves nothing anywhere. Enter the same details — get the exact same password every time.</p>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
-                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> Read Full Masterclass Guide
-                </a>
-            </div>
-            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Hide Quick Guide</button>
+            <h2>Complete Guide: How to Use FrankPass</h2>
+            <p><strong>Remember just 1 personal phrase → Generate unique, unbreakable passwords for every website, forever.</strong></p>
+            <p>This tool is <strong>100% stateless</strong>. It saves nothing anywhere. Enter the same details → get the exact same password every time. Like a calculator: same input = same output.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📍 1. Country / Region</h3>
+            <p>Select your country. This does <strong>two things</strong>:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Personalizes the platform suggestions</strong> — e.g., if you select India, you'll see Paytm, PhonePe, JioMart.</li>
+                <li><strong>Does NOT affect your password.</strong> You can change your country anytime without changing your passwords.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🌐 2. Platform / Website</h3>
+            <p>Type the name of the website or app you need a password for. Examples: <code>Facebook</code>, <code>Gmail</code>, <code>Amazon</code>.</p>
+            <p><strong>Auto-Suggest:</strong> As you type, FrankPass suggests popular platforms. For example, type <code>fa</code> and <code>Facebook</code> appears — just select it. This prevents spelling mistakes.</p>
+            <p><strong>Don't worry about format:</strong> Whether you type <code>facebook</code>, <code>Facebook</code>, <code>FACEBOOK</code>, <code>facebook.com</code>, <code>www.facebook.com</code>, or <code>m.facebook.com</code> — FrankPass automatically normalizes it to the same base name. You will <strong>always get the same password.</strong></p>
+            <p><strong>Platform not listed?</strong> If a platform is missing from auto-suggest, just type it manually. It will still work perfectly. If you want us to add it to the auto-suggest list, tag <strong>@FrankPass</strong> on <a href="https://x.com/frankbasedigital" target="_blank" style="color: var(--accent-primary);">X (Twitter)</a> or <a href="https://instagram.com/frankbasedigital" target="_blank" style="color: var(--accent-primary);">Instagram</a> with your request, or email us — we'll add it as soon as possible.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">👤 3. Username / Email (Optional)</h3>
+            <p>This field is <strong>optional</strong>. Our recommendation: <strong>leave it blank.</strong></p>
+            <p><strong>Why?</strong> If you change your email on a website later, the generated password would change too (because the input changed). Leaving it blank keeps things simple.</p>
+            <p><strong>When to use it:</strong> Only when you have <strong>multiple accounts</strong> on the same platform. For example, if you have 2 Instagram accounts, enter the username for each to get different passwords.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔐 4. Secret Personal Key</h3>
+            <p>This is the <strong>most important field</strong>. It's your personal master phrase — the mathematical seed for all your passwords.</p>
+            <p><strong>What to enter:</strong> Any phrase that only you know and will never forget. Examples:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><code>2friends+mango+2026</code></li>
+                <li><code>mydog$lucky$birthday</code></li>
+                <li><code>papa-ki-dukaan-1995</code></li>
+            </ul>
+            <p><strong>Does complexity matter?</strong> <strong>No!</strong> Whether your key is simple or complex, the generated password will always be cryptographically strong (1 million hash iterations). Your key is just the seed — the math does the rest.</p>
+            <p><strong>Toggle 👁️:</strong> Use the toggle switch to show/hide your key while typing.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔄 5. Variant Counter (Optional)</h3>
+            <p>Default is <code>1</code>. This is your password rotation tool.</p>
+            <p><strong>When to change it:</strong></p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li>A website forces you to change your password → Change variant from <code>1</code> to <code>2</code>.</li>
+                <li>You suspect your account was compromised → Change to the next number.</li>
+            </ul>
+            <p><strong>Security value:</strong> Even if someone discovers your Secret Key, they still can't generate your password without knowing which Variant number you used. This adds an extra layer of protection.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">⚙️ 6. Profile</h3>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Standard (Recommended)</strong> — Letters + Numbers + Symbols. Maximum security.</li>
+                <li><strong>Alphanumeric</strong> — Letters + Numbers only. Use for websites that don't allow symbols.</li>
+                <li><strong>Numeric (PIN)</strong> — Numbers only. For banking PINs or numeric-only fields.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📏 7. Password Length</h3>
+            <p>Slide between 8 and 64 characters. <strong>Recommended: 16+</strong> for maximum security. Some old websites limit to 16 characters — adjust as needed.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔑 8. Generated Password</h3>
+            <p>Your password is generated and automatically copied to your clipboard. Security timers:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Password auto-clears in 15 seconds</strong> — so no one can see it on your screen.</li>
+                <li><strong>Secret Key auto-clears after 30 seconds of inactivity</strong> — if you stop using the page.</li>
+                <li><strong>Closing the tab</strong> instantly destroys all data from memory.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🛡️ 9. About Data Leaks</h3>
+            <p><strong>From FrankPass's side, a data leak is impossible.</strong> We have no database, no server storage, and no cloud. Neither we, nor anyone else in the world, can ever know or see the passwords you generate. The math runs entirely inside your browser.</p>
+            <p>However, the <strong>platforms you use</strong> (like Facebook, Amazon, etc.) can still suffer data breaches on their end. To stay informed:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Follow FrankPass</strong> on social media — we share major breach alerts as fast as possible.</li>
+                <li><strong>Personalized Alerts (Coming Soon):</strong> Join <a href="https://frankbase.com/newsletter" target="_blank" style="color: var(--accent-primary);"><strong>FrankBase Digital</strong></a>'s free personalized security alert service. Our smart AI monitors Google Alerts, Dark Web feeds, and AI-powered data scraping to detect breaches. When a breach is detected, our AI sends a detailed report to our team, who verifies it across multiple layers. If verification takes time, you'll receive an immediate warning: <em>"This data might be leaked — please change your password immediately."</em> This service may become paid in the future.</li>
+            </ul>
+
+            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Hide Guide</button>
         </section>
 
+        <!-- ================= HINDI GUIDE ================= -->
         <section class="guide-content glass-panel hidden" id="guide-hi">
-            <h2>शॉर्ट गाइड: FrankPass का उपयोग कैसे करें</h2>
-            <p><strong>फायदा: सिर्फ 1 या 2 आसान बातें याद रखकर, जीवन भर के लिए कभी हैक न होने वाले पासवर्ड बनाएं!</strong></p>
-            <p>यह टूल 100% स्टेटलेस (Stateless) है। यह आपका डेटा कहीं सेव नहीं करता। यदि आप बिलकुल वही जानकारी दोबारा डालेंगे, तो आपको हमेशा बिलकुल वही पासवर्ड मिलेगा।</p>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
-                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> पूरी मास्टरक्लास गाइड पढ़ें
-                </a>
-            </div>
-            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> गाइड छिपाएं (Hide)</button>
+            <h2>पूरी गाइड: FrankPass का उपयोग कैसे करें</h2>
+            <p><strong>सिर्फ 1 निजी वाक्य याद रखें → हर वेबसाइट के लिए अनोखा, अटूट पासवर्ड बनाएं, जीवन भर के लिए।</strong></p>
+            <p>यह टूल <strong>100% स्टेटलेस</strong> है। यह कहीं कुछ भी सेव नहीं करता। वही जानकारी डालें → हमेशा वही पासवर्ड मिलेगा। बिल्कुल कैलकुलेटर जैसा: एक ही इनपुट = एक ही आउटपुट।</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📍 1. देश / Country</h3>
+            <p>अपना देश चुनें। इससे <strong>दो चीज़ें</strong> होती हैं:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>प्लेटफॉर्म सुझाव बदलते हैं</strong> — जैसे India चुनने पर Paytm, PhonePe, JioMart दिखेगा।</li>
+                <li><strong>आपके पासवर्ड पर कोई असर नहीं पड़ता।</strong> देश बदलने से पासवर्ड नहीं बदलेगा।</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🌐 2. प्लेटफॉर्म / वेबसाइट</h3>
+            <p>जिस वेबसाइट या ऐप का पासवर्ड चाहिए, उसका नाम लिखें। जैसे: <code>Facebook</code>, <code>Gmail</code>, <code>Amazon</code>।</p>
+            <p><strong>ऑटो-सजेस्ट:</strong> जैसे ही आप <code>fa</code> लिखेंगे, <code>Facebook</code> दिखाई देगा — बस वहाँ से चुन लें। इससे स्पेलिंग गलती का कोई डर नहीं।</p>
+            <p><strong>फॉर्मेट की चिंता न करें:</strong> चाहे आप <code>facebook</code>, <code>Facebook</code>, <code>FACEBOOK</code>, <code>facebook.com</code>, या <code>m.facebook.com</code> लिखें — FrankPass सब को एक ही नाम में बदल देता है। <strong>पासवर्ड हमेशा एक ही मिलेगा।</strong></p>
+            <p><strong>प्लेटफॉर्म नहीं दिख रहा?</strong> अगर कोई प्लेटफॉर्म ऑटो-सजेस्ट में नहीं है, तो उसे मैन्युअली लिखें — सब सही काम करेगा। अगर आप चाहते हैं कि हम उसे जोड़ें, तो <a href="https://x.com/frankbasedigital" target="_blank" style="color: var(--accent-primary);">X (Twitter)</a> या <a href="https://instagram.com/frankbasedigital" target="_blank" style="color: var(--accent-primary);">Instagram</a> पर <strong>@FrankPass को tag</strong> करके request करें — हम जल्द से जल्द जोड़ देंगे।</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">👤 3. यूज़रनेम / ईमेल (वैकल्पिक)</h3>
+            <p>यह फ़ील्ड <strong>वैकल्पिक (Optional)</strong> है। हमारी सलाह: <strong>इसे खाली छोड़ दें।</strong></p>
+            <p><strong>क्यों?</strong> अगर आप बाद में किसी वेबसाइट पर अपना ईमेल बदल लें, तो जनरेट हुआ पासवर्ड भी बदल जाएगा। खाली रखने से सब आसान रहता है।</p>
+            <p><strong>कब भरें:</strong> सिर्फ तब जब आपके एक ही प्लेटफॉर्म पर कई अकाउंट हों। जैसे 2 Instagram अकाउंट हैं तो हर एक का यूज़रनेम डालें।</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔐 4. सीक्रेट पर्सनल की (Secret Personal Key)</h3>
+            <p>यह <strong>सबसे महत्वपूर्ण फ़ील्ड</strong> है। यह आपका निजी मास्टर वाक्य है — आपके सभी पासवर्ड का गणितीय बीज।</p>
+            <p><strong>क्या लिखें:</strong> कोई भी वाक्य जो सिर्फ आप जानते हों और कभी न भूलें। उदाहरण:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><code>2friends+mango+2026</code></li>
+                <li><code>papa-ki-dukaan-1995</code></li>
+                <li><code>meripriyabilli$lucky</code></li>
+            </ul>
+            <p><strong>क्या complexity मायने रखती है?</strong> <strong>बिल्कुल नहीं!</strong> चाहे आपकी key सरल हो या जटिल, जनरेट हुआ पासवर्ड हमेशा cryptographically मज़बूत होगा (10 लाख hash iterations)। आपकी key सिर्फ बीज है — गणित बाकी सब करता है।</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔄 5. वेरिएंट काउंटर (Variant Counter)</h3>
+            <p>डिफ़ॉल्ट <code>1</code> है। यह आपका पासवर्ड बदलने का हथियार है।</p>
+            <p><strong>कब बदलें:</strong></p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li>वेबसाइट पासवर्ड बदलने को कहे → <code>1</code> से <code>2</code> करें।</li>
+                <li>अकाउंट compromise होने का शक हो → अगला नंबर डालें।</li>
+            </ul>
+            <p><strong>सुरक्षा लाभ:</strong> अगर किसी को आपकी Secret Key भी पता चल जाए, तो बिना Variant नंबर जाने वो आपका सही पासवर्ड नहीं बना सकता। यह एक extra सुरक्षा परत है।</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">⚙️ 6. प्रोफाइल</h3>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Standard (सुझाया गया)</strong> — अक्षर + अंक + प्रतीक (Symbols)।</li>
+                <li><strong>Alphanumeric</strong> — सिर्फ अक्षर + अंक।</li>
+                <li><strong>Numeric (PIN)</strong> — सिर्फ अंक। बैंकिंग PIN के लिए।</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📏 7. पासवर्ड की लंबाई</h3>
+            <p>8 से 64 तक स्लाइड करें। <strong>सुझाव: 16+</strong></p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔑 8. जनरेट किया हुआ पासवर्ड</h3>
+            <p>पासवर्ड बनते ही ऑटो-कॉपी हो जाता है। सुरक्षा टाइमर:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>पासवर्ड 15 सेकंड में ऑटो-डिलीट</strong> हो जाता है।</li>
+                <li><strong>Secret Key 30 सेकंड inactivity पर ऑटो-डिलीट</strong> होती है।</li>
+                <li><strong>Tab बंद करते ही</strong> सब कुछ मेमोरी से हट जाता है।</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🛡️ 9. डेटा लीक से सावधान</h3>
+            <p><strong>FrankPass की तरफ से डेटा लीक होना असंभव है।</strong> हमारे पास कोई database, server, या cloud नहीं है। ना हम, ना कोई भी इंसान, आपके जनरेट किए हुए पासवर्ड कभी जान या देख सकता है।</p>
+            <p>लेकिन जो <strong>प्लेटफॉर्म आप use करते हैं</strong> (Facebook, Amazon आदि) — उनकी तरफ से data breach हो सकता है। जानकारी पाने के लिए:</p>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li>Social media पर <strong>FrankPass को follow</strong> करें — हम breach alerts जल्द से जल्द शेयर करते हैं।</li>
+                <li><strong>Personalized Alerts (Coming Soon):</strong> <a href="https://frankbase.com/newsletter" target="_blank" style="color: var(--accent-primary);"><strong>FrankBase Digital</strong></a> की free personalized security alert service join करें। हमारा smart AI — Google Alerts, Dark Web monitoring, और AI data scraping से breach detect करता है। Detection के बाद AI हमारी team को detailed report भेजता है, team multiple layers पर verify करती है। अगर verify में समय लगे, तो तुरंत message भेजा जाता है: <em>"यह डेटा लीक हो सकता है — कृपया तुरंत अपना पासवर्ड बदलें।"</em></li>
+            </ul>
+
+            <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> गाइड छिपाएं</button>
         </section>
 
+        <!-- ================= SPANISH GUIDE ================= -->
         <section class="guide-content glass-panel hidden" id="guide-es">
-            <h2>Guía rápida: Cómo usar FrankPass</h2>
-            <p><strong>Beneficio: ¡Recordando solo 1 o 2 cosas, puedes crear contraseñas irrompibles para toda la vida!</strong></p>
-            <p>Esta herramienta es 100% sin estado. No guarda tus datos.</p>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
-                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> Leer guía completa
-                </a>
-            </div>
+            <h2>Guía Completa: Cómo usar FrankPass</h2>
+            <p><strong>Recuerda solo 1 frase personal → Genera contraseñas únicas e irrompibles para cada sitio, para siempre.</strong></p>
+            <p>Esta herramienta es <strong>100% sin estado</strong>. No guarda nada. Mismos datos = misma contraseña siempre.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📍 1. País</h3>
+            <p>Selecciona tu país. Esto personaliza las sugerencias de plataformas. <strong>No afecta tu contraseña.</strong></p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🌐 2. Plataforma</h3>
+            <p>Escribe el nombre del sitio web. Ejemplo: <code>Facebook</code>, <code>Gmail</code>. El auto-sugerido te ayuda a evitar errores de escritura. FrankPass normaliza automáticamente <code>facebook.com</code>, <code>FACEBOOK</code>, <code>m.facebook.com</code> al mismo nombre base.</p>
+            <p><strong>¿Falta una plataforma?</strong> Escríbela manualmente. Para solicitar que la agreguemos, etiqueta a <strong>@FrankPass</strong> en X o Instagram.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">👤 3. Usuario (Opcional)</h3>
+            <p><strong>Déjalo vacío.</strong> Úsalo solo si tienes múltiples cuentas en la misma plataforma.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔐 4. Clave Secreta</h3>
+            <p>Tu frase personal maestra. Ejemplo: <code>2amigos+mango+2026</code>. La complejidad <strong>no importa</strong> — el matemático hace todo el trabajo.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔄 5. Contador de Variante</h3>
+            <p>Predeterminado: <code>1</code>. Cámbialo cuando necesites rotar tu contraseña. Incluso si alguien descubre tu clave secreta, sin el número de variante correcto, no puede generar tu contraseña.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">⚙️ 6. Perfil</h3>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Estándar</strong> — Letras + Números + Símbolos (recomendado).</li>
+                <li><strong>Alfanumérico</strong> — Solo letras + números.</li>
+                <li><strong>Numérico (PIN)</strong> — Solo números.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📏 7. Longitud</h3>
+            <p>8 a 64 caracteres. Recomendado: <strong>16+</strong>.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔑 8. Contraseña Generada</h3>
+            <p>Se copia automáticamente. Se borra en 15 segundos. La clave secreta se borra tras 30 segundos de inactividad. Cerrar la pestaña elimina todo.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🛡️ 9. Sobre Filtraciones de Datos</h3>
+            <p><strong>Desde FrankPass, una filtración es imposible.</strong> No tenemos base de datos. Pero las plataformas que usas pueden sufrir brechas. Síguenos en redes sociales para alertas rápidas o únete a <a href="https://frankbase.com/newsletter" target="_blank" style="color: var(--accent-primary);"><strong>FrankBase Digital</strong></a> para alertas personalizadas (próximamente).</p>
+
             <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Ocultar guía</button>
         </section>
 
+        <!-- ================= FRENCH GUIDE ================= -->
         <section class="guide-content glass-panel hidden" id="guide-fr">
-            <h2>Guide rapide : Comment utiliser FrankPass</h2>
-            <p><strong>Avantage : En vous rappelant seulement 1 ou 2 choses simples, vous pouvez créer des mots de passe inviolables à vie!</strong></p>
-            <p>Cet outil est 100% sans état.</p>
-            <div style="text-align: center; margin-top: 1.5rem;">
-                <a href="/guide.html" class="btn-primary" style="display: inline-flex; width: auto; background: var(--accent-primary);">
-                    <ion-icon name="rocket-outline" style="margin-right: 0.5rem;"></ion-icon> Lire le guide complet
-                </a>
-            </div>
+            <h2>Guide Complet : Comment utiliser FrankPass</h2>
+            <p><strong>Retenez 1 seule phrase personnelle → Générez des mots de passe uniques et inviolables pour chaque site, à vie.</strong></p>
+            <p>Cet outil est <strong>100% sans état</strong>. Il ne sauvegarde rien. Mêmes données = même mot de passe à chaque fois.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📍 1. Pays</h3>
+            <p>Sélectionnez votre pays. Cela personnalise les suggestions de plateformes. <strong>N'affecte pas votre mot de passe.</strong></p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🌐 2. Plateforme</h3>
+            <p>Tapez le nom du site web. Exemple : <code>Facebook</code>, <code>Gmail</code>. L'auto-suggestion vous aide à éviter les fautes. FrankPass normalise automatiquement <code>facebook.com</code>, <code>FACEBOOK</code>, <code>m.facebook.com</code>.</p>
+            <p><strong>Plateforme manquante ?</strong> Tapez-la manuellement. Pour demander son ajout, taguez <strong>@FrankPass</strong> sur X ou Instagram.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">👤 3. Nom d'utilisateur (Optionnel)</h3>
+            <p><strong>Laissez vide.</strong> Utilisez-le uniquement si vous avez plusieurs comptes sur la même plateforme.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔐 4. Clé Secrète</h3>
+            <p>Votre phrase personnelle maîtresse. Exemple : <code>2amis+mangue+2026</code>. La complexité <strong>n'a aucune importance</strong> — les mathématiques font tout le travail.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔄 5. Compteur de Variante</h3>
+            <p>Par défaut : <code>1</code>. Changez-le quand vous devez renouveler votre mot de passe. Même si quelqu'un découvre votre clé secrète, sans le bon numéro de variante, il ne peut pas générer votre mot de passe.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">⚙️ 6. Profil</h3>
+            <ul style="color: var(--text-secondary); padding-left: 1.5rem;">
+                <li><strong>Standard</strong> — Lettres + Chiffres + Symboles (recommandé).</li>
+                <li><strong>Alphanumérique</strong> — Lettres + Chiffres uniquement.</li>
+                <li><strong>Numérique (PIN)</strong> — Chiffres uniquement.</li>
+            </ul>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">📏 7. Longueur</h3>
+            <p>8 à 64 caractères. Recommandé : <strong>16+</strong>.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🔑 8. Mot de Passe Généré</h3>
+            <p>Copié automatiquement. Effacé en 15 secondes. La clé secrète est effacée après 30 secondes d'inactivité. Fermer l'onglet supprime tout.</p>
+
+            <h3 style="color: var(--accent-primary); margin-top: 2rem;">🛡️ 9. Fuites de Données</h3>
+            <p><strong>Depuis FrankPass, une fuite est impossible.</strong> Nous n'avons aucune base de données. Mais les plateformes que vous utilisez peuvent subir des violations. Suivez-nous sur les réseaux sociaux pour des alertes rapides ou rejoignez <a href="https://frankbase.com/newsletter" target="_blank" style="color: var(--accent-primary);"><strong>FrankBase Digital</strong></a> pour des alertes personnalisées (bientôt disponible).</p>
+
             <button class="btn-hide-guide" onclick="closeGuide()" style="margin-top: 2rem;"><ion-icon name="chevron-up-outline"></ion-icon> Masquer le guide</button>
         </section>
 
@@ -682,7 +860,8 @@
                     <ul>
                         <li><a href="/about.html">About Us</a></li>
                         <li><a href="/why-stateless.html">Why Stateless?</a></li>
-                        <li><a href="/guide.html">Masterclass Guide</a></li>
+                        <li><a href="/guide.html">Ebooks & Guides</a></li>
+                        <li><a href="/support.html">Support Us</a></li>
                         <li><a href="/privacy.html">Privacy Policy</a></li>
                         <li><a href="/terms.html">Terms of Service</a></li>
                         <li><a href="/disclaimer.html">Disclaimer</a></li>
@@ -691,25 +870,27 @@
                     </ul>
                 </div>
 
-                <!-- Column 2: App Socials -->
+                <!-- Column 2: Share + Support -->
                 <div class="footer-col" style="flex: 2;">
                     <h4>Support & Security</h4>
                     <ul>
                         <li><a href="#faq">FAQ & Security</a></li>
                         <li><a href="mailto:contact@frankpass.com">Email Support</a></li>
+                        <li><a href="/support.html">💙 Donate / Support Us</a></li>
                     </ul>
-                    <h4 class="small-title" style="margin-top: 1.5rem;">Share FrankPass — Sharing is Caring</h4>
+                    <h4 class="small-title" style="margin-top: 1.5rem;">Share FrankPass 💙</h4>
+                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 0.5rem;">Help someone you care about stay safe online.</p>
                     <div class="shoutout-links">
-                        <a href="javascript:void(0)" onclick="runShoutout('x')" title="X (Formerly Twitter)">
+                        <a href="javascript:void(0)" onclick="runShoutout('x')" title="Post on X">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px" style="vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                         </a>
-                        <a href="javascript:void(0)" onclick="runShoutout('instagram')" title="Instagram"><ion-icon name="logo-instagram"></ion-icon></a>
+                        <a href="javascript:void(0)" onclick="runShoutout('whatsapp')" title="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
                         <a href="javascript:void(0)" onclick="runShoutout('facebook')" title="Facebook"><ion-icon name="logo-facebook"></ion-icon></a>
                         <a href="javascript:void(0)" onclick="runShoutout('linkedin')" title="LinkedIn"><ion-icon name="logo-linkedin"></ion-icon></a>
-                        <a href="javascript:void(0)" onclick="runShoutout('whatsapp')" title="WhatsApp"><ion-icon name="logo-whatsapp"></ion-icon></a>
                     </div>
                 </div>
-                <!-- Column 3: Socials & Developer -->
+
+                <!-- Column 3: Follow FrankPass + Developer -->
                 <div class="footer-col" style="flex: 3;">
                     <h4>Follow FrankPass</h4>
                     <div class="social-links" style="margin-bottom: 1.5rem;">
@@ -721,8 +902,7 @@
                         <a href="https://linkedin.com/company/frankbase" target="_blank" aria-label="LinkedIn"><ion-icon name="logo-linkedin" style="color: #0A66C2;"></ion-icon></a>
                     </div>
 
-                    <h4>The Developer</h4>
-                    <p style="margin-bottom: 0.8rem;">Created by <a href="https://www.google.com/search?q=mastermanikant" target="_blank" rel="noopener"><strong>@mastermanikant</strong></a></p>
+                    <h4>The Developer @mastermanikant</h4>
                     <div class="social-links developer-socials">
                         <a href="https://x.com/mastermanikant" target="_blank" aria-label="X">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="18px" height="18px" style="vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
@@ -740,6 +920,7 @@
             <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; text-align: center; color: #94a3b8; font-size: 0.85rem;">
                 <p>Serverless Cryptography. Zero Database. Pure Math.</p>
                 <p style="margin-top: 0.5rem;">&copy; <span id="copyright-year"></span> FrankPass. All rights reserved.</p>
+                <p style="margin-top: 0.3rem; font-size: 0.75rem; color: #64748b;">FrankPass is the intellectual property of Master Manikant. Offline personal use is permitted. Redistribution, cloning, or republishing under a different name is strictly prohibited.</p>
                 <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
             </div>
         </footer>

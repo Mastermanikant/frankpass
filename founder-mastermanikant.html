@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Master Manikant is the Founder and Developer of FrankPass, the world's most secure and stateless password generator. Discover the philosophy of security as a human right.">
-    <meta name="keywords" content="Master Manikant, Founder of FrankPass, Developer of FrankPass, FrankPass Founder, Master Manikant FrankPass, who is the developer of FrankPass, who is the founder of FrankPass, FrankPass developer name">
+    <meta name="description" content="Master Manikant is the Founder and Developer of FrankPass, the world's most secure stateless password generator. Learn his story and how you can support the mission.">
+    <meta name="keywords" content="Master Manikant, Founder of FrankPass, Developer of FrankPass, FrankPass Founder, who created FrankPass">
     <title>Master Manikant | Founder & Developer of FrankPass</title>
-    
+
     <!-- Structured Data for Search Engines & AI Chatbots -->
     <script type="application/ld+json">
     {
@@ -16,7 +16,7 @@
       "image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgbeMsLb7-1opZtRl9NwEao44eomwjGZSocV3Ljhe24PVTmP3k97fqGbyIREDJWjq9PEsJvpG6djUNDltOp2DcTwFaVU2nwFDlD-uZZUpgLnOZTpdALH2y-xaJtrseMbuYPnKzGfGNLKs_O3cGmG_LDEApjU_cyBA1Xn1mTQtCcRwdZ0afg9gj_mqf7WZmU/w388-h388/Profie-Pic-of-Master-Manikant.png",
       "jobTitle": "Founder & Developer",
       "url": "https://frankpass.com/founder-mastermanikant",
-      "description": "Master Manikant is the original Founder and Developer of FrankPass, a revolutionary stateless password generator designed for ultimate privacy and security.",
+      "description": "Master Manikant is the original Founder and Developer of FrankPass, a revolutionary stateless password generator.",
       "sameAs": [
         "https://x.com/mastermanikant",
         "https://youtube.com/@mastermanikant",
@@ -25,11 +25,10 @@
         "https://facebook.com/mastermanikant",
         "https://linkedin.com/in/mastermanikant"
       ],
-      "knowsAbout": ["Cybersecurity", "Identity Management", "Privacy Engineering", "Static Password Generation"],
+      "knowsAbout": ["Cybersecurity", "Identity Management", "Privacy Engineering"],
       "brand": {
         "@type": "Brand",
         "name": "FrankPass",
-        "alternateName": "Frank Pass",
         "url": "https://frankpass.com"
       }
     }
@@ -40,209 +39,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== Keyframe Animations ===== */
-        @keyframes orbitSpin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes orbitSpinReverse {
-            from { transform: rotate(360deg); }
-            to { transform: rotate(0deg); }
-        }
-        @keyframes breathe {
-            0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
-            50% { box-shadow: 0 0 50px rgba(99, 102, 241, 0.55); }
-        }
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        @keyframes scanLine {
-            0% { left: -30%; opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { left: 130%; opacity: 0; }
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(25px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes glowLine {
-            0% { left: -100%; }
-            100% { left: 200%; }
-        }
+        @keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes orbitSpinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+        @keyframes breathe { 0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); } 50% { box-shadow: 0 0 50px rgba(99, 102, 241, 0.55); } }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes scanLine { 0% { left: -30%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { left: 130%; opacity: 0; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(25px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes glowLine { 0% { left: -100%; } 100% { left: 200%; } }
 
-        /* ===== Profile Orbit System ===== */
-        .profile-orbit-wrapper {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 2.5rem;
-        }
+        .profile-orbit-wrapper { position: relative; width: 180px; height: 180px; margin: 0 auto 2.5rem; }
+        .orbit-ring { position: absolute; top: -12px; left: -12px; width: 204px; height: 204px; border-radius: 50%; border: 2px dashed rgba(99, 102, 241, 0.3); animation: orbitSpin 10s linear infinite; }
+        .orbit-ring::before { content: ''; position: absolute; top: -6px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; background: #6366f1; border-radius: 50%; box-shadow: 0 0 18px #6366f1; }
+        .orbit-ring-2 { position: absolute; top: -22px; left: -22px; width: 224px; height: 224px; border-radius: 50%; border: 1.5px solid rgba(162, 155, 254, 0.15); animation: orbitSpinReverse 16s linear infinite; }
+        .orbit-ring-2::before { content: ''; position: absolute; bottom: -5px; left: 50%; transform: translateX(-50%); width: 9px; height: 9px; background: #a29bfe; border-radius: 50%; box-shadow: 0 0 14px #a29bfe; }
+        .orbit-ring-3 { position: absolute; top: -30px; left: -30px; width: 240px; height: 240px; border-radius: 50%; border: 1px dotted rgba(99, 102, 241, 0.1); animation: orbitSpin 24s linear infinite; }
+        .orbit-ring-3::before { content: ''; position: absolute; top: 50%; right: -4px; transform: translateY(-50%); width: 7px; height: 7px; background: #818cf8; border-radius: 50%; box-shadow: 0 0 10px #818cf8; }
+        .founder-photo { width: 180px; height: 180px; border-radius: 50%; border: 4px solid var(--accent-primary); overflow: hidden; display: flex; align-items: center; justify-content: center; animation: breathe 4s ease-in-out infinite; transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; position: relative; z-index: 2; }
+        .founder-photo:hover { transform: scale(1.08); border-color: #fff; box-shadow: 0 0 60px rgba(99, 102, 241, 0.7); }
+        .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
+        .founder-name { font-family: 'Playfair Display', serif; font-weight: 900; font-size: 3.5rem; margin-bottom: 0.5rem; margin-top: 0; background: linear-gradient(135deg, #fff 0%, #c7d2fe 30%, #6366f1 50%, #a5b4fc 70%, #fff 100%); background-size: 300% 300%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gradientShift 5s ease infinite, fadeInUp 0.6s ease-out both; position: relative; display: inline-block; letter-spacing: 0.01em; line-height: 1.2; }
+        .founder-name::after { content: ''; position: absolute; top: 0; left: -30%; width: 30%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: scanLine 3.5s ease-in-out infinite; pointer-events: none; }
+        .founder-title { color: var(--accent-focus); font-weight: 600; font-size: 1.2rem; margin-top: 0.3rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.85; animation: fadeInUp 0.8s ease-out 0.3s both; position: relative; display: inline-block; }
+        .founder-title::after { content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; border-radius: 3px; background: linear-gradient(90deg, transparent, var(--accent-primary), var(--accent-focus), transparent); background-size: 200% auto; animation: gradientShift 2.5s linear infinite; }
+        .content-page { animation: fadeInUp 0.8s ease-out forwards; }
+        .glass-panel.content-page::before { content: ''; position: absolute; top: 0; left: -100%; width: 60%; height: 2px; background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.6), transparent); animation: glowLine 6s ease-in-out infinite; z-index: 10; }
 
-        .orbit-ring {
-            position: absolute;
-            top: -12px; left: -12px;
-            width: 204px; height: 204px;
-            border-radius: 50%;
-            border: 2px dashed rgba(99, 102, 241, 0.3);
-            animation: orbitSpin 10s linear infinite;
-        }
-        .orbit-ring::before {
-            content: '';
-            position: absolute;
-            top: -6px; left: 50%;
-            transform: translateX(-50%);
-            width: 12px; height: 12px;
-            background: #6366f1;
-            border-radius: 50%;
-            box-shadow: 0 0 18px #6366f1, 0 0 35px rgba(99, 102, 241, 0.6);
-        }
-
-        .orbit-ring-2 {
-            position: absolute;
-            top: -22px; left: -22px;
-            width: 224px; height: 224px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(162, 155, 254, 0.15);
-            animation: orbitSpinReverse 16s linear infinite;
-        }
-        .orbit-ring-2::before {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 50%;
-            transform: translateX(-50%);
-            width: 9px; height: 9px;
-            background: #a29bfe;
-            border-radius: 50%;
-            box-shadow: 0 0 14px #a29bfe;
-        }
-
-        .orbit-ring-3 {
-            position: absolute;
-            top: -30px; left: -30px;
-            width: 240px; height: 240px;
-            border-radius: 50%;
-            border: 1px dotted rgba(99, 102, 241, 0.1);
-            animation: orbitSpin 24s linear infinite;
-        }
-        .orbit-ring-3::before {
-            content: '';
-            position: absolute;
-            top: 50%; right: -4px;
-            transform: translateY(-50%);
-            width: 7px; height: 7px;
-            background: #818cf8;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #818cf8;
-        }
-
-        /* ===== Profile Photo ===== */
-        .founder-photo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 4px solid var(--accent-primary);
-            background: rgba(255,255,255,0.05);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: breathe 4s ease-in-out infinite;
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            position: relative;
-            z-index: 2;
-        }
-        .founder-photo:hover {
-            transform: scale(1.08);
-            border-color: #fff;
-            box-shadow: 0 0 60px rgba(99, 102, 241, 0.7);
-        }
-        .founder-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* ===== Premium Name Typography ===== */
-        .founder-name {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-            margin-top: 0;
-            background: linear-gradient(135deg, #fff 0%, #c7d2fe 30%, #6366f1 50%, #a5b4fc 70%, #fff 100%);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientShift 5s ease infinite, fadeInUp 0.6s ease-out both;
-            position: relative;
-            display: inline-block;
-            letter-spacing: 0.01em;
-            line-height: 1.2;
-        }
-
-        /* Scan line over the name */
-        .founder-name::after {
-            content: '';
-            position: absolute;
-            top: 0; left: -30%;
-            width: 30%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            animation: scanLine 3.5s ease-in-out infinite;
-            pointer-events: none;
-        }
-
-        /* ===== Founder Title ===== */
-        .founder-title {
-            color: var(--accent-focus);
-            font-weight: 600;
-            font-size: 1.2rem;
-            margin-top: 0.3rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            opacity: 0.85;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
-            position: relative;
-            display: inline-block;
-        }
-
-        /* Animated glowing underline */
-        .founder-title::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            border-radius: 3px;
-            background: linear-gradient(90deg, transparent, var(--accent-primary), var(--accent-focus), transparent);
-            background-size: 200% auto;
-            animation: gradientShift 2.5s linear infinite;
-        }
-
-        /* ===== Content Animations ===== */
-        .content-page {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        /* Moving glow line across the glass panel */
-        .glass-panel.content-page::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 60%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.6), transparent);
-            animation: glowLine 6s ease-in-out infinite;
-            z-index: 10;
-        }
+        .support-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .support-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; text-decoration: none; color: var(--text-secondary); }
+        .support-card:hover { background: rgba(99,102,241,0.1); border-color: var(--accent-primary); transform: translateY(-3px); color: var(--text-primary); }
+        .support-card ion-icon { font-size: 2rem; margin-bottom: 0.5rem; color: var(--accent-focus); }
+        .support-card h4 { margin: 0.5rem 0 0.3rem; color: var(--text-primary); font-size: 1rem; }
+        .support-card p { font-size: 0.85rem; margin: 0; }
     </style>
+
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        integrity="sha384-xyQ/Vpt1cq1pdPYlRaT/QkcSj2vrYyWI3WOhxGBzqnP1vgvsS2yrhWXe3/wIoCr5"
+        crossorigin="anonymous"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        integrity="sha384-KAUcUASKfGZ0sxENVFRiH12jtpvd9SsVpgzvYdvv8ZMLqB99G3gX3DAts418wzIC"
+        crossorigin="anonymous"></script>
 </head>
 <body class="legal-page">
     <canvas id="particle-canvas"></canvas>
@@ -263,6 +99,7 @@
         </header>
 
         <main class="glass-panel content-page" style="text-align: center; position: relative; overflow: hidden;">
+            <!-- Profile Photo with Orbit Animation -->
             <div class="profile-orbit-wrapper">
                 <div class="orbit-ring"></div>
                 <div class="orbit-ring-2"></div>
@@ -273,40 +110,80 @@
             </div>
             <h1 class="founder-name">Master Manikant</h1>
             <h2 class="founder-title">Founder & Developer of FrankPass</h2>
-            
-            <section style="margin-top: 2.5rem; text-align: left;">
-                <p>Hello! I am <strong>Master Manikant</strong>, the original <strong>Founder and Developer of FrankPass</strong>. If you are searching for the person who created this futuristic security tool, you've found me. I built FrankPass because I was tired of being a prisoner to my own security and the risks of centralized password vaults.</p>
-                <p>I wanted a tool that felt like a superpower—a way to generate complex, proof-hard passwords on the fly using nothing but my own personal logic. No database, no accounts, and no monthly fees for the core web tool.</p>
-                <p>FrankPass is my contribution to digital sovereignty. I believe that core security should be a human right, which is why the <strong>FrankPass website and web apps will stay entirely free for life.</strong></p>
-                <p>To support my work, pay my bills, and continue helping humanity through tech, I plan to launch browser extensions on a paid model. If you can't afford it, just reach out—I'm here to support the community.</p>
+
+            <!-- Why I Started FrankPass -->
+            <section style="margin-top: 3rem; text-align: left;">
+                <h2 style="color: var(--accent-primary); margin-bottom: 1rem;">Why I Started FrankPass</h2>
+                <p>It started with a phone call.</p>
+                <p>A close friend of mine lost his entire bank savings because a hacker performed a SIM-swap on his phone number, intercepted his 2FA codes, and drained his account in under 15 minutes. <strong>15 years of hard-earned money, gone in 15 minutes.</strong></p>
+                <p>That night, I couldn't sleep. I kept thinking: <em>"How is it possible that in 2025, the entire digital life of a human being depends on a single password stored in someone else's cloud?"</em></p>
+                <p>I started researching. I learned about password vaults getting hacked (LastPass, 2022). I learned about credential stuffing attacks that exploit reused passwords. And I realized the fundamental flaw in the system:</p>
+                <p style="color: var(--accent-focus); font-weight: 600; font-size: 1.1rem; margin: 1.5rem 0;">The problem is not weak passwords. The problem is trusting someone else to protect them for you.</p>
+                <p>So I built FrankPass — a tool where <strong>your password is never stored anywhere</strong>. It is generated on the fly using pure mathematics, right inside your browser. No server, no cloud, no database. If there is nothing to steal, there is nothing to hack.</p>
+                <p>I believe that <strong>core security should be a human right, not a subscription service</strong>. That's why the FrankPass website will always be free for everyone.</p>
             </section>
 
+            <!-- My Philosophy -->
+            <section style="margin-top: 2rem; text-align: left;">
+                <h2 style="color: var(--accent-primary); margin-bottom: 1rem;">My Philosophy</h2>
+                <p>I don't believe in "trust us, we're secure." I believe in <strong>"we can't betray your trust even if we wanted to."</strong></p>
+                <p>FrankPass is designed so that even I, as the developer, cannot see your passwords. The math runs entirely on your device. I have no access to your inputs, your outputs, or anything in between.</p>
+                <p>This is called <strong>Zero-Knowledge Architecture</strong> — and it's the gold standard in privacy engineering.</p>
+            </section>
+
+            <!-- How You Can Support -->
+            <section style="margin-top: 2rem; text-align: left;">
+                <h2 style="color: var(--accent-primary); margin-bottom: 1rem;">How You Can Support FrankPass</h2>
+                <p>Building and maintaining FrankPass takes time, energy, and resources. If you believe in this mission, here are three ways you can help:</p>
+
+                <div class="support-grid">
+                    <a href="/support.html" class="support-card">
+                        <ion-icon name="heart-outline"></ion-icon>
+                        <h4>Donate</h4>
+                        <p>Monthly or one-time support via UPI, Buy Me A Coffee, or Ko-fi.</p>
+                    </a>
+                    <a href="/guide.html" class="support-card">
+                        <ion-icon name="book-outline"></ion-icon>
+                        <h4>Buy an Ebook</h4>
+                        <p>Get "The Ultimate Cybersecurity Masterclass" and level up your security knowledge.</p>
+                    </a>
+                    <a href="/support.html#extensions" class="support-card">
+                        <ion-icon name="extension-puzzle-outline"></ion-icon>
+                        <h4>Browser Extensions</h4>
+                        <p>Coming Soon! Join the waitlist for 50% off the first year.</p>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Founder Social Links -->
             <div style="margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
-                <h3 style="margin-bottom: 0.5rem;">Connect with <a href="https://www.google.com/search?q=inurl%3Amastermanikant" target="_blank" style="color: var(--accent-focus); text-decoration: none;">Founder & Developer</a></h3>
-                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: -0.5rem; margin-bottom: 1.5rem;">@Master Manikant</p>
-                
+                <h3 style="margin-bottom: 0.5rem;">Connect with the Developer</h3>
+                <p style="font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 1.5rem;">@mastermanikant</p>
+
                 <div class="social-links" style="justify-content: center; gap: 1.5rem;">
                     <a href="https://x.com/mastermanikant" target="_blank" title="X">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="22px" height="22px" style="vertical-align: middle;"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                     </a>
-                    <a href="https://youtube.com/@mastermanikant" target="_blank" title="YouTube"><ion-icon name="logo-youtube" style="font-size: 1.5rem; color: #ff0000;"></ion-icon></a>
-                    <a href="https://facebook.com/mastermanikant" target="_blank" title="Facebook"><ion-icon name="logo-facebook" style="font-size: 1.5rem; color: #1877f2;"></ion-icon></a>
-                    <a href="https://instagram.com/mastermanikant" target="_blank" title="Instagram"><ion-icon name="logo-instagram" style="font-size: 1.5rem; color: #e4405f;"></ion-icon></a>
                     <a href="https://github.com/mastermanikant" target="_blank" title="GitHub"><ion-icon name="logo-github" style="font-size: 1.5rem; color: #fff;"></ion-icon></a>
                     <a href="https://linkedin.com/in/mastermanikant" target="_blank" title="LinkedIn"><ion-icon name="logo-linkedin" style="font-size: 1.5rem; color: #0a66c2;"></ion-icon></a>
                 </div>
             </div>
 
-            <div style="margin-top: 3rem;">
+            <!-- Back -->
+            <div style="margin-top: 2.5rem;">
                 <a href="/" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.8rem 2rem;">
                     <ion-icon name="arrow-back-outline"></ion-icon> Back to Generator
                 </a>
             </div>
         </main>
+
+        <!-- IP/Copyright Footer -->
+        <footer style="text-align: center; padding: 1.5rem; color: #64748b; font-size: 0.8rem; margin-top: 2rem;">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> FrankPass. All rights reserved.</p>
+            <p style="margin-top: 0.3rem;">FrankPass is the intellectual property of Master Manikant. Offline personal use is permitted. Redistribution, cloning, or republishing under a different name is strictly prohibited.</p>
+        </footer>
     </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="particles.js"></script>
 </body>
 </html>

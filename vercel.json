@@ -11,6 +11,7 @@
         { "source": "/guide", "destination": "/guide.html" },
         { "source": "/terms", "destination": "/terms.html" },
         { "source": "/disclaimer", "destination": "/disclaimer.html" },
+        { "source": "/support", "destination": "/support.html" },
         { "source": "/:country([a-zA-Z]{2})", "destination": "/index.html" }
     ]
 }

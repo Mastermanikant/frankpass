@@ -1,218 +1,123 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masterclass: How to Use FrankPass | Zero Mental Load Guide</title>
+    <title>Ebooks & Guides | FrankPass Security Library</title>
+    <meta name="description" content="Download free and premium cybersecurity ebooks by FrankPass. Learn to protect your digital life with practical, expert-level guides.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .guide-section { margin-bottom: 3rem; }
-        .guide-section h2 { color: var(--accent-primary); margin-bottom: 1.5rem; font-size: 2rem; border-bottom: 2px solid rgba(99, 102, 241, 0.2); padding-bottom: 0.5rem; }
-        .guide-section h3 { color: var(--text-primary); margin-top: 2rem; margin-bottom: 1rem; }
-        .example-box { background: rgba(255, 255, 255, 0.05); border-left: 4px solid var(--accent-primary); padding: 1.5rem; border-radius: 0 12px 12px 0; margin: 1rem 0; }
-        .rule-box { background: rgba(16, 185, 129, 0.1); border: 1px dashed #10b981; padding: 1rem; border-radius: 12px; margin: 1rem 0; }
-        .bad-rule { color: #ef4444; font-weight: bold; }
-        .good-rule { color: #10b981; font-weight: bold; }
-        .recipe { font-family: 'Fira Code', monospace; background: #000; padding: 0.5rem 1rem; border-radius: 6px; color: #10b981; }
-        .highlight { color: var(--accent-primary); font-weight: 600; }
+        .ebook-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .ebook-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .ebook-card:hover { border-color: var(--accent-primary); transform: translateY(-4px); box-shadow: 0 8px 30px rgba(99,102,241,0.15); }
+        .ebook-card .ebook-badge { position: absolute; top: 1rem; right: 1rem; font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 20px; }
+        .badge-free { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .badge-premium { background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2)); color: #f59e0b; }
+        .ebook-card .ebook-icon { font-size: 4rem; margin-bottom: 1rem; }
+        .ebook-card h3 { color: var(--text-primary); font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .ebook-card p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6; }
+        .ebook-card .chapters { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 1rem; }
+        .ebook-card .langs { display: flex; gap: 0.4rem; justify-content: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+        .ebook-card .lang-tag { background: rgba(99,102,241,0.1); color: var(--accent-focus); font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 6px; }
     </style>
+
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        integrity="sha384-xyQ/Vpt1cq1pdPYlRaT/QkcSj2vrYyWI3WOhxGBzqnP1vgvsS2yrhWXe3/wIoCr5"
+        crossorigin="anonymous"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        integrity="sha384-KAUcUASKfGZ0sxENVFRiH12jtpvd9SsVpgzvYdvv8ZMLqB99G3gX3DAts418wzIC"
+        crossorigin="anonymous"></script>
 </head>
 <body class="legal-page">
     <canvas id="particle-canvas"></canvas>
-    
-    <div class="container" style="max-width: 900px;">
-        <header style="text-align: center; margin-bottom: 4rem;">
+    <div class="background-elements">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
             <div class="logo-container">
                 <a href="/" style="text-decoration: none; color: inherit;">
-                    <h1><span class="FrankPass-text">Frank</span>Pass <span style="font-size: 1rem; vertical-align: middle; opacity: 0.7;">Guide</span></h1>
+                    <h1><span class="FrankPass-text">Frank</span>Pass <span style="font-size: 1rem; opacity: 0.7;">Library</span></h1>
                 </a>
             </div>
-            <p style="font-size: 1.4rem; color: var(--text-primary); margin-top: 1rem;">Masterclass: How to Use FrankPass</p>
-            <p style="opacity: 0.8;">Zero Mental Load + Maximum Security</p>
+            <p>Master cybersecurity. Protect your digital life.</p>
         </header>
 
-        <main class="glass-panel content-page" style="padding: 3rem;">
-            
-            <!-- 1. Quick Overview -->
-            <section class="guide-section">
-                <h2>1. Quick Overview (संक्षिप्त विवरण)</h2>
-                <p>FrankPass एक पारंपरिक पासवर्ड मैनेजर नहीं है। यह एक <strong>Stateless Deterministic Generator</strong> है। इसका मतलब है कि यह आपके पासवर्ड को कहीं भी स्टोर (Save) नहीं करता—न हमारे सर्वर पर, न आपके फोन पर।</p>
-                <p>ज़्यादातर लोग हर वेबसाइट के लिए अलग पासवर्ड याद रखने के "Mental Load" (मानसिक बोझ) से थक जाते हैं। FrankPass इस बोझ को खत्म करता है। यह एक गणितीय मशीन की तरह है: आप एक ही जानकारी (Input) डालेंगे, तो यह हर बार वही मज़बूत पासवर्ड (Output) बनाएगा।</p>
-                <p><strong>यह अलग क्यों है?</strong> क्योंकि अगर FrankPass की वेबसाइट कल बंद भी हो जाए, तब भी आपके पासवर्ड सुरक्षित हैं। आप बस इसके गणितीय फॉर्मूले का उपयोग करके उन्हें कहीं भी वापस पा सकते हैं। यहाँ सुरक्षा "सिस्टम" में नहीं, आपके "दिमाग" में है।</p>
-            </section>
+        <main class="glass-panel content-page">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">📚 FrankPass <span class="FrankPass-text">Security Library</span></h2>
+                <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">Download expert-level cybersecurity guides. Written for humans, not hackers. Learn at your own pace.</p>
+            </div>
 
-            <!-- 2. Core Principle -->
-            <section class="guide-section">
-                <h2>2. Core Principle (मूल सिद्धांत)</h2>
-                <div class="example-box">
-                    <p style="font-size: 1.2rem; line-height: 1.6;">
-                        "FrankPass कोई पासवर्ड सेव नहीं करता। यह आपके इनपुट से गणितीय तरीके से पासवर्ड बनाता है। अगर आप वही इनपुट दोबारा डालेंगे, तो आपको वही पासवर्ड मिलेगा।"
-                    </p>
-                </div>
-                <p>हम <strong>Zero Storage</strong> दर्शन पर काम करते हैं। जब आप 'Generate' बटन दबाते हैं, तो आपका इनपुट (Username, Secret Key, etc.) एक कॉम्प्लेक्स एल्गोरिदम (PBKDF2 + HMAC-SHA512) से गुज़रता है और एक यूनीक पासवर्ड में बदल जाता है। जैसे ही आप पेज बंद करते हैं, वह डेटा मिट जाता है।</p>
-            </section>
-
-            <!-- 3. Understanding the Inputs -->
-            <section class="guide-section">
-                <h2>3. Understanding the Inputs (इनपुट को समझना)</h2>
-                
-                <h3>🌐 Platform (प्लेटफॉर्म)</h3>
-                <p>यह उस वेबसाइट या ऐप का नाम है जिसके लिए आप पासवर्ड बना रहे हैं। इसे हमेशा एक जैसा लिखना ज़रूरी है।</p>
-                <ul>
-                    <li><span class="recipe">facebook</span></li>
-                    <li><span class="recipe">gmail</span></li>
-                    <li><span class="recipe">amazon</span></li>
-                </ul>
-                <div class="rule-box">
-                    <p>💡 <strong>स्मार्ट फीचर:</strong> मुझे पता है कि प्लेटफॉर्म का नाम लिखने में गलती हो सकती है, इसलिए मैंने ज़्यादातर बड़ी वेबसाइट्स के नाम पहले से ऐड कर दिए हैं। जैसे ही आप <span class="highlight">fa</span> या <span class="highlight">fac</span> टाइप करेंगे, आपको <span class="highlight">facebook</span> दिखाई देगा, बस उसे सिलेक्ट कर लें।</p>
-                    <p>अगर कोई नाम मौजूद नहीं है और आपको टाइप करने में दिक्कत होती है, तो आप मुझे <a href="https://x.com/mastermanikant" target="_blank">x.com</a> पर मेंशन करके या मेल करके रिक्वेस्ट कर सकते हैं। मैं उसे जल्द ही लिस्ट में जोड़ दूँगा।</p>
-                </div>
-
-                <h3>👤 Username / Email (यूजरनेम - वैकल्पिक)</h3>
-                <p>यह सेक्शन <strong>Optional (वैकल्पिक)</strong> है। आप चाहें तो इसे खाली छोड़ सकते हैं।</p>
-                <div class="rule-box">
-                    <p><strong>क्या फर्क पड़ेगा?</strong> अगर आप यहां अपना ईमेल या यूजरनेम लिखते हैं, तो जेनरेट होने वाला पासवर्ड बदल जाएगा। यह तब बहुत काम आता है जब एक ही प्लैटफॉर्म (जैसे Instagram) पर आपके <strong>दो अलग-अलग अकाउंट</strong> हों।</p>
-                    <p>अगर आप इसे खाली छोड़ते हैं, तो भी पासवर्ड उतना ही मज़बूत होगा। ज़्यादातर लोग इसे खाली रखते हैं ताकि उन्हें कम चीज़ें याद रखनी पड़ें।</p>
-                </div>
-
-                <h3>🔑 Secret Personal Key (सीक्रेट पर्सनल की)</h3>
-                <p>यह FrankPass का सबसे महत्वपूर्ण हिस्सा है। यह आपका <strong>निजी वाक्य</strong> है जो केवल आपको पता होना चाहिए।</p>
-                <div class="rule-box">
-                    <p><strong>मजबूती का सच:</strong> यह लंबा हो या छोटा, इससे पासवर्ड की तकनीकी मजबूती पर फर्क नहीं पड़ेगा। लेकिन आपको यह ध्यान रखना है कि कोई इसका <strong>अनुमान (Guess)</strong> न लगा सके।</p>
-                </div>
-                <p>इसे याद रखने में आसान और मज़बूत बनाने के लिए ऐसे वाक्यों का उपयोग करें:</p>
-                <ul>
-                    <li><span class="recipe">america ka malik mai hu</span></li>
-                    <li><span class="recipe">bharat ka jhanda mujhe pata hai</span></li>
-                    <li><span class="recipe">Sahi baat mere ko galat lagta hai</span></li>
-                    <li><span class="recipe">Sachha pulishwala sabko kharab lagta hai 1100</span></li>
-                </ul>
-                <p><strong>खास नियम:</strong> इसमें 'Spaces' और 'Letters Case' का कोई फर्क नहीं पड़ता। चाहे आप <span class="recipe">ram</span> लिखें, <span class="recipe">RAM</span> या <span class="recipe">rAM</span>, सबका पासवर्ड एक ही जनरेट होगा।</p>
-
-                <h3>🔄 Variant Counter (वैरिएंट काउंटर)</h3>
-                <p>अगर आपको किसी वेबसाइट का पासवर्ड बदलना है, तो आपको अपनी Secret Key बदलने की ज़रूरत नहीं है। बस Variant को बदल दें।</p>
-                <div class="rule-box">
-                    <p>💡 <strong>प्रो-सिक्योरिटी टिप:</strong> ज़रूरी नहीं कि आप <span class="highlight">Variant 1</span> ही इस्तेमाल करें। आप सीधे <span class="highlight">Variant 10</span> या कोई और संख्या इस्तेमाल कर सकते हैं।</p>
-                    <p>अपने मन में एक नियम बना लें कि मैं हमेशा <span class="highlight">5</span> या <span class="highlight">10</span> के अंतराल (Interval) में वैरिएंट इस्तेमाल करूँगा। इससे यह होगा कि अगर कोई आपकी Secret Key का अंदाज़ा लगा भी ले, तो उसे यह नहीं पता होगा कि आप कौन सा वैरिएंट इस्तेमाल कर रहे हैं।</p>
-                </div>
-
-                <h3>📏 Length (लंबाई)</h3>
-                <p>पासवर्ड कितना लंबा होना चाहिए। डिफ़ॉल्ट 16 है। जितना लंबा पासवर्ड, उतनी ज़्यादा सुरक्षा (Higher Security)।</p>
-
-                <h3>⚙️ Profile (प्रोफाइल)</h3>
-                <ul>
-                    <li><strong>Standard:</strong> अक्षर, अंक और सिंबल (सबसे मज़बूत)।</li>
-                    <li><strong>Alphanumeric:</strong> सिर्फ अक्षर और अंक (अगर वेबसाइट सिंबल मना करे)।</li>
-                </ul>
-            </section>
-
-            <!-- 4. The Zero Mental Load Strategy -->
-            <section class="guide-section">
-                <h2>4. The Zero Mental Load Strategy (सबसे शक्तिशाली रणनीति)</h2>
-                <p>FrankPass का असली जादू इस <strong>Golden Rule</strong> में है:</p>
-                <div class="rule-box" style="text-align: center; border-style: solid;">
-                    <p><span class="highlight">Secret Key</span> → हमेशा एक ही (Make it your life motto)</p>
-                    <p><span class="highlight">Variant</span> → कोई एक फिक्स अंतराल चुनें (जैसे 5, 10 या 1)</p>
-                    <p><span class="highlight">Length</span> → 16</p>
-                </div>
-                <p>अब आपको पूरी ज़िंदगी में सिर्फ एक चीज़ बदलनी है: <strong>Password का Variant</strong>।</p>
-                <div class="rule-box">
-                    <p>वैसे तो सिज़्टम में वैरिएंट 1 होता है, लेकिन आप अपनी सुरक्षा के लिए <strong>Variant 5, 10, या 100</strong> जैसा कोई भी नंबर फिक्स कर सकते हैं। प्लैटफॉर्म तो आप जो खोलेंगे वही लिखेंगे, बस अपना वैरिएंट पैटर्न याद रखें।</p>
-                </div>
-                <p>उदाहरण के लिए:</p>
-                <ul>
-                    <li>Facebook के लिए 'facebook' लिखें + Variant 10</li>
-                    <li>Gmail के लिए 'gmail' लिखें + Variant 10</li>
-                </ul>
-                <p>आपको केवल अपनी <span class="highlight">Secret Key</span> और अपना <span class="highlight">Variant Pattern</span> याद रखना है, और आपके पास हर वेबसाइट के लिए अलग और अटूट पासवर्ड होगा!</p>
-            </section>
-
-            <!-- 5. Step-by-Step Usage Guide -->
-            <section class="guide-section">
-                <h2>5. Step-by-Step Usage Guide (उपयोग कैसे करें)</h2>
-                <div style="display: grid; gap: 1rem;">
-                    <p><strong>Step 1:</strong> Platform का नाम लिखें (जैसे: instagram)।</p>
-                    <p><strong>Step 2:</strong> अपनी Secret Personal Key डालें।</p>
-                    <p><strong>Step 3:</strong> Variant को 1 पर रहने दें (अगर पहली बार बना रहे हैं)।</p>
-                    <p><strong>Step 4:</strong> Length चुनें (16 रेकमेंडेड है)।</p>
-                    <p><strong>Step 5:</strong> 'Generate' बटन दबाएं।</p>
-                    <p><strong>Step 6:</strong> पासवर्ड कॉपी करें और वेबसाइट पर पेस्ट करें।</p>
-                </div>
-            </section>
-
-            <!-- 6. Practical Examples -->
-            <section class="guide-section">
-                <h2>6. Practical Examples (व्यावहारिक उदाहरण)</h2>
-                <div class="example-box">
-                    <strong>Case 1: Facebook का पहला पासवर्ड</strong><br>
-                    Platform: <span class="recipe">facebook</span> | Variant: <span class="recipe">1</span>
-                </div>
-                <div class="example-box">
-                    <strong>Case 2: Gmail का पासवर्ड</strong><br>
-                    Platform: <span class="recipe">gmail</span> | Variant: <span class="recipe">1</span>
-                </div>
-                <div class="example-box">
-                    <strong>Case 3: Facebook पासवर्ड रिसेट (Reset) करना</strong><br>
-                    अगर आप FB पासवर्ड बदलना चाहते हैं: <br>
-                    Platform: <span class="recipe">facebook</span> | Variant: <span class="recipe">2</span>
-                </div>
-            </section>
-
-            <!-- 7. Security Best Practices -->
-            <section class="guide-section">
-                <h2>7. Security Best Practices (सुरक्षा के नियम)</h2>
-                <ul>
-                    <li>अपनी <span class="highlight">Secret Key</span> किसी को न बताएं, न ही कहीं लिखें।</li>
-                    <li>फाइनल जनरेटेड पासवर्ड को कभी भी फाइल में सेव न करें। ज़रूरत पड़ने पर दोबारा जनरेट करें।</li>
-                    <li><strong>Clipboard Rule:</strong> पासवर्ड पेस्ट करने के बाद <strong>Clipboard Clear</strong> कर दें। (FrankPass में पासवर्ड कॉपी करने के बाद, कोई रैंडम टेक्स्ट कॉपी कर लें ताकि आपका पासवर्ड वहां से हट जाए)।</li>
-                </ul>
-            </section>
-
-            <!-- 8. What NOT to Do -->
-            <section class="guide-section">
-                <h2>8. What NOT to Do (क्या न करें)</h2>
-                <ul>
-                    <li class="bad-rule">❌ अपनी Secret Key बार-बार बदलना।</li>
-                    <li class="bad-rule">❌ प्लेटफॉर्म की स्पेलिंग गलत लिखना (fb vs facebook)।</li>
-                    <li class="bad-rule">❌ फाइनल पासवर्ड को कागज़ पर लिख लेना।</li>
-                </ul>
-            </section>
-
-            <!-- 9. Recipe System -->
-            <section class="guide-section">
-                <h2>9. Recipe System (Memory System)</h2>
-                <p>FrankPass की सबसे अच्छी आदत है: <strong>पासवर्ड नहीं, रेसिपी याद रखना।</strong></p>
-                <p>अगर आपको याद रखना है कि आपने क्या इस्तेमाल किया था, तो बस एक छोटी डायरी या नोट्स ऐप में ऐसा लिखें:</p>
-                <div class="rule-box">
-                    <p>Facebook – Variant 2</p>
-                    <p>Gmail – Variant 1</p>
-                </div>
-                <p>इसे कोई चुरा भी ले, तो उसे कुछ नहीं मिलेगा, क्योंकि असली "मसाला" (Secret Key) तो आपके दिमाग में है!</p>
-            </section>
-
-            <!-- 10. Final Summary -->
-            <section class="guide-section">
-                <h2>10. Final Summary (निष्कर्ष)</h2>
-                <p>FrankPass आपके जीवन को सरल बनाने के लिए है। यह <strong>Zero Mental Load</strong> पर आधारित है—जहाँ आपको हज़ारों पासवर्ड की बजाय सिर्फ अपनी "पहचान" (Secret Key) याद रखनी है। यह अटूट सुरक्षा (Deterministic Security) देता है क्योंकि यह गणित पर आधारित है, बिजली पर नहीं।</p>
-                <div style="text-align: center; margin-top: 3rem;">
-                    <a href="/" class="btn-primary" style="display: inline-flex; width: auto; padding: 1rem 3rem;">
-                        <ion-icon name="flash-outline" style="margin-right: 0.5rem;"></ion-icon> Start Generating Now
+            <div class="ebook-grid">
+                <!-- Free Ebook -->
+                <div class="ebook-card">
+                    <span class="ebook-badge badge-free">FREE</span>
+                    <div class="ebook-icon">🛡️</div>
+                    <h3>The Unhackable Identity</h3>
+                    <p>A practical 4-chapter guide to digital survival. Learn to spot phishing, set up 2FA properly, protect your phone, and understand the FrankPass philosophy.</p>
+                    <div class="chapters">📖 4 Chapters • ~30 min read</div>
+                    <div class="langs">
+                        <span class="lang-tag">🇬🇧 English</span>
+                        <span class="lang-tag">🇮🇳 Hindi</span>
+                        <span class="lang-tag">🇪🇸 Spanish</span>
+                        <span class="lang-tag">🇫🇷 French</span>
+                    </div>
+                    <a href="#" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.7rem 1.5rem; background: linear-gradient(135deg, #10b981, #059669);">
+                        <ion-icon name="download-outline" style="margin-right: 0.4rem;"></ion-icon> Download Free
                     </a>
                 </div>
-            </section>
 
+                <!-- Paid Ebook -->
+                <div class="ebook-card">
+                    <span class="ebook-badge badge-premium">PREMIUM</span>
+                    <div class="ebook-icon">🔥</div>
+                    <h3>The Ultimate Cybersecurity Masterclass</h3>
+                    <p>A 10-chapter deep dive into cryptography, hacking techniques, social engineering, dark web risks, and enterprise-level defense strategies.</p>
+                    <div class="chapters">📖 10 Chapters • ~3 hours read</div>
+                    <div class="langs">
+                        <span class="lang-tag">🇬🇧 English</span>
+                        <span class="lang-tag">🇮🇳 Hindi</span>
+                        <span class="lang-tag">🇪🇸 Spanish</span>
+                        <span class="lang-tag">🇫🇷 French</span>
+                    </div>
+                    <a href="#" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.7rem 1.5rem; background: linear-gradient(135deg, #f59e0b, #ef4444); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);">
+                        <ion-icon name="cart-outline" style="margin-right: 0.4rem;"></ion-icon> Buy Now
+                    </a>
+                </div>
+            </div>
+
+            <!-- Back -->
+            <div style="margin-top: 3rem; text-align: center;">
+                <a href="/" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.8rem 2rem;">
+                    <ion-icon name="arrow-back-outline"></ion-icon> Back to Generator
+                </a>
+            </div>
         </main>
 
-        <footer style="text-align: center; margin-top: 3rem; color: #94a3b8; padding-bottom: 3rem;">
-            <p>&copy; 2026 FrankPass. Securely Crafted for Humans.</p>
+        <!-- IP/Copyright Footer -->
+        <footer style="text-align: center; padding: 1.5rem; color: #64748b; font-size: 0.8rem; margin-top: 2rem;">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> FrankPass. All rights reserved.</p>
+            <p style="margin-top: 0.3rem;">FrankPass is the intellectual property of Master Manikant. Offline personal use is permitted. Redistribution, cloning, or republishing under a different name is strictly prohibited.</p>
         </footer>
     </div>
 
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script src="particles.js"></script>
 </body>
 </html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Us | FrankPass</title>
+    <meta name="description" content="Support FrankPass — the free, stateless password generator. Donate via UPI, Buy Me A Coffee, purchase ebooks, or join the browser extension waitlist.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Fira+Code:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .support-hero { text-align: center; margin-bottom: 2rem; }
+        .support-hero h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .support-hero p { color: var(--text-secondary); font-size: 1.05rem; max-width: 500px; margin: 0 auto; }
+
+        .support-section { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
+        .support-section h3 { color: var(--accent-primary); margin-bottom: 0.5rem; font-size: 1.4rem; }
+        .support-section .subtitle { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+        .payment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+        .payment-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .payment-card:hover { background: rgba(99,102,241,0.1); border-color: var(--accent-primary); transform: translateY(-3px); }
+        .payment-card .card-icon { font-size: 2.5rem; margin-bottom: 0.3rem; }
+        .payment-card h4 { margin: 0; font-size: 1.1rem; }
+        .payment-card p { font-size: 0.85rem; color: var(--text-secondary); margin: 0; }
+        .payment-card .badge { display: inline-block; background: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 0.75rem; font-weight: 600; padding: 0.2rem 0.6rem; border-radius: 20px; margin-top: 0.3rem; }
+        .payment-card .badge-coming { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+
+        .waitlist-box {
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(162,155,254,0.05));
+            border: 1px solid rgba(99,102,241,0.25);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .waitlist-box h4 { color: var(--accent-focus); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .waitlist-box p { color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1rem; }
+        .waitlist-box .offer-tag { display: inline-block; background: linear-gradient(135deg, #f59e0b, #ef4444); color: white; font-weight: 700; font-size: 1rem; padding: 0.4rem 1rem; border-radius: 8px; margin-bottom: 1rem; }
+    </style>
+
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+        integrity="sha384-xyQ/Vpt1cq1pdPYlRaT/QkcSj2vrYyWI3WOhxGBzqnP1vgvsS2yrhWXe3/wIoCr5"
+        crossorigin="anonymous"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+        integrity="sha384-KAUcUASKfGZ0sxENVFRiH12jtpvd9SsVpgzvYdvv8ZMLqB99G3gX3DAts418wzIC"
+        crossorigin="anonymous"></script>
+</head>
+<body class="legal-page">
+    <canvas id="particle-canvas"></canvas>
+    <div class="background-elements">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <a href="/" style="text-decoration: none; color: inherit;">
+                    <h1><span class="FrankPass-text">Frank</span>Pass</h1>
+                </a>
+            </div>
+            <p>Every contribution makes the internet more secure.</p>
+        </header>
+
+        <main class="glass-panel content-page">
+            <!-- Hero -->
+            <div class="support-hero">
+                <h2>Support <span class="FrankPass-text">FrankPass</span></h2>
+                <p>FrankPass is 100% free and always will be. Your support helps us keep the lights on, build new features, and protect more people around the world.</p>
+            </div>
+
+            <!-- SECTION 1: Donate -->
+            <div class="support-section" style="border-top: none; padding-top: 0;">
+                <h3>💙 Donate — One-Time or Monthly</h3>
+                <p class="subtitle">Choose the method that works best for your country. Every amount helps.</p>
+
+                <div class="payment-grid">
+                    <!-- UPI (India / Asia) -->
+                    <a href="upi://pay?pa=mastermanikant@sbi&pn=FrankPass&cu=INR" class="payment-card">
+                        <div class="card-icon">🇮🇳</div>
+                        <h4>UPI (India)</h4>
+                        <p>Google Pay, PhonePe, Paytm, BHIM — instant and zero fees.</p>
+                        <span class="badge">Instant • Zero Fees</span>
+                    </a>
+
+                    <!-- Buy Me A Coffee (Global) -->
+                    <a href="https://buymeacoffee.com/frankpass" target="_blank" rel="noopener" class="payment-card">
+                        <div class="card-icon">☕</div>
+                        <h4>Buy Me A Coffee</h4>
+                        <p>Works globally via Stripe. Credit/Debit cards, Apple Pay, Google Pay.</p>
+                        <span class="badge">190+ Countries</span>
+                    </a>
+
+                    <!-- Ko-fi (Global via PayPal) -->
+                    <a href="https://ko-fi.com/frankpass" target="_blank" rel="noopener" class="payment-card">
+                        <div class="card-icon">❤️</div>
+                        <h4>Ko-fi</h4>
+                        <p>PayPal-powered, 0% platform fee. Great for Europe, Americas, and Asia.</p>
+                        <span class="badge">0% Fee • PayPal</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Buy Ebook -->
+            <div class="support-section">
+                <h3>📖 Purchase Our Ebook</h3>
+                <p class="subtitle">Become a master of digital security. Your purchase directly supports FrankPass development.</p>
+
+                <div class="payment-grid">
+                    <a href="/guide.html" class="payment-card">
+                        <div class="card-icon">🆓</div>
+                        <h4>The Unhackable Identity</h4>
+                        <p>4-chapter practical guide to digital survival. Absolutely free.</p>
+                        <span class="badge">Free Download</span>
+                    </a>
+                    <a href="/guide.html" class="payment-card">
+                        <div class="card-icon">🔥</div>
+                        <h4>The Ultimate Masterclass</h4>
+                        <p>10-chapter deep dive into cryptography, hacking, and defense. Premium content.</p>
+                        <span class="badge badge-coming">Paid • Premium</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Browser Extensions -->
+            <div class="support-section" id="extensions">
+                <h3>🧩 Browser Extensions</h3>
+                <p class="subtitle">Auto-fill your FrankPass passwords directly inside any website. No more copy-paste.</p>
+
+                <div class="waitlist-box">
+                    <span class="offer-tag">🎉 50% OFF — First Year Subscription</span>
+                    <h4>Coming Soon!</h4>
+                    <p>Premium browser extensions for Chrome, Firefox, and Edge are in development. Join the waitlist to be the first to know and get an exclusive 50% discount on your first year.</p>
+                    <a href="https://frankbase.com/extensions-waitlist" target="_blank" rel="noopener" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.8rem 2rem; background: linear-gradient(135deg, #f59e0b, #ef4444); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);">
+                        <ion-icon name="notifications-outline" style="margin-right: 0.4rem;"></ion-icon> Join the Waitlist
+                    </a>
+                </div>
+            </div>
+
+            <!-- Back -->
+            <div style="margin-top: 3rem; text-align: center;">
+                <a href="/" class="btn-primary" style="display: inline-flex; width: auto; padding: 0.8rem 2rem;">
+                    <ion-icon name="arrow-back-outline"></ion-icon> Back to Generator
+                </a>
+            </div>
+        </main>
+
+        <!-- IP/Copyright Footer -->
+        <footer style="text-align: center; padding: 1.5rem; color: #64748b; font-size: 0.8rem; margin-top: 2rem;">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> FrankPass. All rights reserved.</p>
+            <p style="margin-top: 0.3rem;">FrankPass is the intellectual property of Master Manikant. Offline personal use is permitted. Redistribution, cloning, or republishing under a different name is strictly prohibited.</p>
+        </footer>
+    </div>
+
+    <script src="particles.js"></script>
+</body>
+</html>
