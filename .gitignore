@@ -1,0 +1,31 @@
+# FrankPass Website — .gitignore
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Build artifacts
+dist/
+build/
+.cache/
+
+# Cloudflare
+.wrangler/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# AI & Editor
+.agents/
+.gemini/
+*.log
+
+# Map files (auto-generated)
+map.json
+map.md
+
+# Old data
+All old data/
