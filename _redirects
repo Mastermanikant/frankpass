@@ -1,19 +1,25 @@
-# Cloudflare Pages Direct Deployment & Cloudflare Router Config
+# Cloudflare Pages Direct Deployment & Router Configuration
 
-# Redirects for Clean URLs and Legacy Paths
+# Clean URL Rewrites for Subpages
+/about /about-us.html 200
+/faq /faq.html 200
+/docs /docs.html 200
+/get-started /get-started.html 200
+/pro /pro.html 200
+/legal /legal.html 200
 /privacy /legal.html 200
 /terms /legal.html 200
 /disclaimer /legal.html 200
 /hn / 200
 
-# Social & External Redirects
-/mastermanikant/x https://x.com/MasterManikant 301
-/mastermanikant/linkedin https://linkedin.com/in/mastermanikant 301
-/mastermanikant/youtube https://youtube.com/@MasterManikant 301
-/mastermanikant/instagram https://instagram.com/mastermanikant 301
-/mastermanikant/facebook https://facebook.com/mastermanikant 301
+# Official Social & Brand Redirects (@frankpasshq)
 /x https://x.com/frankpasshq 301
 /youtube https://youtube.com/@frankpasshq 301
 /instagram https://instagram.com/frankpasshq 301
 /whatsapp https://whatsapp.com/channel/0029VbBvVfqLNSa2At2Shf2z 301
 /facebook https://facebook.com/frankpasshq 301
+/mastermanikant/x https://x.com/MasterManikant 301
+/mastermanikant/linkedin https://linkedin.com/in/mastermanikant 301
+/mastermanikant/youtube https://youtube.com/@MasterManikant 301
+/mastermanikant/instagram https://instagram.com/mastermanikant 301
+/mastermanikant/facebook https://facebook.com/mastermanikant 301
