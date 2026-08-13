@@ -96,7 +96,7 @@
         <a href="./about-us.html#founder">Meet the Founder</a>
         <a href="./about-us.html#contact">Contact Us</a>
         <a href="./legal.html">Legal</a>
-        <a href="https://reddit.com/r/iamfrankpass" target="_blank" rel="noopener noreferrer">Community</a>
+        <a href="https://reddit.com/r/frankpasshq" target="_blank" rel="noopener noreferrer">Community</a>
       </div>
 
       <!-- Founder links -->
