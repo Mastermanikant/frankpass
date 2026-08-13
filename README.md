@@ -91,20 +91,19 @@ frank-pass/
 ├── translations.js         # Multi-language support
 ├── particles.js            # Background animation
 ├── service-worker.js       # PWA offline support
-├── manifest.json           # PWA manifest
-├── vercel.json             # Routing & redirect rules
-├── pro.html                # Pro license & Pricing (Adaptive)
-├── contact-us.html         # Stateless Contact page
-├── extension.html          # Browser extension guide
-├── why-stateless.html      # Why stateless architecture
-└── icons/                  # PWA icons (192px, 512px)
+├── _redirects              # Cloudflare Pages routing & redirect rules
+├── _headers                # Cloudflare Pages security headers
+├── pro.html                # Pro license & Pricing
+├── about-us.html           # About & Founder info
+├── docs.html               # Documentation
+└── icons/                  # PWA icons
 ```
 
 ---
 
 ## SEO & Meta
 
-- ✅ Canonical URLs via `vercel.json` rewrites
+- ✅ Canonical URLs & clean route redirects via `_redirects`
 - ✅ Open Graph + Twitter Card meta tags
 - ✅ Schema.org `Person` structured data (founder page)
 - ✅ Regional URL routing (`/in`, `/us`, `/gb`, etc.)
