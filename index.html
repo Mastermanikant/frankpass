@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 
 <html lang="en">
@@ -541,6 +541,33 @@
 
 
 
+        <!-- Password Length slider (Visible by default) -->
+
+
+        <div class="form-group" style="margin-top:0.5rem;margin-bottom:1rem;">
+
+
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.4rem;">
+
+
+            <label class="form-label" for="length-slider" style="margin:0;">Password Length</label>
+
+
+            <span style="font-weight:700;color:var(--accent);font-size:1.05rem;background:rgba(139,92,246,0.12);padding:0.15rem 0.6rem;border-radius:6px;" id="length-val">16</span>
+
+
+          </div>
+
+
+          <input id="length-slider" type="range" min="8" max="64" value="16" aria-label="Password length slider" style="width:100%;cursor:pointer;">
+
+
+        </div>
+
+
+
+
+
         <!-- Advanced options toggle -->
 
 
@@ -626,24 +653,6 @@
 
 
             </select>
-
-
-          </div>
-
-
-
-
-
-          <!-- Length slider -->
-
-
-          <div class="form-group">
-
-
-            <label class="form-label" for="length-slider">Password Length: <span id="length-val">16</span></label>
-
-
-            <input id="length-slider" type="range" min="8" max="32" value="16" aria-label="Password length slider">
 
 
           </div>
